@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="waction_account_jurnalAkuntansi" model="ir.actions.act_window">
+			<field name="name">Jurnal Akuntansi</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">account.journal</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+		<record id="wactionView_account_treeJurnalAkuntansi" model="ir.actions.act_window.view">
+			<field eval="10" name="sequence"/>
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="tree_account_jurnalAkuntansi"/>
+			<field name="act_window_id" ref="waction_account_jurnalAkuntansi"/>
+		</record>
+
+		<record id="wactionView_account_formJurnalAkuntansi" model="ir.actions.act_window.view">
+			<field eval="20" name="sequence"/>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="form_account_jurnalAkuntansi"/>
+			<field name="act_window_id" ref="waction_account_jurnalAkuntansi"/>
+		</record>
+	</data>
+</openerp>

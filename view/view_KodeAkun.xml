@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+	
+		
+
+		<record id="tree_account_kodeAkun" model="ir.ui.view">
+			<field name="name">Tree Kode Akun</field>
+			<field name="model">account.account</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Kode Akun" toolbar="1" colors="blue:type=='view'">
+					<field name="code" string="Kode"/>
+					<field name="name" string="Nama"/>
+					<field name="debit" string="Debit"/>
+					<field name="credit" string="Kredit"/>
+					<field name="balance" string="Saldo"/>
+					<field name="company_currency_id" string="Mata Uang Perusahaan"/>
+					<field name="type" invisible="1"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="form_account_kodeAkun" model="ir.ui.view">
+			<field name="name">Form Kode Akun</field>
+			<field name="model">account.account</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Kode Akun">
+					<group col="2" colspan="4">
+						<group colspan="1" col="2">
+							<separator string="Akun" colspan="2"/>
+							<field name="name" select="1" string="Nama Akun"/>
+							<field name="code" select="1" string="Kode Akun"/>
+							<field name="parent_id" string="Sub-Akun Dari" />					
+							<field name="company_id" select="2" string="Perusahaan"/>
+						</group>
+						<group colspan="1" col="2">
+							<separator string="Tipe Akun" colspan="2"/>
+							<field name="user_type" select="1" string="Tipe Akun Pengguna" />
+							<field name="type" select="1" string="Tipe Akun Internal"/>
+						</group>					
+					</group>
+
+					<notebook colspan="4">
+						<page string="Infomasi Tambahan">
+							<group colspan="4" col="2">
+								<group colspan="1" col="2">
+									<separator string="Mata Uang" colspan="2"/>									
+									<field name="currency_id" select="2" string="Mata Uang Standar" />
+									<field name="currency_mode" select="2" string="Nilai Tukar Mata Uang"/>
+								</group>
+								<group colspan="1" col="2">
+									<separator string="Lain-lain" colspan="2"/>
+									<field name="reconcile" string="Dapat Direkonsiliasi"/>
+									<field name="active" select="2" string="Aktif"/>
+								</group>
+							</group>
+						</page>
+						<page string="Pajak">
+							<field colspan="4" name="tax_ids" domain="[('parent_id','=',False)]" nolabel="1" >
+								<tree string="Pajak">
+									<field name="tax_code_id" string="Kode"/>
+									<field name="name" string="Pajak"/>
+									<field name="price_include" string="Termasuk dalam harga"/>
+								</tree>
+							</field>
+						</page>
+						<page string="Catatan">
+							<field colspan="4" name="note" nolabel="1"/>
+						</page>
+					</notebook>
+				</form>
+			</field>
+		</record>
+
+	</data>
+</openerp>

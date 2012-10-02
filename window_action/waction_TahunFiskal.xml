@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="waction_account_tahunFiskal" model="ir.actions.act_window">
+			<field name="name">Tahun Fiskal</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">account.fiscalyear</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+		<record id="wactionView_account_treeTahunFiskal" model="ir.actions.act_window.view">
+			<field eval="10" name="sequence"/>
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="tree_account_tahunFiskal"/>
+			<field name="act_window_id" ref="waction_account_tahunFiskal"/>
+		</record>
+
+		<record id="wactionView_account_formTahunFiskal" model="ir.actions.act_window.view">
+			<field eval="20" name="sequence"/>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="form_account_tahunFiskal"/>
+			<field name="act_window_id" ref="waction_account_tahunFiskal"/>
+		</record>
+	</data>
+</openerp>

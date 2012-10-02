@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="waction_account_periode" model="ir.actions.act_window">
+			<field name="name">Periode</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">account.period</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+		<record id="wactionView_account_treePeriode" model="ir.actions.act_window.view">
+			<field eval="10" name="sequence"/>
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="tree_account_periode"/>
+			<field name="act_window_id" ref="waction_account_periode"/>
+		</record>
+
+		<record id="wactionView_account_formPeriode" model="ir.actions.act_window.view">
+			<field eval="20" name="sequence"/>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="form_account_periode"/>
+			<field name="act_window_id" ref="waction_account_periode"/>
+		</record>
+	</data>
+</openerp>

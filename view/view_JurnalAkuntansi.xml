@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="tree_account_jurnalAkuntansi" model="ir.ui.view">
+			<field name="name">Tree Jurnal Akuntansi</field>
+			<field name="model">account.journal</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Jurnal Akuntansi">
+					<field name="name" string="Nama"/>
+					<field name="code" string="Kode"/>
+					<field name="type" string="Tipe"/>
+				</tree>
+			</field>
+		</record>
+		<record id="form_account_jurnalAkuntansi" model="ir.ui.view">
+			<field name="name">Form Jurnal Akuntansi</field>
+			<field name="model">account.journal</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Jurnal Akuntansi">
+					<group colspan="4" col="2">
+						<group colspan="1" col="2">
+							<separator string="Jurnal Akuntansi" colspan="2"/>
+							<field name="code" string="Kode"/>		
+							<field name="name" string="Nama"/>
+							<field name="company_id" string="Perusahaan"/>
+							<field name="active" string="Aktif"/>
+						</group>
+						<group colspan="1" col="2">
+							<separator string="Tipe Jurnal" colspan="2"/>
+							<field name="type" string="Tipe"/>
+							<field name="refund_journal" string="Jurnal Pengembalian"/>
+							<field name="currency" string="Mata Uang" />
+						</group>
+					</group>
+					<notebook colspan="4">
+						<page string="Detail">
+							<group colspan="4" col="2">
+								<group colspan="1" col="2">
+									<separator string="Akun Default" colspan="2"/>
+									<field name="default_credit_account_id" string="Akun Kredit" />
+									<field name="default_debit_account_id" string="Akun Debit" />
+								</group>
+								<group colspan="1" col="2">
+									<separator string="Tampilan dan Sequence" colspan="2"/>
+									<field name="view_id" string="Tampilan Jurnal"/>	
+									<field name="sequence_id" string="Sequence Jurnal" />
+									<field name="invoice_sequence_id" string="Sequence Invoice" />								
+								</group>
+								<group colspan="1" col="2">
+									<separator string="Opsi Tambahan" colspan="2"/>
+									<field name="centralisation" string="Sentralisasi"/>
+									<field name="update_posted" string="Perbolehkan Pembatalan"/>
+									<field name="entry_posted" string="Lewati status draft"/>												
+									<field name="group_invoice_lines" string="Kelompokan Baris Invoice"/>
+								</group>
+							</group>
+						</page>
+						<page string="Kontrol Akun">
+							<group colspan="4" col="2">
+								<group colspan="1" col="2">
+									<separator string="Kontrol Berdasarkan Tipe Akun" colspan="2"/>
+									<field name="type_control_ids" string="Tipe Kontrol" colspan="2" nolabel="1" >
+										<tree string="Tipe Akun">
+											<field name="code" string="Kode"/>
+											<field name="name" string="Tipe Akun"/>
+										</tree>
+									</field>
+								</group>
+								<group colspan="1" col="2">
+									<separator string="Kontrol Berdasarkan Kode Akun" colspan="2"/>
+									<field name="account_control_ids" string="Akun Kontrol" colspan="2" nolabel="1" >
+										<tree string="Kode Akun">
+											<field name="code" string="Kode"/>
+											<field name="name" string="Akun"/>
+										</tree>
+									</field>
+								</group>
+							</group>
+						</page>
+						<page string="Pengguna">
+							<field name="user_id" string="Penanggung Jawab"/>
+							<newline/>
+							<separator string="Group Yang Diperbolehkan" colspan="4"/>	
+							<field name="groups_id" string="grup" colspan="4" nolabel="1"/>
+						</page>
+					</notebook>
+				</form>
+			</field>
+		</record>
+	</data>
+</openerp>

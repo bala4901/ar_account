@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+        <record id="tree_account_tahunFiskal" model="ir.ui.view">
+            <field name="name">Tree Tahun Fiskal</field>
+            <field name="model">account.fiscalyear</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="TahunFiskal">
+                    <field name="code" string="Kode"/>
+                    <field name="name" string="Tahun Fiskal"/>
+                    <field name="state" string="Status"/>
+                </tree>
+            </field>
+        </record>
+		
+
+	<record id="form_account_tahunFiskal" model="ir.ui.view">
+            <field name="name">Form Tahun Fiskal</field>
+            <field name="model">account.fiscalyear</field>
+            <field name="type">form</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <form string="TahunFiskal">
+                	<group name="group_1" colspan="4" col="2">
+                		<group name="group_1_1" colspan="1" col="2">
+                			<separator string="Tahun Fiskal" colspan="2"/>
+                			<field name="code" select="1" string="Kode"/>
+                			<field name="name" select="1" string="Tahun Fiskal"/>
+                		</group>
+                		<group name="group_1_2" colspan="1" col="2">
+                			<separator string="Mulai &amp; Akhir" colspan="2"/>
+							<field name="date_start" string="Tanggal Mulai"/>
+							<field name="date_stop" string="Tanggal Akhir"/>
+							<field name="end_journal_period_id" string="Periode Akhir"/>                			
+                		</group>                		
+                	</group>					
+					<separator colspan="4" string="Periode Fiskal"/>
+                   	<field colspan="4" name="period_ids" nolabel="1" mode="tree">
+						<tree string="Periode">
+							<field name="code" string="Kode"/>
+							<field name="name" string="Nama"/>
+							<field name="date_start" string="Tanggal Mulai"/>
+							<field name="date_stop" string="Tanggal Akhir"/>
+							<field name="special" string="Spesial"/>
+							<field name="state" string="Status"/>
+						</tree>
+						<form string="Periode">
+							<field name="name" select="1" string="Periode Fiskal"/>
+							<field name="code" select="1" string="Kode"/>
+							<field name="date_start" string="Tanggal Mulai"/>
+							<field name="date_stop" string="Tanggal Akhir"/>
+							<field name="special" string="Special"/>
+							<separator colspan="4" string="States"/>
+							<field name="state" select="1"/>
+							<button name="action_draft" states="done" string="Set to Draft" type="object"/>
+						</form>				
+					</field>
+					<group name="group_2" colspan="4" col="3">
+						<group name="group_2_1" colspan="1" col="2">
+							<separator colspan="2" string="Status"/>
+							<field name="state" select="1" readonly="1"/>
+						</group>
+						<group name="group_2_2" colspan="1" col="2">
+							<separator colspan="2" string="Action"/>
+							<button name="create_period" states="draft" string="Membuat Periode Bulanan" type="object" colspan="2" icon="gtk-execute"/>
+							<button name="create_period3" states="draft" string="Membuat Periode 3 Bulanan" type="object" colspan="2" icon="gtk-execute"/>
+						</group>
+						<group name="group_2_3" colspan="1" col="2">
+							<separator colspan="2" string="Workflow"/>
+						</group>						
+					</group>
+                </form>
+            </field>
+        </record>
+	</data>
+</openerp>

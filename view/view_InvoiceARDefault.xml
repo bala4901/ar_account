@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="tree_account_invoiceARDefault" model="ir.ui.view">
+			<field name="name">Tree Invoice A/R Default</field>
+			<field name="model">account.invoice</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Invoice A/R Default">
+					<field name="number" string="# Invoice"/>
+					<field name="name" string="Deskripsi"/>				
+					<field name="date_invoice" string="Tanggal Invoice"/>
+					<field name="date_due" string="Tanggal Jatuh Tempo"/>
+					<field name="amount_untaxed" string="Sebelum Pajak"/>
+					<field name="amount_total" string="Setelah Pajak"/>
+					<field name="residual" string="Belum Dibayar"/>
+					<field name="state" string="Status"/>
+				</tree>
+			</field>
+		</record>
+		
+		<record id="form_account_invoiceARDefault" model="ir.ui.view">
+			<field name="name">Form Invoice A/R Default</field>
+			<field name="model">account.invoice</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Invoice A/R Default">
+					<group colspan="4" col="3">
+						<group colspan="1" col="2">
+							<separator string="INVOICE" colspan="2"/>
+							<field name="number" string="# Invoice"/>
+							<field name="company_id" string="Perusahaan"/>
+							<field name="currency_id" string="Mata Uang"/>
+							<field name="journal_id" string="Jurnal" groups="base.group_extended"/>
+							<field name="type" groups="base.group_extended"/>
+						</group>
+						<group colspan="1" col="2">
+							<separator string="KONSUMEN" colspan="2"/>
+							<field name="partner_id" string="Konsumen" domain="[('customer','=',1)]"/>
+							<field name="address_invoice_id" string="Alamat Invoice" domain="[('partner_id','=',partner_id)]"/>
+						</group>
+						<group colspan="1" col="2">
+							<separator string="TANGGAL" colspan="2"/>
+							<field name="period_id" string="Periode" groups="base.group_extended"/>
+							<field name="date_invoice" string="Tanggal"/>
+							<field name="date_due" string="Jatuh Tempo"/>
+						</group>
+					</group>				
+					<notebook colspan="4">
+						<page string="DETAIL INVOICE">
+							<field name="name" string="Deskripsi"/>
+							<field name="account_id" string="Akun" domain="[('company_id', '=', company_id),('type','=', 'receivable')]"/>
+							<field name="invoice_line" mode="tree" nolabel="1" colspan="4" height="200">
+								<tree string="Detail Invoice">
+									<field name="name" string="Deskripsi"/>
+									<field name="product_id" string="Item"/>
+									<field name="account_id" string="Akun"/>
+									<field name="price_unit" string="Harga"/>
+									<field name="uos_id" string="Satuan"/>
+									<field name="quantity" string="Qty"/>
+									<field name="discount" string="Diskon"/>
+									<field name="price_subtotal" string="Sub Total"/>
+								</tree>
+								<form string="Detail Invoice">
+									<separator string="DESKRIPSI" colspan="4"/>
+									<field name="name" string="Deskripsi"/>
+									<group colspan="4" col="2">
+										<group colspan="1" col="2">
+											<separator string="ITEM" colspan="2"/>
+											<field name="product_id" string="Item"/>
+											<field name="account_id" string="Akun" domain="[('company_id', '=', parent.company_id), ('type', '&lt;&gt;', 'view')]"/>
+
+										</group>
+										<group colspan="1" col="2">
+											<separator string="HARGA &amp; KUANTITAS" colspan="2"/>
+											<field name="price_unit" string="Harga"/>
+											<field name="quantity" string="Kuantitas"/>	
+											<field name="uos_id" string="Satuan"/>	
+											<field name="discount" string="Diskon"/>
+											<field name="price_subtotal" string="Sub Total"/>																				
+										</group>
+									</group>
+									<separator string="PAJAK PENJUALAN" colspan="4"/>
+									<field name="invoice_line_tax_id" colspan="4" nolabel="1">
+										<tree string="Pajak Penjualan">
+											<field name="description" string="Kode Pajak"/>
+											<field name="name" string="Pajak"/>
+										</tree>						
+									</field>			
+								</form>
+							</field>
+						</page>
+						<page string="PAJAK PENJUALAN">
+							<field name="tax_line" mode="tree" nolabel="1" colspan="2">
+								<tree string="Pajak Penjualan">
+									<field name="sequence" string="Urutan"/>
+									<field name="name" string="Deskripsi"/>
+									<field name="account_id" string="Akun Pajak"/>
+									<field name="base" string="Dasar Pengenaan Pajak"/>
+									<field name="amount" string="Pajak"/>
+								</tree>
+							</field>
+						</page>
+					</notebook>
+					<group colspan="4" col="4">
+						<group colspan="1" col="2">
+							<separator string="STATUS" colspan="2"/>
+							<field name="state" widget="statusbar" statusbar_visible="draft,open,paid" statusbar_colors='{"proforma":"blue","proforma2":"blue"}'/>
+						</group>
+						<group colspan="1" col="2">
+							<separator string="ACTION" colspan="2"/>
+							<button colspan="2" name="button_reset_taxes" states="draft" string="Hitung Pajak" type="object" icon="gtk-execute"/>
+							<button name="%(account.action_account_invoice_refund)d" type='action' string='Refund' states='open,paid' icon="gtk-execute" colspan="2"/>
+						</group>						
+						<group colspan="1" col="2">
+							<separator string="WORKFLOW" colspan="2"/>
+							<button name="invoice_open" states="draft,proforma2" string="Konfirmasi" icon="gtk-yes" colspan="2"/>
+							<button name="invoice_cancel" states="draft,proforma2,sale,open" string="Batal" icon="gtk-cancel" colspan="2"/>
+							<!-- <button name="action_cancel_draft" states="cancel" string="Set to Draft" type="object" icon="gtk-convert" colspan="2"/> -->
+						</group>	
+						<group colspan="1" col="2">
+							<separator string="TOTAL" colspan="2"/>
+							<field name="amount_untaxed" string="Sebelum Pajak"/>
+							<field name="amount_tax" string="Pajak"/>
+							<field name="amount_total" string="Total"/>
+							<field name="residual" string="Sisa"/>
+						</group>					
+					</group>
+				</form>
+			</field>
+		</record>
+		
+        <record id="search_account_invoiceARDefault" model="ir.ui.view">
+            <field name="name">aForm Invoice A/R Default</field>
+            <field name="model">account.invoice</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Invoice A/R Default">
+                   <group>
+                        <filter name="draft" icon="terp-document-new" string="Draft" domain="[('state','=','draft')]" help="Draft Invoices"/>
+                        <filter name="proforma" icon="terp-gtk-media-pause" string="Proforma" domain="[('state','=','proforma2')]" help="Proforma Invoices"/>
+                        <filter name="open" icon="terp-dolar" string="Open" domain="[('state','=','open')]" help="Invoice Aktif"/>
+                        <filter name="paid" icon="terp-dolar_ok!" string="Dibayar" domain="[('state','=','paid')]" help="Invoice Sudah Dibayar"/>
+                        <filter name="batal" icon="gtk-cancel" string="Batal" domain="[('state','=','paid')]" help="Invoices Dibatalkan"/>
+                        <separator orientation="vertical"/>
+                        <field name="number"
+                            string="# Invoice"
+                            filter_domain="['|', ('number','ilike',self),('origin','ilike',self)]"/>
+                        <field name="partner_id" string="Konsumen"/>
+                    </group>
+                    <group>
+                        <field name="date_invoice" string="Tanggal Invoice"/>
+                        <field name="date_due" string="Tanggal Jatuh Tempo"/>
+                        <field name="period_id" string="Periode"/>
+                    </group>
+               </search>
+            </field>
+        </record>		
+	</data>
+	
+	
+</openerp>

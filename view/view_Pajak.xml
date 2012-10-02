@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+	
+		
+
+		<record id="tree_account_pajak" model="ir.ui.view">
+            <field name="name">Tree Kode Pajak</field>
+            <field name="model">account.tax</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Pajak">
+		    		<field name="tax_code_id" string="Kode Pajak" select="1"/>
+                    <field name="name" string="Nama Pajak" select="1"/>
+                    <field name="price_include" string="Harga Termasuk Pajak" select="1"/>
+                </tree>
+            </field>
+        </record>
+        <record id="form_account_pajak" model="ir.ui.view">
+            <field name="name">Form Kode Pajak</field>
+            <field name="model">account.tax</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Pajak">
+					<separator string="Pajak" colspan="4"/>
+					<group colspan="4" col="2">
+		                <group colspan="1" col="2">
+							<field name="description" select="1" string="Kode Pajak"/>
+		                    <field name="name" select="1" string="Nama Pajak"/>
+						</group>
+						<group colspan="1" col="2">		                    
+		                    <field name="active" string="Aktif" select="2"/>
+		                    <field name="company_id" string="Perusahaan"/>
+		                </group>
+						<group colspan="1" col="2">
+							<separator string="Perhitungan Pajak" colspan="2"/>
+							<field name="type" string="Perhitungan Berdasarkan"/>
+							<field name="amount" string="Jumlah" select="2" attrs="{'readonly':[('type','=','none'),('type','=','code')]}"/>	
+                            <field name="include_base_amount" string="Dimasukan di Perhitungan Pajak Selanjutnya"/>
+                            <field name="sequence" string="Urutan Perhitungan"/>
+						</group>
+						<group colspan="1" col="2">
+							<separator string="Akuntansi" colspan="2"/>
+                            <field name="account_collected_id" domain="[('type','&lt;&gt;','view'),('type','&lt;&gt;','consolidation')]" string="Akun Pajak Invoice" />
+                            <field name="account_paid_id" domain="[('type','&lt;&gt;','view'),('type','&lt;&gt;','consolidation')]" string="Akun Pajak Refund" />
+						</group>
+					</group>
+                </form>
+            </field>
+        </record>
+ 				
+	</data>
+</openerp>

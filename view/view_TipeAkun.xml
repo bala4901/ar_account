@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="tree_account_tipeAkun" model="ir.ui.view">
+			<field name="name">Tree Tipe Akun</field>
+			<field name="model">account.account.type</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Tipe Akun">
+					<field name="name" string="Nama"/>
+					<field name="code" string="Kode"/>
+				</tree>
+			</field>
+		</record>
+		<record id="form_account_tipeAkun" model="ir.ui.view">
+			<field name="name">Form Tipe Akun</field>
+			<field name="model">account.account.type</field>
+			<field name="type">form</field>
+			<field name="priority" eval="1"/>
+			<field name="arch" type="xml">
+				<form string="Tipe Akun">
+					<field name="name" select="1" string="Nama"/>
+					<field name="code" select="1" string="Kode"/>
+					<field name="sequence"/>
+					<field name="sign"/>
+					<field name="close_method"/>
+					<field name="partner_account"/>
+				</form>
+			</field>
+		</record>
+
+	</data>
+</openerp>

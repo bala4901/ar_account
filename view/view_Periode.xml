@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		
+		
+        <record id="tree_account_periode" model="ir.ui.view">
+            <field name="name">Tree Periode</field>
+            <field name="model">account.period</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Periode">
+					<field name="code" string="Kode"/>
+					<field name="name" string="Nama"/>
+					<field name="date_start" string="Tanggal Mulai"/>
+					<field name="date_stop" string="Tanggal Akhir"/>
+					<field name="special" string="Spesial"/>
+					<field name="state" string="Status"/>
+                </tree>
+            </field>
+        </record>
+		
+
+	<record id="form_account_periode" model="ir.ui.view">
+            <field name="name">Form Periode</field>
+            <field name="model">account.period</field>
+            <field name="type">form</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <form string="Periode">
+					<field name="name" select="1" string="Periode Pembukuan"/>
+					<field name="code" select="1" string="Kode"/>
+					<field name="date_start" string="Tanggal Mulai"/>
+					<field name="date_stop" string="Tanggal Akhir"/>
+					<field name="fiscalyear_id" string="Tahun Pembukuan"/>
+					<field name="special" string="Special"/>
+					<separator colspan="4" string="States"/>
+					<field name="state" select="1"/>
+					<button name="action_draft" states="done" string="Set to Draft" type="object"/>
+                </form>
+            </field>
+        </record>
+	</data>
+</openerp>
