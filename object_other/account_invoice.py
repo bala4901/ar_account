@@ -43,6 +43,9 @@ class account_invoice(osv.osv):
 		# Tujuan :
 		# 1. Agar penginputan data diatur melalui context
 		
+		if context is None:
+			context = {}
+		
 		situasi = context.get('situasi', 'aman')
 		
 		if situasi == 'aman':
@@ -54,6 +57,9 @@ class account_invoice(osv.osv):
 		# Overriding method copy
 		# Tujuan :
 		# 1. Agar copy data diatur oleh context
+
+		if context is None:
+			context = {}
 		
 		situasi = context.get('situasi', 'aman')
 		
@@ -66,6 +72,9 @@ class account_invoice(osv.osv):
 		# Overriding method copy
 		# Tujuan :
 		# 1. Agar penghapusan data diatur oleh context
+
+		if context is None:
+			context = {}
 		
 		situasi = context.get('situasi', 'aman')
 		
