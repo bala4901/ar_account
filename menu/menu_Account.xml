@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>							
+	
+		<menuitem 	id="menu_account_voucherType"
+					parent="account.menu_finance_accounting"
+					sequence="1"
+					name="Voucher Type"
+					action="waction_account_voucherType"
+		/>																																																								
+																																																
+	</data>
+</openerp>
