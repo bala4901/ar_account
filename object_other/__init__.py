@@ -48,6 +48,7 @@ import account_tax
 import account_tax_code
 import account_tax_code_template
 import account_tax_template
+import account_voucher
 
 
 

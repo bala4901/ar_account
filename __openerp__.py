@@ -32,7 +32,7 @@
     'author': 'Andhitia Rama',
     'website': 'http://andhitiarama.wordpress.com',
     'images': [],
-    'depends': ['account'],
+    'depends': ['account', 'account_voucher'],
     'init_xml': [],
     'update_xml': [ 'view/view_PerusahaanAccount.xml',
                     'view/view_Sequence.xml',
