@@ -22,6 +22,7 @@
 
 import account_invoice_type
 import voucher_type
+import memorial_journal
 
 
 

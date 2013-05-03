@@ -22,6 +22,7 @@
 
 
 from osv import fields, osv
+from tools.translate import _
 
 class account_move(osv.osv):
 	_name = 'account.move'
@@ -29,17 +30,17 @@ class account_move(osv.osv):
 	
 	def default_journal_id(self, cr, uid, context={}):
 		obj_account_journal = self.pool.get('account.journal')
+		
 		if not context:
 			context = {}
-	
-		account_journal = context.get('account_journal', False)
-		account_journal = False
 
+		account_journal = context.get('account_journal', False)
+		account_journal_id = False
 		if account_journal:			
 			account_journal_ids = obj_account_journal.search(cr, uid, [('name','=',account_journal)])
 			if account_journal_ids : account_journal_id = account_journal_ids[0]
 	
-		return saccount_journal_id
+		return account_journal_id
 		
 	_defaults =	{
 							'journal_id' : default_journal_id,
@@ -81,11 +82,6 @@ class account_move(osv.osv):
 		else:
 			raise osv.except_osv('Peringatan', 'Data tidak bisa dihapus')
 			
-
-			
-			
-			
-
 account_move()
 
 

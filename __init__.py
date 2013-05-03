@@ -20,8 +20,8 @@
 #
 ##############################################################################
 
-import object_modul
 import object_other
+import object_modul
 #import wizard
 
 

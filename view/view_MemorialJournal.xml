@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+        <record id="view_account_treeMemorialJournal" model="ir.ui.view">
+            <field name="name">Tree Memorial Journal</field>
+            <field name="model">account.memorial_journal</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree colors="blue:state == 'draft';black:state == 'posted'" string="Journal Entries">
+                    <field name="name"/>
+                    <field name="ref"/>
+                    <field name="date"/>
+                    <field name="period_id"/>
+                    <field name="journal_id"/>
+                    <field name="partner_id"/>
+                    <field name="amount" sum="Total Amount"/>
+                    <field name="to_check" groups="base.group_extended"/>
+                    <field name="state"/>
+                    <button name="button_validate" states="draft" string="Approve" type="object" icon="terp-camera_test"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_account_formMemorialJournal" model="ir.ui.view">
+            <field name="name">Form Memorial Journal</field>
+            <field name="model">account.memorial_journal</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Journal Entries">
+                    <group colspan="4" col="6">
+                        <field name="name" readonly="True"/>
+                        <field name="ref"/>
+                        <field name="to_check" groups="base.group_extended"/>
+                        <field name="journal_id" invisible="1"/>
+                        <field name="period_id"/>
+                        <field name="date"/>
+                        <field name="company_id" required="1" groups="base.group_multi_company"/>
+                        <field name="partner_id" invisible="1"/>
+                        <field name="amount" invisible="1"/>
+                    </group>
+                    <notebook colspan="4">
+                        <page string="Journal Items">
+                            <field name="balance" invisible="1"/>
+                            <field colspan="4" name="line_id" nolabel="1" height="250" widget="one2many_list" 
+                            on_change="onchange_line_id(line_id)"
+                            context="{'balance': balance , 'journal': journal_id }">
+                                <form string="Journal Item">
+                                    <group col="6" colspan="4">
+                                        <field name="name"/>
+                                        <field name="ref"/>
+                                        <field name="partner_id" on_change="onchange_partner_id(False,partner_id,account_id,debit,credit,date)"/>
+
+                                        <field name="journal_id"/>
+                                        <field name="period_id"/>
+                                        <field name="company_id" required="1" groups="base.group_multi_company"/>
+                                    </group>
+                                    <notebook colspan="4">
+                                        <page string="Information">
+                                            <group col="2" colspan="2">
+                                                <separator colspan="2" string="Amount"/>
+                                                <field name="account_id" domain="[('company_id', '=', parent.company_id), ('type','&lt;&gt;','view'),('type','&lt;&gt;','consolidation')]"/>
+                                                <field name="debit"/>
+                                                <field name="credit"/>
+                                                <field name="quantity"/>
+                                            </group>
+
+                                            <group col="2" colspan="2">
+                                                <separator colspan="2" string="Accounting Documents"/>
+                                                <field name="invoice"/>
+                                                <field name="move_id" required="False"/>
+                                                <field name="statement_id"/>
+                                            </group>
+
+                                            <group col="2" colspan="2">
+                                                <separator colspan="2" string="Dates"/>
+                                                <field name="date"/>
+                                                <field name="date_maturity"/>
+                                                <field name="date_created"/>
+                                            </group>
+
+                                            <group col="2" colspan="2">
+                                                <separator colspan="2" string="Taxes"/>
+                                                <field name="tax_code_id"/>
+                                                <field name="tax_amount"/>
+                                                <field name="account_tax_id" domain="[('parent_id','=',False)]"/>
+                                            </group>
+
+                                            <group col="2" colspan="2">
+                                                <separator colspan="2" string="Currency"/>
+                                                <field name="currency_id"/>
+                                                <field name="amount_currency"/>
+                                            </group>
+
+                                            <group col="2" colspan="2">
+                                                <separator colspan="2" string="Reconciliation"/>
+                                                <field name="reconcile_id"/>
+                                                <field name="reconcile_partial_id"/>
+                                            </group>
+
+                                            <group col="2" colspan="2">
+                                                <separator colspan="2" string="States"/>
+                                                <field name="state"/>
+                                                <field name="blocked"/>
+                                            </group>
+
+                                            <group col="2" colspan="2" groups="base.group_extended">
+                                                <separator colspan="2" string="Analytic"/>
+                                                <field name="analytic_account_id" domain="[('parent_id','!=',False)]" groups="analytic.group_analytic_accounting"/>
+                                            </group>
+                                            <separator string="Internal Note" colspan="4"/>
+                                            <field name="narration" colspan="4" nolabel="1"/>
+                                        </page>
+                                        <page string="Analytic Lines" groups="analytic.group_analytic_accounting">
+                                            <field colspan="4" name="analytic_lines" nolabel="1" context="{'default_general_account_id':account_id, 'default_name': name, 'default_date':date, 'amount': (debit or 0.0)-(credit or 0.0)}"/>
+                                        </page>
+                                    </notebook>
+                                </form>
+                                <tree colors="blue:state == 'draft';black:state == 'posted'" editable="top" string="Journal Items">
+                                    <field name="ref"/>
+                                    <field name="invoice"/>
+                                    <field name="name"/>
+                                    <field name="partner_id" on_change="onchange_partner_id(False,partner_id,account_id,debit,credit,parent.date,parent.journal_id)"/>
+                                    <field name="account_id" domain="[('journal_id','=',parent.journal_id),('company_id', '=', parent.company_id)]"/>
+                                    <field name="date_maturity"/>
+                                    <field name="debit" sum="Total Debit"/>
+                                    <field name="credit" sum="Total Credit"/>
+                                    <field name="analytic_account_id" domain="[('parent_id','!=',False)]" groups="analytic.group_analytic_accounting"/>
+                                    <field name="amount_currency" groups="base.group_extended"/>
+                                    <field name="currency_id" groups="base.group_extended"/>
+                                    <field name="tax_code_id"/>
+                                    <field name="tax_amount"/>
+                                    <field name="state"/>
+                                    <field name="reconcile_id"/>
+                                    <field name="reconcile_partial_id" groups="base.group_extended"/>
+                                </tree>
+                            </field>
+                            <separator colspan="4" string="Internal Note"/>
+                            <field name="narration" colspan="4" nolabel="1" height="50"/>
+                            <group col="4" colspan="4">
+                                <field name="state" select="1"/>
+                                <button name="button_cancel" states="posted" string="Cancel" type="object" icon="gtk-cancel"/>
+                                <button name="button_validate" states="draft" string="Post" type="object" icon="terp-camera_test"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+		
+        <record id="view_account_searchMemorialJournal" model="ir.ui.view">
+            <field name="name">Search Memorial Journal</field>
+            <field name="model">account.memorial_journal</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Search Move">
+                    <group>
+                        <filter icon="terp-document-new" string="Unposted" domain="[('state','=','draft')]" help="Unposted Journal Entries"/>
+                        <filter icon="terp-camera_test" string="Posted" domain="[('state','=','posted')]" help="Posted Journal Entries"/>
+                        <separator orientation="vertical"/>
+                        <filter icon="terp-gtk-jump-to-ltr" string="To Review" domain="[('to_check','=',True)]" groups="base.group_extended" help="Journal Entries to Review"/>
+                        <separator orientation="vertical"/>
+                        <field name="name"/>
+                        <field name="ref"/>
+                        <field name="partner_id"/>
+                        <field name="date"/>
+                    </group>
+                    <newline/>
+                    <group>
+                        <field name="journal_id" widget="selection"/>
+                        <field name="period_id"/>
+                    </group>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Partner" icon="terp-partner" domain="[]" context="{'group_by':'partner_id'}"/>
+                        <separator orientation="vertical"/>
+                        <filter string="Journal" icon="terp-folder-orange" domain="[]" context="{'group_by':'journal_id'}"/>
+                        <filter string="States" icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'state'}"/>
+                        <separator orientation="vertical"/>
+                        <filter string="Period" icon="terp-go-month" domain="[]" context="{'group_by':'period_id'}"/>
+                        <filter string="Date" icon="terp-go-month" domain="[]" context="{'group_by':'date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+	</data>
+</openerp>
