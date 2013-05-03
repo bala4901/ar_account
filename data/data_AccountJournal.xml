@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="data_accountJournal_memorialJournal" model="account.journal">
+			<field name="name">Memorial Journal</field>
+			<field name="code">MJ</field>
+			<field name="view_id" ref="account.account_journal_view"/>
+			<field name="type">general</field>
+			<field name="sequence_id" ref="data_sequence_memorialJournal"/>
+            <field name="company_id" ref="base.main_company"/>
+		</record>
+	</data>
+</openerp>
