@@ -26,6 +26,24 @@ from osv import fields, osv
 class account_move(osv.osv):
 	_name = 'account.move'
 	_inherit = 'account.move'
+	
+	def default_journal_id(self, cr, uid, context={}):
+		obj_account_journal = self.pool.get('account.journal')
+		if not context:
+			context = {}
+	
+		account_journal = context.get('account_journal', False)
+		account_journal = False
+
+		if account_journal:			
+			account_journal_ids = obj_account_journal.search(cr, uid, [('name','=',account_journal)])
+			if account_journal_ids : account_journal_id = account_journal_ids[0]
+	
+		return saccount_journal_id
+		
+	_defaults =	{
+							'journal_id' : default_journal_id,
+							}
 
 	def create(self, cr, uid, values, context={}):
 		# Overriding method create
