@@ -34,9 +34,7 @@ from tools.translate import _
 class account_invoice(osv.osv):
 	_name = 'account.invoice'
 	_inherit = 'account.invoice'
-	_columns = 	{
-				'tipe_invoice_id' : fields.many2one('account.invoice.type', 'Tipe Invoice'),
-				}
+
 		
 	def create(self, cr, uid, values, context={}):
 		# Overriding method create

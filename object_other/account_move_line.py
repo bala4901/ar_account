@@ -31,7 +31,7 @@ class account_move_line(osv.osv):
                         'cheque_number' : fields.char(string='Cheque Number', size=50),
                         'cheque_date' : fields.date(string='Cheque Date'),
                         'cheque_partner_bank_id' : fields.many2one(obj='res.partner.bank', string='Destination Bank Account'),
-                        'cheque_bank_id' : fields.related('cheque_partner_bank_id', 'cheque_bank_id', type='many2one', relation='res.bank', string='Bank', store=True, readonly=True),
+                        'cheque_bank_id' : fields.related('cheque_partner_bank_id', 'bank', type='many2one', relation='res.bank', string='Bank', store=True, readonly=True),
                         'cheque_recepient' : fields.char(string='Cheque Recepient', size=100),
                         'cheque_is_giro' : fields.boolean('Is Giro?')
                         }
