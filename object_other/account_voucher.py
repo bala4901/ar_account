@@ -52,13 +52,13 @@ class account_voucher(osv.osv):
 		return voucher_type.default_header_type
 	
 	_columns =	{
-                        'voucher_type_id' : fields.many2one(obj='account.voucher_type', string='Voucher Type'),
-                        'payment_method' : fields.selection(string='Payment Method', selection=[('bank_transfer','Bank Transfer'),('cheque','Cheque'),('giro','Giro')]),
-                        'cheque_number' : fields.char(string='Cheque Number', size=50),
-                        'cheque_date' : fields.date(string='Cheque Date'),
-                        'cheque_partner_bank_id' : fields.many2one(obj='res.partner.bank', string='Destination Bank Account'),
+                        'voucher_type_id' : fields.many2one(obj='account.voucher_type', string='Voucher Type', readonly=True, states={'draft':[('readonly',False)]}),
+                        'payment_method' : fields.selection(string='Payment Method', selection=[('bank_transfer','Bank Transfer'),('cheque','Cheque'),('giro','Giro')], readonly=True, states={'draft':[('readonly',False)]}),
+                        'cheque_number' : fields.char(string='Cheque Number', size=50, readonly=True, states={'draft':[('readonly',False)]}),
+                        'cheque_date' : fields.date(string='Cheque Date', readonly=True, states={'draft':[('readonly',False)]}),
+                        'cheque_partner_bank_id' : fields.many2one(obj='res.partner.bank', string='Destination Bank Account', readonly=True, states={'draft':[('readonly',False)]}),
                         'cheque_bank_id' : fields.related('cheque_partner_bank_id', 'bank', type='many2one', relation='res.bank', string='Bank', store=True, readonly=True),
-                        'cheque_recepient' : fields.char(string='Cheque Recepient', size=100),
+                        'cheque_recepient' : fields.char(string='Cheque Recepient', size=100, readonly=True, states={'draft':[('readonly',False)]}),
                         'cheque_is_giro' : fields.boolean('Is Giro?')
                         }
     
