@@ -28,6 +28,7 @@ class account_move_line(osv.osv):
 	_inherit = 'account.move.line'
 	
 	_columns =	{
+						'payment_method' : fields.selection(string='Payment Method', selection=[('bank_transfer','Bank Transfer'),('cheque','Cheque'),('giro','Giro')]),
                         'cheque_number' : fields.char(string='Cheque Number', size=50),
                         'cheque_date' : fields.date(string='Cheque Date'),
                         'cheque_partner_bank_id' : fields.many2one(obj='res.partner.bank', string='Destination Bank Account'),

@@ -64,14 +64,7 @@ class memorial_journal(osv.osv):
 			
 		return super(memorial_journal, self).unlink(cr, uid, ids, context)
 		
-	def action_process(self, cr, uid, ids, context=None):
-		"""
-		override method action_process pada account.move
-		"""
-		context['inherit_model'] = 'account.move'
-		result = super(memorial_journal, self).action_process(cr, uid, ids, context)
-		
-		return result
+
 
 memorial_journal()
 

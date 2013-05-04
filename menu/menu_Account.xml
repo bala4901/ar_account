@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
 	<data>							
+
+		<menuitem 	
+					id="menu_account_bankPayment"
+					parent="account.menu_finance_payables"
+					name="Bank Payment"
+					action="waction_account_bankPayment"
+		/>
+		
+		<menuitem 	
+					id="menu_account_cashPayment"
+					parent="account.menu_finance_payables"
+					name="Cash Payment"
+					action="waction_account_bankPayment"
+		/>		
+		
+		<menuitem 	
+					id="menu_account_bankReceipt"
+					parent="account.menu_finance_receivables"
+					name="Bank Receipt"
+					action="waction_account_bankPayment"
+		/>
+		
+		<menuitem 	
+					id="menu_account_cashReceipt"
+					parent="account.menu_finance_receivables"
+					name="Cash Receipt"
+					action="waction_account_bankPayment"
+		/>		
 	
 		<menuitem 	id="menu_account_voucherType"
 					parent="account.menu_finance_accounting"

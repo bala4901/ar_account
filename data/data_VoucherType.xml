@@ -27,6 +27,34 @@
 			<field name="kode">CR</field>
 			<field name="default_header_type">receipt</field>
 			<field name="default_detail_type_selection">dr</field>
-		</record>			
+		</record>	
+		
+		<record id="data_voucherType_otherBankPayment" model="account.voucher_type">
+			<field name="name">Other Bank Payment</field>
+			<field name="kode">OBP</field>
+			<field name="default_header_type">payment</field>
+			<field name="default_detail_type_selection">cr</field>
+		</record>
+		
+		<record id="data_voucherType_otherBankReceive" model="account.voucher_type">
+			<field name="name">Other Bank Receive</field>
+			<field name="kode">OBR</field>
+			<field name="default_header_type">receipt</field>
+			<field name="default_detail_type_selection">dr</field>
+		</record>		
+		
+		<record id="data_voucherType_otherCashPayment" model="account.voucher_type">
+			<field name="name">Other Cash Payment</field>
+			<field name="kode">OCP</field>
+			<field name="default_header_type">payment</field>
+			<field name="default_detail_type_selection">cr</field>
+		</record>
+		
+		<record id="data_voucherType_otherCashReceive" model="account.voucher_type">
+			<field name="name">Other Cash Receive</field>
+			<field name="kode">OCR</field>
+			<field name="default_header_type">receipt</field>
+			<field name="default_detail_type_selection">dr</field>
+		</record>				
 	</data>
 </openerp>

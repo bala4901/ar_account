@@ -24,33 +24,33 @@
 from osv import fields, osv
 import netsvc
 
-class memorial_journal(osv.osv):
-	_name = 'account.memorial_journal'
-	_inherit = 'account.move'
-	_table = 'account_move'
-	_description = 'Memorial Journal'
+class bank_payment(osv.osv):
+	_name = 'account.bank_payment'
+	_inherit = 'account.voucher'
+	_table = 'account_voucher'
+	_description = 'Bank Payment'
 	_order = 'name'
 	
 	def check_access_rights(self, cr, uid, operation, raise_exception=True):
 		"""
-		override in order to redirect the check of access rights on the account.move object
+		override in order to redirect the check of access rights on the account.voucher object
 		"""
-		return self.pool.get('account.move').check_access_rights(cr, uid, operation, raise_exception=raise_exception)
+		return self.pool.get('account.voucher').check_access_rights(cr, uid, operation, raise_exception=raise_exception)
 		
 	def check_access_rule(self, cr, uid, ids, operation, context=None):
 		"""
-		override in order to redirect the check of access rules on the account.move object
+		override in order to redirect the check of access rules on the account.voucher object
 		"""
-		return self.pool.get('account.move').check_access_rule(cr, uid, ids, operation, context=context)
+		return self.pool.get('account.voucher').check_access_rule(cr, uid, ids, operation, context=context)
 		
 	def create(self, cr, uid, value, context=None):
 		"""
 		override method orm create
 		"""
-		new_id = super(memorial_journal, self).create(cr, uid, value, context)
+		new_id = super(bank_payment, self).create(cr, uid, value, context)
 		
 		wkf_service = netsvc.LocalService('workflow')
-		wkf_service.trg_create(uid, 'account.move', new_id, cr)
+		wkf_service.trg_create(uid, 'account.voucher', new_id, cr)
 		
 		return new_id
 		
@@ -60,20 +60,29 @@ class memorial_journal(osv.osv):
 		"""
 		wkf_service = netsvc.LocalService('workflow')
 		for id in ids:
-			wkf_service.trg_delete(uid, 'account.move', id, cr)
+			wkf_service.trg_delete(uid, 'account.voucher', id, cr)
 			
-		return super(memorial_journal, self).unlink(cr, uid, ids, context)
+		return super(bank_payment, self).unlink(cr, uid, ids, context)
 		
-	def action_process(self, cr, uid, ids, context=None):
-		"""
-		override method action_process pada account.move
-		"""
-		context['inherit_model'] = 'account.move'
-		result = super(memorial_journal, self).action_process(cr, uid, ids, context)
+	def button_proforma_voucher(self, cr, uid, ids, context={}):
+		wkf_service = netsvc.LocalService('workflow')
 		
-		return result
+		for id in ids:
+			wkf_service.trg_validate(uid, 'account.voucher', id, 'proforma_voucher', cr)
+			
+		return True
+		
+	def button_cancel_voucher(self, cr, uid, ids, context={}):
+		wkf_service = netsvc.LocalService('workflow')
+		
+		for id in ids:
+			wkf_service.trg_validate(uid, 'account.voucher', id, 'cancel_voucher', cr)
+			
+		return True	
+		
 
-memorial_journal()
+
+bank_payment()
 
 
 
