@@ -40,6 +40,7 @@
     'update_xml': [ 
                     'data/data_Sequence.xml',
                     'data/data_AccountJournal.xml',
+                    'data/data_VoucherType.xml',
                     'view/view_VoucherType.xml',
                     'view/view_MemorialJournal.xml',
                     'window_action/waction_VoucherType.xml',

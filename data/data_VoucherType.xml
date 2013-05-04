@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="data_voucherType_bankPayment" model="account.voucher_type">
+			<field name="name">Bank Payment</field>
+			<field name="kode">BP</field>
+			<field name="default_header_type">payment</field>
+			<field name="default_detail_type_selection">cr</field>
+		</record>
+		
+		<record id="data_voucherType_bankReceive" model="account.voucher_type">
+			<field name="name">Bank Receive</field>
+			<field name="kode">BR</field>
+			<field name="default_header_type">receipt</field>
+			<field name="default_detail_type_selection">dr</field>
+		</record>		
+		
+		<record id="data_voucherType_cashPayment" model="account.voucher_type">
+			<field name="name">Cash Payment</field>
+			<field name="kode">CP</field>
+			<field name="default_header_type">payment</field>
+			<field name="default_detail_type_selection">cr</field>
+		</record>
+		
+		<record id="data_voucherType_cashReceive" model="account.voucher_type">
+			<field name="name">Cash Receive</field>
+			<field name="kode">CR</field>
+			<field name="default_header_type">receipt</field>
+			<field name="default_detail_type_selection">dr</field>
+		</record>			
+	</data>
+</openerp>
