@@ -26,6 +26,10 @@ import bank_payment
 import bank_receipt
 import cash_payment
 import cash_receipt
+import other_bank_payment
+import other_bank_receipt
+import other_cash_payment
+import other_cash_receipt
 
 
 
