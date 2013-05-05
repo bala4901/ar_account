@@ -50,6 +50,7 @@
                     'view/view_OtherBankPayment.xml',
                     'view/view_OtherBankReceipt.xml',
                     'view/view_OtherCashPayment.xml',
+                    'view/view_OtherCashReceipt.xml',
                     'window_action/waction_VoucherType.xml',
                     'window_action/waction_MemorialJournal.xml',
                     'window_action/waction_BankPayment.xml',
@@ -59,6 +60,7 @@
                     'window_action/waction_OtherBankPayment.xml',
                      'window_action/waction_OtherBankReceipt.xml',
                      'window_action/waction_OtherCashPayment.xml',
+                     'window_action/waction_OtherCashReceipt.xml',
                     'menu/menu_Account.xml'
                     ],
     'demo_xml': [],

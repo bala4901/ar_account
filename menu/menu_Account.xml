@@ -58,6 +58,13 @@
 					action="waction_account_otherCashPayment"
 		/>			
 		
+		<menuitem 	
+					id="menu_account_otherCashReceipt"
+					parent="account.menu_finance_entries"
+					name="Other Cash Receipt"
+					action="waction_account_otherCashReceipt"
+		/>		
+		
 		<menuitem 	id="menu_account_memorialJournal"
         			parent="account.menu_finance_entries"
 					name="Memorial Journal"
