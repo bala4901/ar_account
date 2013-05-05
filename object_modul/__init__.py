@@ -25,6 +25,7 @@ import memorial_journal
 import bank_payment
 import bank_receipt
 import cash_payment
+import cash_receipt
 
 
 

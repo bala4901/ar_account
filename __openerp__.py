@@ -46,11 +46,13 @@
                     'view/view_BankPayment.xml',
                     'view/view_BankReceipt.xml',
                     'view/view_CashPayment.xml',
+                    'view/view_CashReceipt.xml',
                     'window_action/waction_VoucherType.xml',
                     'window_action/waction_MemorialJournal.xml',
                     'window_action/waction_BankPayment.xml',
                     'window_action/waction_BankReceipt.xml',
                     'window_action/waction_CashPayment.xml',
+                    'window_action/waction_CashReceipt.xml',
                     'menu/menu_Account.xml'
                     ],
     'demo_xml': [],

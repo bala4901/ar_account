@@ -27,7 +27,7 @@
 					id="menu_account_cashReceipt"
 					parent="account.menu_finance_receivables"
 					name="Cash Receipt"
-					action="waction_account_bankPayment"
+					action="waction_account_cashReceipt"
 		/>		
 	
 		<menuitem 	id="menu_account_voucherType"
