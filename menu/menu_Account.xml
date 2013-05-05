@@ -38,11 +38,18 @@
 		/>			
 		
 		<menuitem 	
+					id="menu_account_otherBankReceipt"
+					parent="account.menu_finance_entries"
+					name="Other Bank Receipt"
+					action="waction_account_otherBankReceipt"
+		/>	
+		
+		<menuitem 	
 					id="menu_account_otherBankPayment"
 					parent="account.menu_finance_entries"
 					name="Other Bank Payment"
 					action="waction_account_otherBankPayment"
-		/>		
+		/>			
 		
 		<menuitem 	id="menu_account_memorialJournal"
         			parent="account.menu_finance_entries"
