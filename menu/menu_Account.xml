@@ -13,7 +13,7 @@
 					id="menu_account_cashPayment"
 					parent="account.menu_finance_payables"
 					name="Cash Payment"
-					action="waction_account_bankPayment"
+					action="waction_account_cashPayment"
 		/>		
 		
 		<menuitem 	
