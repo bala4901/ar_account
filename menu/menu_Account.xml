@@ -51,6 +51,13 @@
 					action="waction_account_otherBankPayment"
 		/>			
 		
+		<menuitem 	
+					id="menu_account_otherCashPayment"
+					parent="account.menu_finance_entries"
+					name="Other Cash Payment"
+					action="waction_account_otherCashPayment"
+		/>			
+		
 		<menuitem 	id="menu_account_memorialJournal"
         			parent="account.menu_finance_entries"
 					name="Memorial Journal"
