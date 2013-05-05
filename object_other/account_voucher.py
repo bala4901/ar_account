@@ -25,47 +25,71 @@ from osv import fields, osv
 from datetime import datetime
 
 class account_voucher(osv.osv):
-        _name = 'account.voucher'
+	_name = 'account.voucher'
 	_inherit = 'account.voucher'
-	
+
 	def default_voucher_type_id(self, cr, uid, context=None):
 		obj_account_voucher_type = self.pool.get('account.voucher_type')
 		voucher_type = []
-		
-                if context.get('voucher_type', False):
-                        kriteria = [('name', '=', context['voucher_type'])]
-			
-                        voucher_type_ids = obj_account_voucher_type.search(cr, uid, kriteria)
-                        if voucher_type_ids : voucher_type = voucher_type_ids[0]
 
-                return voucher_type
-		
+		if context.get('voucher_type', False):
+			kriteria = [('name', '=', context['voucher_type'])]
+
+			voucher_type_ids = obj_account_voucher_type.search(cr, uid, kriteria)
+			if voucher_type_ids : voucher_type = voucher_type_ids[0]
+
+		return voucher_type
+
 	def default_type(self, cr, uid, context=None):
 		obj_account_voucher_type = self.pool.get('account.voucher_type')
-		
+
 		voucher_type_id = self.default_voucher_type_id(cr, uid, context)
-		
+
 		if not voucher_type_id : return False
-		
+
 		voucher_type = obj_account_voucher_type.browse(cr, uid, [voucher_type_id])[0]
 
 		return voucher_type.default_header_type
-	
+
 	_columns =	{
-                        'voucher_type_id' : fields.many2one(obj='account.voucher_type', string='Voucher Type', readonly=True, states={'draft':[('readonly',False)]}),
-                        'payment_method' : fields.selection(string='Payment Method', selection=[('bank_transfer','Bank Transfer'),('cheque','Cheque'),('giro','Giro')], readonly=True, states={'draft':[('readonly',False)]}),
-                        'cheque_number' : fields.char(string='Cheque Number', size=50, readonly=True, states={'draft':[('readonly',False)]}),
-                        'cheque_date' : fields.date(string='Cheque Date', readonly=True, states={'draft':[('readonly',False)]}),
-                        'cheque_partner_bank_id' : fields.many2one(obj='res.partner.bank', string='Destination Bank Account', readonly=True, states={'draft':[('readonly',False)]}),
-                        'cheque_bank_id' : fields.related('cheque_partner_bank_id', 'bank', type='many2one', relation='res.bank', string='Bank', store=True, readonly=True),
-                        'cheque_recepient' : fields.char(string='Cheque Recepient', size=100, readonly=True, states={'draft':[('readonly',False)]}),
-                        'cheque_is_giro' : fields.boolean('Is Giro?')
-                        }
-    
+			            'voucher_type_id' : fields.many2one(obj='account.voucher_type', string='Voucher Type', readonly=True, states={'draft':[('readonly',False)]}),
+			            'payment_method' : fields.selection(string='Payment Method', selection=[('bank_transfer','Bank Transfer'),('cheque','Cheque'),('giro','Giro')], readonly=True, states={'draft':[('readonly',False)]}),
+			            'cheque_number' : fields.char(string='Cheque Number', size=50, readonly=True, states={'draft':[('readonly',False)]}),
+			            'cheque_date' : fields.date(string='Cheque Date', readonly=True, states={'draft':[('readonly',False)]}),
+			            'cheque_partner_bank_id' : fields.many2one(obj='res.partner.bank', string='Destination Bank Account', readonly=True, states={'draft':[('readonly',False)]}),
+			            'cheque_bank_id' : fields.related('cheque_partner_bank_id', 'bank', type='many2one', relation='res.bank', string='Bank', store=True, readonly=True),
+			            'cheque_recepient' : fields.char(string='Cheque Recepient', size=100, readonly=True, states={'draft':[('readonly',False)]}),
+			            'cheque_is_giro' : fields.boolean('Is Giro?')
+			            }
+
 	_defaults =	{
-                        'voucher_type_id' : default_voucher_type_id,
-                        'type' : default_type,
-                        }
+			            'voucher_type_id' : default_voucher_type_id,
+			            'type' : default_type,
+			            }
+			            
+	def first_move_line_get(self, cr, uid, voucher_id, move_id, company_currency, current_currency, context=None):
+		'''
+		Override untuk menyesuaikan field yang berkaitan dengan cek/giro
+		'''
+		voucher = self.browse(cr, uid, [voucher_id])[0]
+
+		res =	{
+					'payment_method' : voucher.payment_method,
+					'cheque_number' : voucher.cheque_number,
+					'cheque_date' : voucher.cheque_date,
+					'cheque_partner_bank_id' : voucher.cheque_partner_bank_id.id,
+					'cheque_recepient' : voucher.cheque_recepient
+					}
+
+		move_line = super(account_voucher, self).first_move_line_get(cr, uid, voucher_id, move_id, company_currency, current_currency)
+
+		move_line.update(res)
+
+
+
+		return move_line
+        
+        
 							
 account_voucher()							
 	
