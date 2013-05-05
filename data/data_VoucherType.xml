@@ -9,7 +9,7 @@
 		</record>
 		
 		<record id="data_voucherType_bankReceive" model="account.voucher_type">
-			<field name="name">Bank Receive</field>
+			<field name="name">Bank Receipt</field>
 			<field name="kode">BR</field>
 			<field name="default_header_type">receipt</field>
 			<field name="default_detail_type_selection">dr</field>
@@ -23,7 +23,7 @@
 		</record>
 		
 		<record id="data_voucherType_cashReceive" model="account.voucher_type">
-			<field name="name">Cash Receive</field>
+			<field name="name">Cash Receipt</field>
 			<field name="kode">CR</field>
 			<field name="default_header_type">receipt</field>
 			<field name="default_detail_type_selection">dr</field>
@@ -37,7 +37,7 @@
 		</record>
 		
 		<record id="data_voucherType_otherBankReceive" model="account.voucher_type">
-			<field name="name">Other Bank Receive</field>
+			<field name="name">Other Bank Receipt</field>
 			<field name="kode">OBR</field>
 			<field name="default_header_type">receipt</field>
 			<field name="default_detail_type_selection">dr</field>
@@ -51,7 +51,7 @@
 		</record>
 		
 		<record id="data_voucherType_otherCashReceive" model="account.voucher_type">
-			<field name="name">Other Cash Receive</field>
+			<field name="name">Other Cash Receipt</field>
 			<field name="kode">OCR</field>
 			<field name="default_header_type">receipt</field>
 			<field name="default_detail_type_selection">dr</field>

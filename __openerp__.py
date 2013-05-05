@@ -44,9 +44,11 @@
                     'view/view_VoucherType.xml',
                     'view/view_MemorialJournal.xml',
                     'view/view_BankPayment.xml',
+                    'view/view_BankReceipt.xml',
                     'window_action/waction_VoucherType.xml',
                     'window_action/waction_MemorialJournal.xml',
                     'window_action/waction_BankPayment.xml',
+                    'window_action/waction_BankReceipt.xml',
                     'menu/menu_Account.xml'
                     ],
     'demo_xml': [],
