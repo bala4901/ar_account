@@ -38,6 +38,7 @@
                             'ar_base'],
     'init_xml': [],
     'update_xml': [ 
+                    'security/ir.model.access.csv',
                     'data/data_Sequence.xml',
                     'data/data_AccountJournal.xml',
                     'data/data_VoucherType.xml',
