@@ -3,7 +3,7 @@
 	<data>
 		<record id="data_accountJournal_memorialJournal" model="account.journal">
 			<field name="name">Memorial Journal</field>
-			<field name="code">MJ</field>
+			<field name="code">MOJ</field>
 			<field name="view_id" ref="account.account_journal_view"/>
 			<field name="type">general</field>
 			<field name="sequence_id" ref="data_sequence_memorialJournal"/>
