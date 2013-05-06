@@ -4,34 +4,34 @@
 
 		<menuitem 	
 					id="menu_account_bankPayment"
-					parent="account.menu_finance_payables"
+					parent="account.menu_finance_bank_and_cash"
 					name="Bank Payment"
 					action="waction_account_bankPayment"
 		/>
 		
 		<menuitem 	
 					id="menu_account_cashPayment"
-					parent="account.menu_finance_payables"
+					parent="account.menu_finance_bank_and_cash"
 					name="Cash Payment"
 					action="waction_account_cashPayment"
 		/>		
 		
 		<menuitem 	
 					id="menu_account_bankReceipt"
-					parent="account.menu_finance_receivables"
+					parent="account.menu_finance_bank_and_cash"
 					name="Bank Receipt"
 					action="waction_account_bankReceipt"
 		/>
 		
 		<menuitem 	
 					id="menu_account_cashReceipt"
-					parent="account.menu_finance_receivables"
+					parent="account.menu_finance_bank_and_cash"
 					name="Cash Receipt"
 					action="waction_account_cashReceipt"
 		/>		
 	
 		<menuitem 	id="menu_account_voucherType"
-					parent="account.menu_finance_accounting"
+					parent="account.menu_finance_configuration"
 					sequence="1"
 					name="Voucher Type"
 					action="waction_account_voucherType"
@@ -39,28 +39,28 @@
 		
 		<menuitem 	
 					id="menu_account_otherBankReceipt"
-					parent="account.menu_finance_entries"
+					parent="account.menu_finance_bank_and_cash"
 					name="Other Bank Receipt"
 					action="waction_account_otherBankReceipt"
 		/>	
 		
 		<menuitem 	
 					id="menu_account_otherBankPayment"
-					parent="account.menu_finance_entries"
+					parent="account.menu_finance_bank_and_cash"
 					name="Other Bank Payment"
 					action="waction_account_otherBankPayment"
 		/>			
 		
 		<menuitem 	
 					id="menu_account_otherCashPayment"
-					parent="account.menu_finance_entries"
+					parent="account.menu_finance_bank_and_cash"
 					name="Other Cash Payment"
 					action="waction_account_otherCashPayment"
 		/>			
 		
 		<menuitem 	
 					id="menu_account_otherCashReceipt"
-					parent="account.menu_finance_entries"
+					parent="account.menu_finance_bank_and_cash"
 					name="Other Cash Receipt"
 					action="waction_account_otherCashReceipt"
 		/>		

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>							
+
+		<menuitem 	
+					id="menu_account_accountingHideHeader"
+					parent="base.menu_administration"
+					name="Unused Accounting Menu"
+		/>
+		
+		<menuitem 
+				action="account_voucher.action_voucher_list" 
+				id="account_voucher.menu_encode_entries_by_voucher" 
+				parent="menu_account_accountingHideHeader" />
+				
+        <menuitem 
+        		action="account_voucher.action_vendor_payment" 
+        		icon="STOCK_JUSTIFY_FILL"
+            	id="account_voucher.menu_action_vendor_payment"  
+            	parent="menu_account_accountingHideHeader"/>	
+            	
+        <menuitem 
+        		action="account_voucher.action_vendor_receipt" 
+        		icon="STOCK_JUSTIFY_FILL"
+            	id="account_voucher.menu_action_vendor_receipt"  
+            	parent="menu_account_accountingHideHeader"/>     
+            	
+        <menuitem 
+        		id="account_voucher.menu_action_sale_receipt" 
+        		icon="STOCK_JUSTIFY_FILL"
+            	action="account_voucher.action_sale_receipt"
+            	parent="menu_account_accountingHideHeader"
+            	groups="base.group_extended"/>          
+            	
+        <menuitem 
+        		id="account_voucher.menu_action_purchase_receipt" 
+        		icon="STOCK_JUSTIFY_FILL"
+            	action="account_voucher.action_purchase_receipt" 
+            	parent="menu_account_accountingHideHeader"
+            	groups="base.group_extended"/>            	  	       				
+																																																		
+																																																
+	</data>
+</openerp>

@@ -62,7 +62,8 @@
                      'window_action/waction_OtherBankReceipt.xml',
                      'window_action/waction_OtherCashPayment.xml',
                      'window_action/waction_OtherCashReceipt.xml',
-                    'menu/menu_Account.xml'
+                    'menu/menu_Account.xml',
+                    'menu/menu_Setting.xml',
                     ],
     'demo_xml': [],
     'test': [],
