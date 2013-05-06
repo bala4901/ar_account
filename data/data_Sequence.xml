@@ -7,6 +7,7 @@
         <record id="data_sequence_memorialJournal" model="ir.sequence">
             <field name="name">Memorial Journal</field>
             <field eval="5" name="padding"/>
+            <field name="code">account.journal</field>
             <field name="prefix">MJ/%(year)s/</field>
         </record>        
                        
