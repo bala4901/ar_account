@@ -7,4 +7,6 @@
 "data_accessRight_accountOtherBankReceipt","data_accessRight_accountOtherBankReceipt","ar_account.model_account_other_bank_receipt",,1,1,1,1
 "data_accessRight_accountOtherCashPayment","data_accessRight_accountOtherCashPayment","ar_account.model_account_other_cash_payment",,1,1,1,1
 "data_accessRight_accountOtherCashReceipt","data_accessRight_accountOtherCashReceipt","ar_account.model_account_other_cash_receipt",,1,1,1,1
+"data_accessRight_accountVoucherType","data_accessRight_accountVoucherType","ar_account.model_account_voucher_type",,1,1,1,1
+"data_accessRight_accountMemorialJournal","data_accessRight_accountMemorialJournal","ar_account.model_account_memorial_journal",,1,1,1,1
 
