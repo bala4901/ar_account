@@ -36,7 +36,7 @@
 					name="Voucher Type"
 					action="waction_account_voucherType"
 		/>			
-		
+		<!--
 		<menuitem 	
 					id="menu_account_otherBankReceipt"
 					parent="account.menu_finance_bank_and_cash"
@@ -64,6 +64,7 @@
 					name="Other Cash Receipt"
 					action="waction_account_otherCashReceipt"
 		/>		
+		-->
 		
 		<menuitem 	id="menu_account_memorialJournal"
         			parent="account.menu_finance_entries"
