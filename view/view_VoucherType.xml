@@ -31,6 +31,12 @@
 							<field name="default_detail_type_selection"/>
 						</group>
 						<group colspan="1" col="2">
+							<separator string="Inherit Object" colspan="2"/>
+							<field name="model_name"/>
+							<field name="model_view_form"/>
+							<field name="modul_origin"/>								
+						</group>
+						<group colspan="1" col="2">
 							<separator string="Allowed Account Journal" colspan="2"/>
 							<field name="allowed_journal_ids" nolabel="1"/>
 						</group>

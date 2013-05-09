@@ -47,6 +47,9 @@ class voucher_type(osv.osv):
 					'default_header_type' : fields.selection(selection=DEFAULT_HEADER_TYPE, string='Default Header Type'),
 					'default_detail_type_selection' : fields.selection(selection=DEFAULT_DETAIL_TYPE_SELECTION, string='Default Detail Type Selection'),
 					'allowed_journal_ids' : fields.many2many(obj='account.journal', rel='account_voucher_type_account_journal_rel', id1='voucher_type_id', id2='account_journal_id'),	
+					'model_name' : fields.char(string='Model Name', size=100),
+					'model_view_form' : fields.char(string='Model View Form', size=100),		
+					'modul_origin' : fields.char(string='Modul Origin', size=100),	
 				}
 				
 	_defaults =	{

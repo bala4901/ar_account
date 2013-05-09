@@ -23,6 +23,8 @@
 
 from osv import fields, osv
 from datetime import datetime
+from lxml import etree
+from tools.translate import _
 
 class account_voucher(osv.osv):
 	_name = 'account.voucher'
@@ -66,6 +68,43 @@ class account_voucher(osv.osv):
 			            'voucher_type_id' : default_voucher_type_id,
 			            'type' : default_type,
 			            }
+			            
+        def fields_view_get(self, cr, uid, view_id=None, view_type=False, context=None, toolbar=False, submenu=False):
+                x = []
+                mod_obj = self.pool.get('ir.model.data')
+                obj_account_voucher_type = self.pool.get('account.voucher_type')
+                if context is None: context = {}
+                
+                voucher_type = context.get('voucher_type')
+
+                if voucher_type:
+
+                        kriteria = [('name','=',voucher_type)]
+                        voucher_type_ids = obj_account_voucher_type.search(cr, uid, kriteria)[0]
+
+                        voucher = obj_account_voucher_type.browse(cr, uid, voucher_type_ids, context=context)
+
+                        result = mod_obj.get_object_reference(cr, uid, voucher.modul_origin, voucher.model_view_form)
+                        result = result and result[1] or False
+                        view_id = result
+                        
+                        if voucher.allowed_journal_ids:
+                                for journal in voucher.allowed_journal_ids:
+                                        x.append(journal.id)
+
+                res = super(account_voucher, self).fields_view_get(cr, uid, view_id=view_id, view_type=view_type, context=context, toolbar=toolbar, submenu=submenu)
+                doc = etree.XML(res['arch'])
+
+                nodes = doc.xpath("//field[@name='journal_id']")
+
+                if x:
+                    for node in nodes:
+                        node.set('domain', "[('id', 'in', x)]")
+                else:
+                    for node in nodes:
+                        node.set('domain', "[('id', '=', 0)]")    
+                res['arch'] = etree.tostring(doc)
+                return res
 			            
 	def first_move_line_get(self, cr, uid, voucher_id, move_id, company_currency, current_currency, context=None):
 		'''
