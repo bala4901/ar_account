@@ -85,9 +85,50 @@ class account_voucher(osv.osv):
 
 		move_line.update(res)
 
-
-
 		return move_line
+		
+	def check_total_voucher(self, cr, uid, id):
+		"""
+		Method untuk melakukan pengecekan agar total voucher == sum amount semua voucher line
+		"""
+		
+		voucher = self.browse(cr, uid, [id])[0]
+		
+		total = 0.0
+		if voucher.line_ids:
+			for line in voucher.line_ids:
+				total += line.amount
+				
+		if voucher.amount == total:
+			return True
+		else:
+			return False
+			
+	def proforma_voucher(self, cr, uid, ids, context=None):
+		"""
+		Override
+		"""
+		
+		for id in ids:
+			if not self.check_total_voucher(cr, uid, id):
+				raise osv.except_osv('Warning!', 'Total voucher is not equal with line total')
+				return False
+
+		return super(account_voucher, self).proforma_voucher(cr, uid, ids, context)
+		
+	def onchange_journal_id(self, cr, uid, ids, journal_id):
+		value = {}
+		domain = {}
+		warning = {}
+		
+		obj_journal = self.pool.get('account.journal')
+				
+		if journal_id:
+			journal = obj_journal.browse(cr, uid, [journal_id])[0]
+			value['account_id'] = journal.default_debit_account_id.id
+		
+		
+		return {'value' : value, 'domain' : domain, 'warning' : warning}
         
         
 							
