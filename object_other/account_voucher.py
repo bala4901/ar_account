@@ -70,6 +70,7 @@ class account_voucher(osv.osv):
 			            }
 			            
         def fields_view_get(self, cr, uid, view_id=None, view_type=False, context=None, toolbar=False, submenu=False):
+                res = super(account_voucher, self).fields_view_get(cr, uid, view_id=view_id, view_type=view_type, context=context, toolbar=toolbar, submenu=submenu)
                 x = []
                 mod_obj = self.pool.get('ir.model.data')
                 obj_account_voucher_type = self.pool.get('account.voucher_type')
@@ -77,7 +78,7 @@ class account_voucher(osv.osv):
                 
                 voucher_type = context.get('voucher_type')
 
-                if voucher_type:
+                if voucher_type and view_type == 'form':
 
                         kriteria = [('name','=',voucher_type)]
                         voucher_type_ids = obj_account_voucher_type.search(cr, uid, kriteria)[0]
@@ -91,19 +92,11 @@ class account_voucher(osv.osv):
                         if voucher.allowed_journal_ids:
                                 for journal in voucher.allowed_journal_ids:
                                         x.append(journal.id)
+                        domain_journal = list(set(x))
 
-                res = super(account_voucher, self).fields_view_get(cr, uid, view_id=view_id, view_type=view_type, context=context, toolbar=toolbar, submenu=submenu)
-                doc = etree.XML(res['arch'])
-
-                nodes = doc.xpath("//field[@name='journal_id']")
-
-                if x:
-                    for node in nodes:
-                        node.set('domain', "[('id', 'in', x)]")
-                else:
-                    for node in nodes:
-                        node.set('domain', "[('id', '=', 0)]")    
-                res['arch'] = etree.tostring(doc)
+                        for field in res['fields']:
+                            if field == 'journal_id':
+                                res['fields'][field]['domain'] = [('id','in',domain_journal)]
                 return res
 			            
 	def first_move_line_get(self, cr, uid, voucher_id, move_id, company_currency, current_currency, context=None):

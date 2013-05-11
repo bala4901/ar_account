@@ -60,7 +60,7 @@
 		                        on_change="onchange_journal(journal_id, line_dr_ids, False, partner_id, date, amount, type, company_id, context)"
 		                        string="Bank"/>                    		
 	                        -->
-		                    <field name="journal_id" invisible="context.get('line_type', False)" widget="selection" select="1" string="Journal" on_change="onchange_journal_id(journal_id)"/>   
+		                    <field name="journal_id" invisible="context.get('line_type', False)" select="1" string="Journal" on_change="onchange_journal_id(journal_id)"/>   
 
 							<!--		                        	                        
 							<field name="amount" invisible="context.get('line_type', False)" on_change="onchange_amount(amount, payment_rate, partner_id, journal_id, currency_id, type, date, payment_rate_currency_id, company_id, context)"/>                             		
