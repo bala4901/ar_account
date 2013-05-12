@@ -29,7 +29,7 @@ class bank_receipt(osv.osv):
 	_inherit = 'account.voucher'
 	_table = 'account_voucher'
 	_description = 'Bank Receipt'
-	_order = 'name'
+	_order = 'number'
 	
 	def check_access_rights(self, cr, uid, operation, raise_exception=True):
 		"""

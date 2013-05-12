@@ -29,6 +29,10 @@ from tools.translate import _
 class account_voucher(osv.osv):
 	_name = 'account.voucher'
 	_inherit = 'account.voucher'
+	_order = 'number'
+	
+	def default_journal_id(self, cr, uid, context={}):
+		return False
 
 	def default_voucher_type_id(self, cr, uid, context=None):
 		obj_account_voucher_type = self.pool.get('account.voucher_type')
@@ -67,6 +71,7 @@ class account_voucher(osv.osv):
 	_defaults =	{
 			            'voucher_type_id' : default_voucher_type_id,
 			            'type' : default_type,
+			            'journal_id' : default_journal_id,
 			            }
 			            
         def fields_view_get(self, cr, uid, view_id=None, view_type=False, context=None, toolbar=False, submenu=False):
@@ -161,6 +166,8 @@ class account_voucher(osv.osv):
 		
 		
 		return {'value' : value, 'domain' : domain, 'warning' : warning}
+		
+		
         
         
 							

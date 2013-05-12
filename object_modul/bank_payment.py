@@ -29,7 +29,7 @@ class bank_payment(osv.osv):
 	_inherit = 'account.voucher'
 	_table = 'account_voucher'
 	_description = 'Bank Payment'
-	_order = 'name'
+	_order = 'number'
 	
 	def check_access_rights(self, cr, uid, operation, raise_exception=True):
 		"""

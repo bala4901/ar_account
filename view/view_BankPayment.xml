@@ -120,7 +120,7 @@
                                         required="1"
                                         />
                                     -->
-                                    <field name="move_line_id"/>                                    
+                                    <field name="move_line_id" domain="[('reconcile_id','=',False),('account_id.reconcile','=',True),('credit','>',0)]" on_change="onchange_move_id(move_line_id, parent.journal_id, parent.currency_id)"/>                                    
                                     
                                     <!--
                                     <field name="account_id" groups="base.group_no_one" domain="[('type','=','payable')]"/>
