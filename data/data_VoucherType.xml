@@ -6,6 +6,9 @@
 			<field name="kode">BP</field>
 			<field name="default_header_type">payment</field>
 			<field name="default_detail_type_selection">cr</field>
+			<field name="model_name">account.bank_payment</field>
+			<field name="model_view_form">form_account_bankPayment</field>
+			<field name="modul_origin">ar_account</field>	
 		</record>
 		
 		<record id="data_voucherType_bankReceive" model="account.voucher_type">
@@ -13,6 +16,9 @@
 			<field name="kode">BR</field>
 			<field name="default_header_type">receipt</field>
 			<field name="default_detail_type_selection">dr</field>
+			<field name="model_name">account.bank_receipt</field>
+			<field name="model_view_form">form_account_bankReceipt</field>
+			<field name="modul_origin">ar_account</field>
 		</record>		
 		
 		<record id="data_voucherType_cashPayment" model="account.voucher_type">
@@ -20,6 +26,9 @@
 			<field name="kode">CP</field>
 			<field name="default_header_type">payment</field>
 			<field name="default_detail_type_selection">cr</field>
+			<field name="model_name">account.cash_payment</field>
+			<field name="model_view_form">form_account_cashPayment</field>
+			<field name="modul_origin">ar_account</field>
 		</record>
 		
 		<record id="data_voucherType_cashReceive" model="account.voucher_type">
@@ -27,6 +36,9 @@
 			<field name="kode">CR</field>
 			<field name="default_header_type">receipt</field>
 			<field name="default_detail_type_selection">dr</field>
+			<field name="model_name">account.cash_receipt</field>
+			<field name="model_view_form">form_account_cashReceipt</field>
+			<field name="modul_origin">ar_account</field>
 		</record>	
 		
 		<record id="data_voucherType_otherBankPayment" model="account.voucher_type">
@@ -34,6 +46,9 @@
 			<field name="kode">OBP</field>
 			<field name="default_header_type">purchase</field>
 			<field name="default_detail_type_selection">cr</field>
+			<field name="model_name">account.other_bank_payment</field>
+			<field name="model_view_form">form_account_otherBankPayment</field>
+			<field name="modul_origin">ar_account</field>
 		</record>
 		
 		<record id="data_voucherType_otherBankReceive" model="account.voucher_type">
@@ -41,6 +56,9 @@
 			<field name="kode">OBR</field>
 			<field name="default_header_type">sale</field>
 			<field name="default_detail_type_selection">dr</field>
+			<field name="model_name">account.other_bank_receipt</field>
+			<field name="model_view_form">form_account_otherBankReceipt</field>
+			<field name="modul_origin">ar_account</field>
 		</record>		
 		
 		<record id="data_voucherType_otherCashPayment" model="account.voucher_type">
@@ -48,6 +66,9 @@
 			<field name="kode">OCP</field>
 			<field name="default_header_type">purchase</field>
 			<field name="default_detail_type_selection">cr</field>
+			<field name="model_name">account.other_cash_payment</field>
+			<field name="model_view_form">form_account_otherCashPayment</field>
+			<field name="modul_origin">ar_account</field>
 		</record>
 		
 		<record id="data_voucherType_otherCashReceive" model="account.voucher_type">
@@ -55,6 +76,9 @@
 			<field name="kode">OCR</field>
 			<field name="default_header_type">sale</field>
 			<field name="default_detail_type_selection">dr</field>
+			<field name="model_name">account.other_cash_receipt</field>
+			<field name="model_view_form">form_account_otherCashReceipt</field>
+			<field name="modul_origin">ar_account</field>
 		</record>				
 	</data>
 </openerp>

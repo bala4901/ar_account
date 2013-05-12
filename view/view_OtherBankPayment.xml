@@ -36,7 +36,7 @@
                 			<field name="number" string="# Transaction"/>
                 			<field name="partner_id" required="1" on_change="onchange_journal_voucher(line_ids, tax_id, amount, partner_id, journal_id, type)"/>
 		                    <field name="date" on_change="onchange_date(date, currency_id, payment_rate_currency_id, amount, company_id)"/>
-		                    <field name="journal_id" widget="selection" select="1" on_change="onchange_journal_voucher(line_ids, tax_id, amount, partner_id, journal_id, type)"/>
+		                    <field name="journal_id" select="1" on_change="onchange_journal_voucher(line_ids, tax_id, amount, partner_id, journal_id, type)"/>
 		                    <field name="currency_id"/>
 		                    <field name="amount"/>
                         	<field name="type" required="1" invisible="1"/>            
