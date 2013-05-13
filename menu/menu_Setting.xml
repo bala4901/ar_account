@@ -45,7 +45,15 @@
         	sequence="16" 
 			parent="menu_account_accountingHideHeader"
             icon="STOCK_JUSTIFY_FILL" 
-            groups="account.group_account_user,account.group_account_manager"/>      	  	       				
+            groups="account.group_account_user,account.group_account_manager"/>  
+            
+        <menuitem 
+        	action="account.action_account_moves_purchase"
+            id="account.menu_eaction_account_moves_purchase"
+			parent="menu_account_accountingHideHeader"
+            icon="STOCK_JUSTIFY_FILL"
+            sequence="16"
+            groups="account.group_account_user,account.group_account_manager"/>    	  	       				
 																																																		
 																																																
 	</data>
