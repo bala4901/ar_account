@@ -70,6 +70,11 @@
         	id="account.menu_bank_statement_tree" 
 			parent="menu_account_accountingHideHeader"
         	sequence="7"/>	
+        	
+        <menuitem 
+        	action="account.action_view_bank_statement_tree" 
+        	id="account.journal_cash_move_lines"
+			parent="menu_account_accountingHideHeader" />
 																																																		
 																																																
 	</data>
