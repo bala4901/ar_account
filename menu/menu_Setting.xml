@@ -37,7 +37,15 @@
         		icon="STOCK_JUSTIFY_FILL"
             	action="account_voucher.action_purchase_receipt" 
             	parent="menu_account_accountingHideHeader"
-            	groups="base.group_extended"/>            	  	       				
+            	groups="base.group_extended"/>      
+            	
+        <menuitem 
+			id="account.menu_eaction_account_moves_sale"        
+        	action="account.action_account_moves_sale" 
+        	sequence="16" 
+			parent="menu_account_accountingHideHeader"
+            icon="STOCK_JUSTIFY_FILL" 
+            groups="account.group_account_user,account.group_account_manager"/>      	  	       				
 																																																		
 																																																
 	</data>
