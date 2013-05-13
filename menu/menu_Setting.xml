@@ -62,7 +62,14 @@
 			parent="menu_account_accountingHideHeader"
             sequence="16"
             groups="account.group_account_user,account.group_account_manager"
-        />     				
+        />     			
+        
+        <menuitem 
+        	string="Bank Statements" 
+        	action="account.action_bank_statement_tree" 
+        	id="account.menu_bank_statement_tree" 
+			parent="menu_account_accountingHideHeader"
+        	sequence="7"/>	
 																																																		
 																																																
 	</data>
