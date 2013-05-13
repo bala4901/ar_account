@@ -53,7 +53,16 @@
 			parent="menu_account_accountingHideHeader"
             icon="STOCK_JUSTIFY_FILL"
             sequence="16"
-            groups="account.group_account_user,account.group_account_manager"/>    	  	       				
+            groups="account.group_account_user,account.group_account_manager"/>    	  	  
+            
+        <menuitem
+            action="account.action_account_moves_bank"
+            icon="STOCK_JUSTIFY_FILL"
+            id="account.menu_action_account_moves_bank"
+			parent="menu_account_accountingHideHeader"
+            sequence="16"
+            groups="account.group_account_user,account.group_account_manager"
+        />     				
 																																																		
 																																																
 	</data>
