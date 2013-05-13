@@ -167,6 +167,9 @@ class account_voucher(osv.osv):
 		
 		return {'value' : value, 'domain' : domain, 'warning' : warning}
 		
+	def writeoff_move_line_get(self, cr, uid, voucher_id, line_total, move_id, name, company_currency, current_currency, context=None):
+		return False
+		
 		
         
         
