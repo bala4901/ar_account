@@ -130,7 +130,7 @@
                                     <field name="amount" sum="Total Allocation" on_change="onchange_amount(amount, amount_unreconciled, context)"/>
                                 </tree>
                             </field>
-                            <button name="import_invoice" string="Import Invoice" icon="gtk-execute" type="object"/>
+                            <button name="%(waction_stock_wizardImportMoveLine)d" string="Import Invoice" states="draft" icon="gtk-execute" type="action" context="{'move_type' : 'dr'}"/>
 							<field name="writeoff_amount"/>
                         </page>
                         <page string="Notes">
