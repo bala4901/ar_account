@@ -36,41 +36,18 @@
 					name="Voucher Type"
 					action="waction_account_voucherType"
 		/>			
-		<!--
-		<menuitem 	
-					id="menu_account_otherBankReceipt"
-					parent="account.menu_finance_bank_and_cash"
-					name="Other Bank Receipt"
-					action="waction_account_otherBankReceipt"
-		/>	
-		
-		<menuitem 	
-					id="menu_account_otherBankPayment"
-					parent="account.menu_finance_bank_and_cash"
-					name="Other Bank Payment"
-					action="waction_account_otherBankPayment"
-		/>			
-		
-		<menuitem 	
-					id="menu_account_otherCashPayment"
-					parent="account.menu_finance_bank_and_cash"
-					name="Other Cash Payment"
-					action="waction_account_otherCashPayment"
-		/>			
-		
-		<menuitem 	
-					id="menu_account_otherCashReceipt"
-					parent="account.menu_finance_bank_and_cash"
-					name="Other Cash Receipt"
-					action="waction_account_otherCashReceipt"
-		/>		
-		-->
 		
 		<menuitem 	id="menu_account_memorialJournal"
         			parent="account.menu_finance_entries"
 					name="Memorial Journal"
 					sequence="10" 
-					action="waction_account_MemorialJournal"/>																																																					
+					action="waction_account_MemorialJournal"/>		
+					
+		<menuitem 	id="account.menu_account_memorialJournal"
+        			parent="account.menu_finance_bank_and_cash"
+					name="Bank/Cash Reconciliation"/>						
+					
+																																																								
 																																																
 	</data>
 </openerp>
