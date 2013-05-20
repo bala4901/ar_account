@@ -68,7 +68,7 @@ class wizard_import_move_line(osv.osv_memory):
         voucher_id = obj_account_voucher.browse(cr, uid, [record_id])[0]
 
         for move_line in wizard.move_line_ids:
-            kriteria = [('move_line_id','=',move_line.id),('voucher_id','=',voucher_id.id)]
+            kriteria = [('move_line_id','=',move_line.id),('voucher_id','=',voucher_id.id),('state','=','valid')]
 
             voucher_line_ids = obj_account_voucher_line.search(cr, uid, kriteria)
 
