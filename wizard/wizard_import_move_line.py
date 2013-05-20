@@ -73,12 +73,14 @@ class wizard_import_move_line(osv.osv_memory):
             voucher_line_ids = obj_account_voucher_line.search(cr, uid, kriteria)
 
             if not voucher_line_ids:
+                amount = obj_account_voucher_line.compute_amount(cr, uid, move_line.id, voucher_id.journal_id.id, voucher_id.currency_id.id)['amount']
                 val = {
                         'voucher_id' : record_id,
                         'account_id' : move_line.account_id.id,
                         'move_line_id' : move_line.id,
                         'name' : move_line.name,
                         'type' : move_type,
+                        'amount' : amount,
                         }
                 obj_account_voucher_line.create(cr, uid, val, context=context)
         return {'type': 'ir.actions.act_window_close'}

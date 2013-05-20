@@ -35,6 +35,7 @@
                             'account_voucher',
                             'ar_base_waktu',
                             'ar_base_sequence',
+                            'ar_base_amount_to_text',
                             'ar_base'],
     'init_xml': [],
     'update_xml': [ 
