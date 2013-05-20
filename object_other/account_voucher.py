@@ -56,18 +56,17 @@ class account_voucher(osv.osv):
 		voucher_type = obj_account_voucher_type.browse(cr, uid, [voucher_type_id])[0]
 
 		return voucher_type.default_header_type
-		
-        def get_amount_to_text(self, cr, uid, ids, field_name, args, context=None):
-	    res = {}
-	    amount_to_text = []
-	    obj_account_voucher = self.pool.get('account.voucher')
-	    obj_res_currency = self.pool.get('res.currency')
-	
-	    for account_voucher in obj_account_voucher.browse(cr, uid, ids):
-	    	amount_to_text = obj_res_currency.terbilang_indo(cr, uid, int(account_voucher.amount))
-                res[account_voucher.id] = amount_to_text
-		
-	    return res
+
+	def get_amount_to_text(self, cr, uid, ids, field_name, args, context=None):
+		res = {}
+		amount_to_text = []
+		obj_account_voucher = self.pool.get('account.voucher')
+		obj_res_currency = self.pool.get('res.currency')
+
+		for account_voucher in obj_account_voucher.browse(cr, uid, ids):
+			amount_to_text = obj_res_currency.terbilang_indo(cr, uid, int(account_voucher.amount))
+			res[account_voucher.id] = amount_to_text
+		return res
 
 	_columns =	{
                                 'voucher_type_id' : fields.many2one(obj='account.voucher_type', string='Voucher Type', readonly=True, states={'draft':[('readonly',False)]}),

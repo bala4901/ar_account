@@ -35,17 +35,16 @@ class account_invoice(osv.osv):
 	_name = 'account.invoice'
 	_inherit = 'account.invoice'
 	
-        def get_amount_to_text(self, cr, uid, ids, field_name, args, context=None):
-	    res = {}
-	    amount_to_text = []
-	    obj_account_invoice = self.pool.get('account.invoice')
-	    obj_res_currency = self.pool.get('res.currency')
-	
-	    for account_invoice in obj_account_invoice.browse(cr, uid, ids):
-	    	amount_to_text = obj_res_currency.terbilang_indo(cr, uid, int(account_invoice.amount_total))
-                res[account_invoice.id] = amount_to_text
-		
-	    return res
+	def get_amount_to_text(self, cr, uid, ids, field_name, args, context=None):
+		res = {}
+		amount_to_text = []
+		obj_account_invoice = self.pool.get('account.invoice')
+		obj_res_currency = self.pool.get('res.currency')
+
+		for account_invoice in obj_account_invoice.browse(cr, uid, ids):
+			amount_to_text = obj_res_currency.terbilang_indo(cr, uid, int(account_invoice.amount_total))
+			res[account_invoice.id] = amount_to_text
+		return res
 
 	_columns =	{
                                 'amount_to_text' : fields.function(fnct=get_amount_to_text, string='Terbilang', type='text', method=True, store=True),
