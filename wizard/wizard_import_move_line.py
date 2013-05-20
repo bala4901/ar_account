@@ -47,9 +47,9 @@ class wizard_import_move_line(osv.osv_memory):
             for field in res['fields']:
                 if field == 'move_line_ids':
                     if record_id == 'cr':
-                        res['fields'][field]['domain'] = [('reconcile_id','=',False),('account_id.reconcile','=',True),('debit','>',0)]
+                        res['fields'][field]['domain'] = [('reconcile_id','=',False),('account_id.reconcile','=',True),('debit','>',0),('state','=','valid')]
                     elif record_id == 'dr':
-                        res['fields'][field]['domain'] = [('reconcile_id','=',False),('account_id.reconcile','=',True),('credit','>',0)]
+                        res['fields'][field]['domain'] = [('reconcile_id','=',False),('account_id.reconcile','=',True),('credit','>',0),('state','=','valid')]
                     else:
                         res['fields'][field]['domain'] = []
         return res

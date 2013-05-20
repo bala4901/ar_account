@@ -56,16 +56,29 @@ class account_voucher(osv.osv):
 		voucher_type = obj_account_voucher_type.browse(cr, uid, [voucher_type_id])[0]
 
 		return voucher_type.default_header_type
+		
+        def get_amount_to_text(self, cr, uid, ids, field_name, args, context=None):
+	    res = {}
+	    amount_to_text = []
+	    obj_account_voucher = self.pool.get('account.voucher')
+	    obj_res_currency = self.pool.get('res.currency')
+	
+	    for account_voucher in obj_account_voucher.browse(cr, uid, ids):
+	    	amount_to_text = obj_res_currency.terbilang_indo(cr, uid, int(account_voucher.amount))
+                res[account_voucher.id] = amount_to_text
+		
+	    return res
 
 	_columns =	{
-			            'voucher_type_id' : fields.many2one(obj='account.voucher_type', string='Voucher Type', readonly=True, states={'draft':[('readonly',False)]}),
-			            'payment_method' : fields.selection(string='Payment Method', selection=[('bank_transfer','Bank Transfer'),('cheque','Cheque'),('giro','Giro')], readonly=True, states={'draft':[('readonly',False)]}),
-			            'cheque_number' : fields.char(string='Cheque Number', size=50, readonly=True, states={'draft':[('readonly',False)]}),
-			            'cheque_date' : fields.date(string='Cheque Date', readonly=True, states={'draft':[('readonly',False)]}),
-			            'cheque_partner_bank_id' : fields.many2one(obj='res.partner.bank', string='Destination Bank Account', readonly=True, states={'draft':[('readonly',False)]}),
-			            'cheque_bank_id' : fields.related('cheque_partner_bank_id', 'bank', type='many2one', relation='res.bank', string='Bank', store=True, readonly=True),
-			            'cheque_recepient' : fields.char(string='Cheque Recepient', size=100, readonly=True, states={'draft':[('readonly',False)]}),
-			            'cheque_is_giro' : fields.boolean('Is Giro?')
+                                'voucher_type_id' : fields.many2one(obj='account.voucher_type', string='Voucher Type', readonly=True, states={'draft':[('readonly',False)]}),
+                                'payment_method' : fields.selection(string='Payment Method', selection=[('bank_transfer','Bank Transfer'),('cheque','Cheque'),('giro','Giro')], readonly=True, states={'draft':[('readonly',False)]}),
+                                'cheque_number' : fields.char(string='Cheque Number', size=50, readonly=True, states={'draft':[('readonly',False)]}),
+                                'cheque_date' : fields.date(string='Cheque Date', readonly=True, states={'draft':[('readonly',False)]}),
+                                'cheque_partner_bank_id' : fields.many2one(obj='res.partner.bank', string='Destination Bank Account', readonly=True, states={'draft':[('readonly',False)]}),
+                                'cheque_bank_id' : fields.related('cheque_partner_bank_id', 'bank', type='many2one', relation='res.bank', string='Bank', store=True, readonly=True),
+                                'cheque_recepient' : fields.char(string='Cheque Recepient', size=100, readonly=True, states={'draft':[('readonly',False)]}),
+                                'cheque_is_giro' : fields.boolean('Is Giro?'),
+                                'amount_to_text' : fields.function(fnct=get_amount_to_text, string='Terbilang', type='text', method=True, store=True),
 			            }
 
 	_defaults =	{
