@@ -64,7 +64,7 @@ class account_voucher(osv.osv):
 		obj_res_currency = self.pool.get('res.currency')
 
 		for account_voucher in obj_account_voucher.browse(cr, uid, ids):
-			amount_to_text = obj_res_currency.terbilang_indo(cr, uid, int(account_voucher.amount))
+			amount_to_text = obj_res_currency.terbilang(cr, uid, account_voucher.currency_id.id, account_voucher.amount) # INI CONTOH TERBILANG NYA
 			res[account_voucher.id] = amount_to_text
 		return res
 
