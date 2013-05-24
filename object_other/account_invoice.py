@@ -42,7 +42,7 @@ class account_invoice(osv.osv):
 		obj_res_currency = self.pool.get('res.currency')
 
 		for account_invoice in obj_account_invoice.browse(cr, uid, ids):
-			amount_to_text = obj_res_currency.terbilang_indo(cr, uid, int(account_invoice.amount_total))
+			amount_to_text = obj_res_currency.terbilang(cr, uid, account_invoice.currency_id.id, account_invoice.amount_total)
 			res[account_invoice.id] = amount_to_text
 		return res
 
