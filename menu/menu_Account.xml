@@ -29,6 +29,13 @@
 					name="Cash Receipt"
 					action="waction_account_cashReceipt"
 		/>		
+		
+		<menuitem 	
+					id="menu_account_bankCashReconcilliation"
+					parent="account.menu_finance_bank_and_cash"
+					name="Bank/Cash Reconciliattion"
+					action="account.action_bank_statement_periodic_tree"
+		/>		
 	
 		<menuitem 	id="menu_account_voucherType"
 					parent="account.menu_finance_configuration"
