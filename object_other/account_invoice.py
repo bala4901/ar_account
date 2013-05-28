@@ -38,13 +38,13 @@ class account_invoice(osv.osv):
 	def get_amount_to_text(self, cr, uid, ids, field_name, args, context=None):
 		res = {}
 		amount_to_text = []
-		obj_account_voucher = self.pool.get('account.voucher')
+		obj_account_invoice = self.pool.get('account.invoice')
 		obj_res_currency = self.pool.get('res.currency')
 
-		for account_voucher in obj_account_voucher.browse(cr, uid, ids):
-			amount_to_text = obj_res_currency.terbilang(cr, uid, account_voucher.currency_id.id, account_voucher.amount) # INI CONTOH TERBILANG NYA
-			#raise osv.except_osv(_('Test !'), _('%s')%amount_to_text)
-			res[account_voucher.id] = amount_to_text
+		for account_invoice in obj_account_invoice.browse(cr, uid, ids):
+			amount_to_text = obj_res_currency.terbilang(cr, uid, account_invoice.currency_id.id, account_invoice.amount_total)
+
+			res[account_invoice.id] = amount_to_text
 		return res
 
 	_columns =	{
