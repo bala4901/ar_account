@@ -150,10 +150,12 @@ class account_voucher(osv.osv):
 			for line in voucher.line_ids:
 				total += line.amount
 				
-		if voucher.amount == total:
+		if voucher.amount == total and voucher.check_total:
 			return True
-		else:
+		elif voucher.amount == total and voucher.check_total:
 			return False
+		else:
+			return True
 			
 	def proforma_voucher(self, cr, uid, ids, context=None):
 		"""
