@@ -41,6 +41,16 @@
 			<field name="modul_origin">ar_account</field>
 		</record>	
 		
+		<record id="data_voucherType_memorialJournal" model="account.voucher_type">
+			<field name="name">Memorial Journal</field>
+			<field name="kode">MJ</field>
+			<field name="default_header_type">receipt</field>
+			<field name="default_detail_type_selection">dr</field>
+			<field name="model_name">account.memorial_journal</field>
+			<field name="model_view_form">form_account_memorialJournal</field>
+			<field name="modul_origin">ar_account</field>
+		</record>		
+		
 		<record id="data_voucherType_otherBankPayment" model="account.voucher_type">
 			<field name="name">Other Bank Payment</field>
 			<field name="kode">OBP</field>
