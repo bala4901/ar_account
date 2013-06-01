@@ -29,7 +29,7 @@
 							<separator string="Default Information" colspan="2"/>
 							<field name="default_header_type"/>
 							<field name="default_detail_type_selection"/>
-							<field name="checkout_total"/>
+							<field name="check_total"/>
 						</group>
 						<group colspan="1" col="2">
 							<separator string="Inherit Object" colspan="2"/>
