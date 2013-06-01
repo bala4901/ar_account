@@ -152,7 +152,7 @@ class account_voucher(osv.osv):
 				
 		if voucher.amount == total and voucher.voucher_type_id.check_total:
 			return True
-		elif voucher.amount == total and voucher.voucher_type_id.check_total:
+		elif voucher.amount != total and voucher.voucher_type_id.check_total:
 			return False
 		else:
 			return True
