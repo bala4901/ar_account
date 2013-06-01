@@ -38,6 +38,12 @@ DEFAULT_DETAIL_TYPE_SELECTION = [
 class voucher_type(osv.osv):
 	_name = 'account.voucher_type'
 	_description = 'Voucher Type'
+	
+	def default_check_total(self, cr, uid, context={}):
+		return True
+		
+	def default_active(self, cr, uid, context={}):
+		return True		
 
 	_columns =	{
 					'kode' : fields.char(string='# Kode', size=100, required=True),
@@ -50,11 +56,13 @@ class voucher_type(osv.osv):
 					'model_name' : fields.char(string='Model Name', size=100),
 					'model_view_form' : fields.char(string='Model View Form', size=100),		
 					'modul_origin' : fields.char(string='Modul Origin', size=100),	
+					'check_total' : fields.boolean(string='Check For Total'),
 				}
 				
 	_defaults =	{
-					'active' : True,
-				}
+							'active' : default_active,
+							'check_total' : default_check_total,
+							}
 
 voucher_type()
 
