@@ -150,9 +150,9 @@ class account_voucher(osv.osv):
 			for line in voucher.line_ids:
 				total += line.amount
 				
-		if voucher.amount == total and voucher.check_total:
+		if voucher.amount == total and voucher.voucher_type_id.check_total:
 			return True
-		elif voucher.amount == total and voucher.check_total:
+		elif voucher.amount == total and voucher.voucher_type_id.check_total:
 			return False
 		else:
 			return True
