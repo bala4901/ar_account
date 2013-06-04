@@ -2,6 +2,14 @@
 <openerp>
 	<data>							
 
+            
+        <record id="account.menu_finance" model="ir.ui.menu">
+			<field name="icon">terp-account</field>
+			<field name="sequence">14</field>
+			<field name="action"></field>
+			
+        </record>	            
+
 		<menuitem 	
 					id="menu_account_bankPayment"
 					parent="account.menu_finance_bank_and_cash"
