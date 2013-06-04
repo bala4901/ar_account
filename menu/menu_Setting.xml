@@ -75,6 +75,28 @@
         	action="account.action_view_bank_statement_tree" 
         	id="account.journal_cash_move_lines"
 			parent="menu_account_accountingHideHeader" />
+			
+		<menuitem id="account.periodical_processing_journal_entries_validation" name="Draft Entries" parent="menu_account_accountingHideHeader"/>		
+		
+		<menuitem id="account.menu_account_pp_statements" name="Statements" parent="menu_account_accountingHideHeader" sequence="12"/>	
+		
+        <menuitem id="account.menu_finance_recurrent_entries" name="Recurring Entries"
+            parent="menu_account_accountingHideHeader" sequence="15"
+            groups="base.group_extended"/>		
+            
+        <menuitem
+             name="Manual Reconciliation" icon="STOCK_EXECUTE"
+             action="account.action_account_manual_reconcile"
+             id="account.menu_manual_reconcile"
+             parent="menu_account_accountingHideHeader"/>       
+             
+        <menuitem
+            icon="STOCK_EXECUTE"
+            name="Automatic Reconciliation"
+            action="account.action_account_automatic_reconcile"
+            id="account.menu_automatic_reconcile"
+            parent="menu_account_accountingHideHeader"
+            groups="base.group_extended"/>                  
 																																																		
 																																																
 	</data>
