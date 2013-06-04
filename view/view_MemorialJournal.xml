@@ -37,7 +37,7 @@
             		<field name="number" string="# Voucher"/>
             		<field name="date" select="1" invisible="context.get('line_type', False)" on_change="onchange_date(date, currency_id, payment_rate_currency_id, amount, company_id, context)" required="1"/>
                     <field name="journal_id" invisible="context.get('line_type', False)" select="1" string="Journal" on_change="onchange_journal_id(journal_id)"/>   
-            		<field name="company_id" widget="selection" groups="base.group_multi_company"/>
+            		<field name="company_id" widget="selection"/>
 					<field name="account_id" widget="selection" invisible="1"/> 
    					<field name="name" invisible="context.get('line_type', False)" required="1" string="Description"/>					
 					<field name="pre_line" invisible="1"/>	
@@ -121,6 +121,7 @@
                     <field name="reference" string="Description"/>
                     <field name="date"/>
                     <field name="period_id"/>
+                    <field name="company_id"/>
                     <field name="state"/>
                 </tree>
             </field>
