@@ -121,6 +121,7 @@
                                     <field name="account_id" groups="base.group_no_one" domain="[('type','=','payable')]"/>
                                     -->
                                     <field name="account_id" domain="[('type','!=','view')]"/>
+                                     <field name="analytics_id" domain="[('plan_id','&lt;&gt;',False)]"/>
                                     <field name="name" required="1"/>
                                     
                                     <field name="date_original" readonly="1"/>

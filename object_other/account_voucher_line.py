@@ -27,6 +27,10 @@ from datetime import datetime
 class account_voucher_line(osv.osv):
 	_name = 'account.voucher.line'
 	_inherit = 'account.voucher.line'
+	
+	_columns =	{
+							'analytics_id' : fields.many2one(obj='account.analytic.plan.instance', string='Analytic Distribution'),
+							}
 
 	def default_get(self, cr, uid, fields_list, context=None):
 		res = super(account_voucher_line, self).default_get(cr, uid, fields_list, context)
