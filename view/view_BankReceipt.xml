@@ -189,13 +189,13 @@
             <field name="arch" type="xml">
                 <tree colors="blue:state == 'draft';gray:state == 'cancel'" string="Voucher Entries">
                     <field name="number" string="# Voucher"/>
+                    <field name="reference" string="Description"/>
                     <field name="date"/>
-                    <field name="reference"/>
-                    <field name="partner_id" string="Customer"/>
+                    <field name="period_id"/>
                     <field name="journal_id"/>
                     <field name="payment_method"/>
-                    <field name="period_id" groups="base.group_extended" invisible="context.get('visible', True)"/>
-                    <field name="type" invisible="context.get('visible', True)"/>
+                   <field name="cheque_number"/>
+                   <field name="cheque_date"/>
                     <field name="amount" sum="Total Amount"/>
                     <field name="state"/>
                 </tree>
