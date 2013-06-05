@@ -5,7 +5,7 @@
 		<record id="waction_account_bankReceipt" model="ir.actions.act_window">
 			<field name="name">Bank Receipt</field>
 			<field name="type">ir.actions.act_window</field>
-			<field name="res_model">account.bank_payment</field>
+			<field name="res_model">account.bank_receipt</field>
 			<field name="search_view_id" ref="select_account_bankReceipt"/>
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
