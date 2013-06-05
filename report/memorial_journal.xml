@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<!-- MEMORIAL JOURNAL -->
+        <report id="report_account_memorialJournal" 
+        		auto="False" 
+        		model="account.memorial_journal" 
+        		name="account.memorial_journal_form"
+                rml="ar_account/report/memorial_journal.prpt"
+                string="Memorial Journal"
+                menu="True"/>
+
+		<record id="report_account_memorialJournal" model="ir.actions.report.xml">
+			<field name="is_pentaho_report" eval="1"/>
+			<field name="pentaho_load_file" eval="1"/>
+			<field name="pentaho_report_output_type">pdf</field>
+			<field name="pentaho_report_model_id" ref="ar_account.model_account_memorial_journal"/>
+			<field name="pentaho_filename">ar_account/report/memorial_journal.prpt</field>
+		</record>					
+
+	</data>
+</openerp>
