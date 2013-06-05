@@ -48,6 +48,7 @@
                             <field name="line_ids" colspan="4" nolabel="1" height="140">     
                                 <tree string="Voucher Detail" editable="bottom" colors="gray:amount==0">
                                     <field name="account_id" domain="[('type','!=','view')]"/>
+                                    <field name="analytics_id" domain="[('plan_id','&lt;&gt;',False)]"/>
                                     <field name="name" required="1"/>
 									<field name="type" required="1"/>
                                     <field name="amount" on_change="onchange_amount(amount, amount_unreconciled, context)" required="1"/>
