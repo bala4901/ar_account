@@ -43,7 +43,6 @@
                     'data/data_Sequence.xml',
                     'data/data_AccountJournal.xml',
                     'data/data_VoucherType.xml',
-                    'ar_account_report.xml',
                     'wizard/wizard_import_move_line.xml',
                     'view/view_VoucherType.xml',
                     'view/view_MemorialJournal.xml',
