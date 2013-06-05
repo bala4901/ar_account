@@ -58,6 +58,12 @@
 					sequence="10" 
 					action="waction_account_memorialJournal"/>		
 					
+		<menuitem 	id="menu_account_analyticDistribution"
+        			parent="account.menu_analytic_accounting"
+					name="Analytic Distribution"
+					sequence="10" 
+					action="account_analytic_plans.account_analytic_plan_instance_action"/>						
+					
 			
 					
 																																																								
