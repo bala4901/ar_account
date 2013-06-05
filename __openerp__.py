@@ -45,6 +45,7 @@
                     'data/data_VoucherType.xml',
                     'report/bank_payment.xml',
                     'report/cash_payment.xml',
+                    'report/bank_receipt.xml',
                     'wizard/wizard_import_move_line.xml',
                     'view/view_VoucherType.xml',
                     'view/view_MemorialJournal.xml',
