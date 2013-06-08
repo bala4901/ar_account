@@ -41,6 +41,8 @@
     'init_xml': [],
     'update_xml': [ 
                     'security/ir.model.access.csv',
+                    'security/data_Application.xml',
+                    'security/data_Groups.xml',
                     'data/data_Sequence.xml',
                     'data/data_AccountJournal.xml',
                     'data/data_VoucherType.xml',

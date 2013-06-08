@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<!-- BANK PAYMENT -->
+		<record id="group_account_bankPaymentUser" model="res.groups">
+			<field name="name">Bank Payment User</field>
+			<field name="category_id" ref="application_account_bankPayment"/>
+		</record>
+		
+		<record id="group_account_bankPaymentValidator" model="res.groups">
+			<field name="name">Bank Payment Validator</field>
+			<field name="category_id" ref="application_account_bankPayment"/>
+		</record>		
+		
+		<record id="group_account_bankPaymentCancel" model="res.groups">
+			<field name="name">Bank Payment Cancel</field>
+			<field name="category_id" ref="application_account_bankPayment"/>
+		</record>		
+		
+		<!-- BANK RECEIPT -->
+		<record id="group_account_bankReceiptUser" model="res.groups">
+			<field name="name">Bank Receipt User</field>
+			<field name="category_id" ref="application_account_bankReceipt"/>
+		</record>
+		
+		<record id="group_account_bankReceiptValidator" model="res.groups">
+			<field name="name">Bank Receipt Validator</field>
+			<field name="category_id" ref="application_account_bankReceipt"/>
+		</record>		
+		
+		<record id="group_account_bankReceiptCancel" model="res.groups">
+			<field name="name">Bank Receipt Cancel</field>
+			<field name="category_id" ref="application_account_bankReceipt"/>
+		</record>		
+		
+		<!-- CASH PAYMENT -->
+		<record id="group_account_cashPaymentUser" model="res.groups">
+			<field name="name">Cash Payment User</field>
+			<field name="category_id" ref="application_account_cashPayment"/>
+		</record>
+		
+		<record id="group_account_cashPaymentValidator" model="res.groups">
+			<field name="name">Cash Payment Validator</field>
+			<field name="category_id" ref="application_account_cashPayment"/>
+		</record>		
+		
+		<record id="group_account_cashPaymentCancel" model="res.groups">
+			<field name="name">Cash Payment Cancel</field>
+			<field name="category_id" ref="application_account_cashPayment"/>
+		</record>		
+		
+		<!-- CASH RECEIPT -->
+		<record id="group_account_cashReceiptUser" model="res.groups">
+			<field name="name">Cash Receipt User</field>
+			<field name="category_id" ref="application_account_cashReceipt"/>
+		</record>
+		
+		<record id="group_account_cashReceiptValidator" model="res.groups">
+			<field name="name">Cash Receipt Validator</field>
+			<field name="category_id" ref="application_account_cashReceipt"/>
+		</record>		
+		
+		<record id="group_account_cashReceiptCancel" model="res.groups">
+			<field name="name">Cash Receipt Cancel</field>
+			<field name="category_id" ref="application_account_cashReceipt"/>
+		</record>			
+		
+		<!-- MEMORIAL JOURNAL -->
+		<record id="group_account_memorialJournalUser" model="res.groups">
+			<field name="name">Memorial Journal User</field>
+			<field name="category_id" ref="application_account_memorialJournal"/>
+		</record>
+		
+		<record id="group_account_memorialJournalValidator" model="res.groups">
+			<field name="name">Memorial Journal Validator</field>
+			<field name="category_id" ref="application_account_memorialJournal"/>
+		</record>		
+		
+		<record id="group_account_memorialJournalCancel" model="res.groups">
+			<field name="name">Memorial Journal Cancel</field>
+			<field name="category_id" ref="application_account_memorialJournal"/>
+		</record>			
+			
+
+	</data>
+</openerp>

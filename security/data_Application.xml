@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="application_account_bankPayment" model="ir.module.category">
+			<field name="name">Bank Payment</field>
+		</record>
+		
+		<record id="application_account_bankReceipt" model="ir.module.category">
+			<field name="name">Bank Receipt</field>
+		</record>		
+		
+		<record id="application_account_cashPayment" model="ir.module.category">
+			<field name="name">Cash Payment</field>
+		</record>		
+		
+		<record id="application_account_cashReceipt" model="ir.module.category">
+			<field name="name">Cash Receipt</field>
+		</record>		
+		
+		<record id="application_account_memorialJournal" model="ir.module.category">
+			<field name="name">Memorial Journal</field>
+		</record>		
+
+	</data>
+</openerp>
