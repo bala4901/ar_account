@@ -21,6 +21,7 @@
 ##############################################################################
 
 import voucher_type
+import invoice_type
 import memorial_journal
 import bank_payment
 import bank_receipt
@@ -30,6 +31,13 @@ import other_bank_payment
 import other_bank_receipt
 import other_cash_payment
 import other_cash_receipt
+
+# inherit dari account.invoice
+import customer_invoice
+import supplier_invoice
+import credit_note
+import debit_note
+
 
 
 

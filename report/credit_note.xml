@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<!-- CERDIT NOTE -->
+        <report id="report_account_creditNote" 
+        		auto="False" 
+        		model="account.credit_note" 
+        		name="account.credit_note_form"
+                rml="ar_account/report/credit_note.prpt"
+                string="Credit Note"
+                menu="True"/>
+
+		<record id="report_account_creditNote" model="ir.actions.report.xml">
+			<field name="is_pentaho_report" eval="1"/>
+			<field name="pentaho_load_file" eval="1"/>
+			<field name="pentaho_report_output_type">pdf</field>
+			<field name="pentaho_report_model_id" ref="ar_account.model_account_credit_note"/>
+			<field name="pentaho_filename">ar_account/report/credit_note.prpt</field>
+		</record>					
+
+	</data>
+</openerp>

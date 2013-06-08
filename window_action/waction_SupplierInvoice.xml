@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="waction_account_supplierInvoice" model="ir.actions.act_window">
+			<field name="name">Supplier Invoice</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">account.supplier_invoice</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="search_view_id" ref="search_account_supplierInvoice"/>
+			<field name="domain">[('invoice_type_id.name','=','Supplier Invoice')]</field>
+			<field name="context">{'invoice_type' : 'Supplier Invoice'}</field>
+		</record>
+		
+		<record id="wactionView_account_treeSupplierInvoice" model="ir.actions.act_window.view">
+			<field eval="10" name="sequence"/>
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="tree_account_supplierInvoice"/>
+			<field name="act_window_id" ref="waction_account_supplierInvoice"/>
+		</record>
+
+		<record id="wactionView_account_formSupplierInvoice" model="ir.actions.act_window.view">
+			<field eval="20" name="sequence"/>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="form_account_supplierInvoice"/>
+			<field name="act_window_id" ref="waction_account_supplierInvoice"/>
+		</record>
+	</data>
+</openerp>

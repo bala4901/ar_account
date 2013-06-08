@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="tree_account_invoiceType" model="ir.ui.view">
+			<field name="name">Invoice Type</field>
+			<field name="model">account.invoice_type</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Invoice Type">
+					<field name="kode"/>
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+		
+		<record id="form_account_invoiceType" model="ir.ui.view">
+			<field name="name">Invoice Type</field>
+			<field name="model">account.invoice_type</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Invoice Type">
+					<group name="group_1" colspan="4" col="2">
+						<group name="group_1_1" colspan="1" col="2">
+							<separator string="Invoice Type" colspan="2"/>
+							<field name="name"/>
+							<field name="kode"/>
+							<field name="default_invoice_type"/>
+						</group>
+						<group name="group_1_2" colspan="1" col="2">
+							<separator string="State" colspan="2"/>
+							<field name="active"/>
+						</group>						
+					</group>
+					<notebook colspan="4">
+						<page string="Company Journal">
+							<field name="line_ids" colspan="4" nolabel="1">
+								<tree string="Company Journal" editable="bottom">
+									<field name="company_id"/>
+									<field name="journal_id" domain="[('company_id','=',company_id)]"/>
+								</tree>
+							</field>
+						</page>
+						<page string="Description">
+							<field name="description" colspan="4" nolabel="1"/>
+						</page>
+					</notebook>
+				</form>
+			</field>
+		</record>
+
+	</data>
+</openerp>

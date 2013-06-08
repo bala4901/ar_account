@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="application_account_customerInvoice" model="ir.module.category">
+			<field name="name">Customer Invoice</field>
+		</record>
+		
+		<record id="application_account_supplierInvoice" model="ir.module.category">
+			<field name="name">Supplier Invoice</field>
+		</record>		
+		
+		<record id="application_account_creditNote" model="ir.module.category">
+			<field name="name">Credit Note</field>
+		</record>		
+		
+		<record id="application_account_debitNote" model="ir.module.category">
+			<field name="name">Debit Note</field>
+		</record>		
+
+	</data>
+</openerp>

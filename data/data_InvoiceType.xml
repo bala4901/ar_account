@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="data_invoiceType_customerInvoice" model="account.invoice_type">
+			<field name="name">Customer Invoice</field>
+			<field name="kode">CI</field>
+			<field name="default_invoice_type">out_invoice</field>
+		</record>
+		
+		<record id="data_invoiceType_supplierInvoice" model="account.invoice_type">
+			<field name="name">Supplier Invoice</field>
+			<field name="kode">SI</field>
+			<field name="default_invoice_type">in_invoice</field>
+		</record>		
+		
+		<record id="data_invoiceType_creditNote" model="account.invoice_type">
+			<field name="name">Credit Note</field>
+			<field name="kode">CN</field>
+			<field name="default_invoice_type">out_refund</field>
+		</record>		
+		
+		<record id="data_invoiceType_debitNote" model="account.invoice_type">
+			<field name="name">Debit Note</field>
+			<field name="kode">DN</field>
+			<field name="default_invoice_type">in_refund</field>
+		</record>			
+		
+	</data>
+</openerp>

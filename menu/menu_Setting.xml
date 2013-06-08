@@ -96,7 +96,19 @@
             action="account.action_account_automatic_reconcile"
             id="account.menu_automatic_reconcile"
             parent="menu_account_accountingHideHeader"
-            groups="base.group_extended"/>                  
+            groups="base.group_extended"/>        
+            
+        <!-- HIDE : CUSTOMER INVOICE -->
+        <menuitem action="account.action_invoice_tree1" id="account.menu_action_invoice_tree1" parent="menu_account_accountingHideHeader"/>    
+        
+        <!-- HIDE : CUSTOMER REFUND -->
+        <menuitem action="account.action_invoice_tree3" id="account.menu_action_invoice_tree3" parent="menu_account_accountingHideHeader"/>      
+        
+        <!-- HIDE : SUPPLIER INVOICE -->
+        <menuitem action="account.action_invoice_tree2" id="account.menu_action_invoice_tree2" parent="menu_account_accountingHideHeader"/>
+        
+        <!-- HIDE : SUPPLIER REFUND -->
+        <menuitem action="account.action_invoice_tree4" id="account.menu_action_invoice_tree4" parent="menu_account_accountingHideHeader"/>
 																																																		
 																																																
 	</data>

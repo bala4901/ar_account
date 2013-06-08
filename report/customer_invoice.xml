@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<!-- CUSTOMER INVOICE -->
+        <report id="report_account_customerInvoice" 
+        		auto="False" 
+        		model="account.customer_invoice" 
+        		name="account.customer_invoice_form"
+                rml="ar_account/report/customer_invoice.prpt"
+                string="Customer Invoice"
+                menu="True"/>
+
+		<record id="report_account_customerInvoice" model="ir.actions.report.xml">
+			<field name="is_pentaho_report" eval="1"/>
+			<field name="pentaho_load_file" eval="1"/>
+			<field name="pentaho_report_output_type">pdf</field>
+			<field name="pentaho_report_model_id" ref="ar_account.model_account_customer_invoice"/>
+			<field name="pentaho_filename">ar_account/report/customer_invoice.prpt</field>
+		</record>					
+
+	</data>
+</openerp>

@@ -52,6 +52,13 @@
 					action="waction_account_voucherType"
 		/>			
 		
+		<menuitem 	id="menu_account_invoiceType"
+					parent="account.menu_finance_configuration"
+					sequence="2"
+					name="Invoice Type"
+					action="waction_account_invoiceType"
+		/>		
+		
 		<menuitem 	id="menu_account_memorialJournal"
         			parent="account.menu_finance_entries"
 					name="Memorial Journal"
@@ -62,7 +69,35 @@
         			parent="account.menu_analytic_accounting"
 					name="Analytic Distribution"
 					sequence="10" 
-					action="account_analytic_plans.account_analytic_plan_instance_action"/>						
+					action="account_analytic_plans.account_analytic_plan_instance_action"/>					
+
+		<!-- CUSTOMER INVOICE -->					
+		<menuitem 	id="menu_account_customerInvoice"
+        			parent="account.menu_finance_receivables"
+					name="Customer Invoices"
+					sequence="1" 
+					action="waction_account_customerInvoice"/>		
+					
+	<!-- CREDIT NOTE -->
+		<menuitem 	id="menu_account_creditNote"
+        			parent="account.menu_finance_receivables"
+					name="Credit Note"
+					sequence="2" 
+					action="waction_account_creditNote"/>										
+					
+		<!-- SUPPLIER INVOICE -->					
+		<menuitem 	id="menu_account_supplierInvoice"
+        			parent="account.menu_finance_payables"
+					name="Supplier Invoices"
+					sequence="1" 
+					action="waction_account_supplierInvoice"/>	
+					
+		<!-- DEBIT NOTE -->					
+		<menuitem 	id="menu_account_debitNote"
+        			parent="account.menu_finance_payables"
+					name="Debit Note"
+					sequence="2" 
+					action="waction_account_debitNote"/>															
 					
 			
 					
