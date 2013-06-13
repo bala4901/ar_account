@@ -85,6 +85,7 @@
                     'window_action/waction_SupplierInvoice.xml',
                     'window_action/waction_CreditNote.xml',
                     'window_action/waction_DebitNote.xml',
+                    'board/board_AR.xml',
                     'menu/menu_Account.xml',
                     'menu/menu_Setting.xml',
                     ],

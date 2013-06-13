@@ -11,6 +11,33 @@
         </record>	            
 
 		<menuitem 	
+					id="menu_account_dashboardHeader"
+					parent="account.menu_finance"
+					name="Dashboard"
+		/>
+		
+		<menuitem 	
+					id="menu_account_dashboardAR"
+					parent="menu_account_dashboardHeader"
+					name="Dashboard A/R"
+					action="waction_account_boardAR"
+		/>
+		
+		<menuitem 	
+					id="menu_account_dashboardAP"
+					parent="menu_account_dashboardHeader"
+					name="Dashboard A/P"
+					action="waction_account_boardAR"
+		/>				
+		
+		<menuitem 	
+					id="menu_account_dashboardVoucher"
+					parent="menu_account_dashboardHeader"
+					name="Dashboard Voucher"
+					action="waction_account_boardAR"
+		/>		
+
+		<menuitem 	
 					id="menu_account_bankPayment"
 					parent="account.menu_finance_bank_and_cash"
 					name="Bank Payment"
