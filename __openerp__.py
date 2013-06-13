@@ -86,6 +86,8 @@
                     'window_action/waction_CreditNote.xml',
                     'window_action/waction_DebitNote.xml',
                     'board/board_AR.xml',
+                    'board/board_AP.xml',
+                    'board/board_Voucher.xml',
                     'menu/menu_Account.xml',
                     'menu/menu_Setting.xml',
                     ],

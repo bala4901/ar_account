@@ -65,11 +65,11 @@
                 <form string="Dashboard A/R">
                     <board style="2-1">
                         <column>
-							 <action name="%(waction_account_boardCustomerInvoice)d" creatable="False" string="Customer Invoices On Progress"/>
-							 <action name="%(waction_account_boardCreditNote)d" creatable="False" string="Credit Note On Progress"/>
+							 <action name="%(waction_account_boardCustomerInvoice)d" string="Customer Invoices On Progress"/>
+							 <action name="%(waction_account_boardCreditNote)d" string="Credit Note On Progress"/>
                         </column>
                         <column>
-							<action name="%(waction_account_boardUnpaidCustomerInvoice)d" creatable="False" string="Unpaid Customer Invoice"/>
+							<action name="%(waction_account_boardUnpaidCustomerInvoice)d" string="Unpaid Customer Invoice"/>
                         </column>
                     </board>
                 </form>
