@@ -20,40 +20,18 @@
 #
 ##############################################################################
 
-import ir_sequence
-import account_account
-import account_account_template
-import account_account_type
-import account_chart_template
-import account_fiscal_position_account_template
-import account_fiscal_position_tax_template
-import account_fiscal_position_template
-import account_fiscalyear
-import account_invoice
-import account_journal
-import account_journal_column
-import account_journal_period
-import account_journal_view
-import account_model
-import account_model_line
-import account_move_line
-import account_move
-import account_move_reconcile
-import account_payment_term
-import account_payment_term_line
-import account_period
-import account_subscription
-import account_subscription_line
-import account_tax
-import account_tax_code
-import account_tax_code_template
-import account_tax_template
-import account_voucher
-import account_voucher_line
-import res_company
+
+from osv import fields, osv
+
+class res_company(osv.osv):
+	_name = 'res.company'
+	_inherit = 'res.company'
+
+	_columns =	{
+							'account_writeoff_id' : fields.many2one(string='Default Write-Off Account', obj='account.account', domain=['|',('type','!=','view'),('type','!=','closed'),('type','!=','consolidation')]),
+							}
+res_company()
 
 
 
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

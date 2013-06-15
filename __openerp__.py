@@ -71,6 +71,7 @@
                     'view/view_SupplierInvoice.xml',
                     'view/view_CreditNote.xml',
                     'view/view_DebitNote.xml',
+                    'view/view_ResCompany.xml',
                     'window_action/waction_VoucherType.xml',
                     'window_action/waction_InvoiceType.xml',
                     'window_action/waction_MemorialJournal.xml',
