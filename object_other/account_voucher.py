@@ -513,6 +513,7 @@ class account_voucher(osv.osv):
 			if not line.amount:
 			    continue
 	
+			amount = line.amount
 			# override jika ada penambahan maka di writeoff
 			if line.amount > line.amount_unreconciled and line.move_line_id:
 				#TODO: writeoff
