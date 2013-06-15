@@ -25,6 +25,7 @@ from osv import fields, osv
 from datetime import datetime
 from lxml import etree
 from tools.translate import _
+import netsvc
 
 class account_voucher(osv.osv):
 	_name = 'account.voucher'
@@ -67,6 +68,9 @@ class account_voucher(osv.osv):
 			amount_to_text = obj_res_currency.terbilang(cr, uid, account_voucher.payment_rate_currency_id.id, account_voucher.amount) # INI CONTOH TERBILANG NYA
 			res[account_voucher.id] = amount_to_text
 		return res
+		
+	def default_payment_option(self, cr, uid, context={}):
+		return 'with_writeoff'
 
 	_columns =	{
                                 'voucher_type_id' : fields.many2one(obj='account.voucher_type', string='Voucher Type', readonly=True, states={'draft':[('readonly',False)]}),
@@ -79,6 +83,7 @@ class account_voucher(osv.osv):
                                 'cheque_is_giro' : fields.boolean('Is Giro?'),
                                 'amount_to_text' : fields.function(fnct=get_amount_to_text, string='Terbilang', type='text', method=True, store=True),
                                 'account_id':fields.many2one('account.account', 'Account', required=False, readonly=True, states={'draft':[('readonly',False)]}),
+                                'state' : fields.selection(selection=[('draft','Draft'),('confirm','Confirm'),('waiting','Waiting For Approval'),('ready','Ready To Process'),('proforma','Pro-forma'),('posted','Posted'),('cancel','Cancelled')], string='State', readonly=True),
                                 
 			            }
 
@@ -86,7 +91,9 @@ class account_voucher(osv.osv):
 			            'voucher_type_id' : default_voucher_type_id,
 			            'type' : default_type,
 			            'journal_id' : default_journal_id,
+			            'payment_option' : default_payment_option,
 			            }
+			            
 			            
         def fields_view_get(self, cr, uid, view_id=None, view_type=False, context=None, toolbar=False, submenu=False):
                 res = super(account_voucher, self).fields_view_get(cr, uid, view_id=view_id, view_type=view_type, context=context, toolbar=toolbar, submenu=submenu)
@@ -138,6 +145,230 @@ class account_voucher(osv.osv):
 
 		return move_line
 		
+	def workflow_action_confirm(self, cr, uid, ids, context={}):
+		"""
+		Method yang dijalankan ketika confirm
+		
+		* Merubah state
+		"""
+		for id in ids:
+				
+			self.write(cr, uid, [id], {'state':'confirm'})
+		return True
+	
+	def workflow_action_waiting(self, cr, uid, ids, context={}):
+		"""
+		Method yang dijalankan ketika waiting
+		
+		* Merubah state
+		"""	
+		for id in ids:
+			#TODO:
+			#if not self.start_approval(cr, uid, id):
+				#return False
+				
+			self.write(cr, uid, [id], {'state':'waiting'})
+		return True	
+		
+	def workflow_action_ready(self, cr, uid, ids, context={}):
+		"""
+		Method yang dijalankan ketika ready
+		
+		* Merubah state
+		"""
+		for id in ids:
+				
+			self.write(cr, uid, [id], {'state':'ready'})
+		return True			
+	
+	def workflow_action_proforma(self, cr, uid, ids, context={}):
+		"""
+		Method yang dijalankan ketika confirm
+		
+		* Merubah state
+		* Memberikan nomor pada voucher
+		"""	
+		for id in ids:
+			if not self.proforma_voucher(cr, uid, [id]):
+				return False
+				
+			self.write(cr, uid, [id], {'state':'proforma'})
+		return True		
+	
+	def workflow_action_posted(self, cr, uid, ids, context={}):
+		"""
+		Method yang dijalankan ketika confirm
+		
+		* Merubah state
+		* Memberikan nomor pada voucher jika belum ada nomor
+		* Membuat penjurnalan
+		"""	
+		for id in ids:				
+			if not self.post_journal_entry(cr, uid, id):
+				return False
+						
+			self.write(cr, uid, [id], {'state':'posted'})
+		return True		
+	
+	def workflow_action_cancel(self, cr, uid, ids, context={}):
+		"""
+		Method yang dijalankan ketika cancel
+		
+		* Merubah state
+		"""	
+		for id in ids:
+			#TODO
+			if not self.cancel_account_voucher(cr, uid, id):
+				return False
+				
+			self.write(cr, uid, [id], {'state':'cancel'})
+		return True		
+		
+	def button_workflow_action_confirm(self, cr, uid, ids, context={}):
+		wkf_service = netsvc.LocalService('workflow')
+		
+		for id in ids:
+		
+			#if not self.check_total_voucher(cr, uid, id):
+				#raise osv.except_osv('Warning!', 'Total voucher is not equal with line total')
+				#return False		
+				
+			wkf_service.trg_validate(uid, 'account.voucher', id, 'button_confirm', cr)
+			
+
+		return True		
+		
+	def button_workflow_action_waiting(self, cr, uid, ids, context={}):
+		wkf_service = netsvc.LocalService('workflow')
+		
+		for id in ids:
+			wkf_service.trg_validate(uid, 'account.voucher', id, 'button_waiting', cr)
+			
+		return True			
+		
+	def button_workflow_action_proforma(self, cr, uid, ids, context={}):
+		wkf_service = netsvc.LocalService('workflow')
+		
+		for id in ids:
+			wkf_service.trg_validate(uid, 'account.voucher', id, 'button_proforma', cr)
+			
+		return True		
+		
+	def button_workflow_action_posted(self, cr, uid, ids, context={}):
+		wkf_service = netsvc.LocalService('workflow')
+		
+		for id in ids:
+			wkf_service.trg_validate(uid, 'account.voucher', id, 'button_posted', cr)
+			
+		return True		
+		
+	def button_workflow_action_cancel(self, cr, uid, ids, context={}):
+		wkf_service = netsvc.LocalService('workflow')
+		
+		for id in ids:
+			wkf_service.trg_validate(uid, 'account.voucher', id, 'button_cancel', cr)
+			
+		return True		
+		
+	def button_workflow_action_ready(self, cr, uid, ids, context={}):
+		wkf_service = netsvc.LocalService('workflow')
+		
+		for id in ids:
+			wkf_service.trg_validate(uid, 'account.voucher', id, 'button_ready', cr)
+			
+		return True						
+
+	def post_journal_entry(self, cr, uid, id):
+		obj_move = self.pool.get('account.move')
+		 
+		voucher = self.browse(cr, uid, [id])[0]
+		
+		if not voucher.move_id:
+			if not self.proforma_voucher(cr, uid, [id]):
+				return False
+		
+		voucher = self.browse(cr, uid, [id])[0]
+		obj_move.post(cr, uid, [voucher.move_id.id], context={})			
+		
+		return True
+		
+	def button_cancel(self, cr, uid, ids, context={}):
+		for id in ids:
+			if not self.cancel_account_voucher(cr, uid, id):
+				return False
+				
+			if not self.cancel_workflow_instance(cr, uid, id):
+				return False
+				
+			self.write(cr, uid, [id], {'state' : 'cancel'})
+		return True		
+		
+	def cancel_account_voucher(self, cr, uid, id, context=None):
+
+		obj_reconcile = self.pool.get('account.move.reconcile')
+		obj_move = self.pool.get('account.move')
+		obj_move_line = self.pool.get('account.move.line')
+	
+		voucher = self.browse(cr, uid, [id], context)[0]
+	
+		# Batalkan rekonsiliasi setiap voucher line
+		for line in voucher.move_ids:
+		    if line.reconcile_id:
+		        move_lines = [move_line.id for move_line in line.reconcile_id.line_id]
+		        move_lines.remove(line.id)
+		        obj_reconcile(cr, uid, line.reconcile_id.id)
+		        if len(move_lines) >= 2:
+		            obj_move_line.reconcile_partial(cr, uid, move_lines, 'auto',context=context)
+		            
+		# Hapus account.move
+		if voucher.move_id:
+		    obj_move.button_cancel(cr, uid, [voucher.move_id.id])
+		    obj_move.unlink(cr, uid, [voucher.move_id.id])
+		    
+		res = 	{
+					'move_id' : False,
+					}
+				
+		self.write(cr, uid, [id], res)
+	
+		return True
+		
+	def cancel_workflow_instance(self, cr, uid, id):
+		wkf_service = netsvc.LocalService('workflow')
+
+		wkf_service.trg_delete(uid, 'account.voucher', id, cr)
+		wkf_service.trg_create(uid, 'account.voucher', id, cr)
+		wkf_service.trg_validate(uid, 'account.voucher', id, 'button_cancel', cr)
+
+		return True			
+		
+	def button_set_to_draft(self, cr, uid, ids, context={}):
+		"""
+		Method yang dijalankan ketika user menekan tombol set to draft
+		"""
+		
+		for id in ids:
+			if not self.set_to_draft(cr, uid, id, context):
+				return False
+				
+		return True
+		
+	def set_to_draft(self, cr, uid, id, context={}):
+		"""
+		Method yang dijalankan untuk merubah cancel -> draft
+		"""
+		wkf_service = netsvc.LocalService('workflow')
+		
+		voucher = self.browse(cr, uid, [id], context)[0]
+		
+		wkf_service.trg_delete(uid, 'account.voucher', id, cr)
+		wkf_service.trg_create(uid, 'account.voucher', id, cr)
+		
+		self.write(cr, uid, [id], {'state':'draft'})
+		
+		return True					
+		
+		
 	def check_total_voucher(self, cr, uid, id):
 		"""
 		Method untuk melakukan pengecekan agar total voucher == sum amount semua voucher line
@@ -163,9 +394,10 @@ class account_voucher(osv.osv):
 		"""
 		
 		for id in ids:
-			if not self.check_total_voucher(cr, uid, id):
-				raise osv.except_osv('Warning!', 'Total voucher is not equal with line total')
-				return False
+			pass
+			#if not self.check_total_voucher(cr, uid, id):
+				#raise osv.except_osv('Warning!', 'Total voucher is not equal with line total')
+				#return False
 
 		return super(account_voucher, self).proforma_voucher(cr, uid, ids, context)
 		
@@ -183,8 +415,6 @@ class account_voucher(osv.osv):
 		
 		return {'value' : value, 'domain' : domain, 'warning' : warning}
 		
-	def writeoff_move_line_get(self, cr, uid, voucher_id, line_total, move_id, name, company_currency, current_currency, context=None):
-		return False
 		
 	def action_move_line_create(self, cr, uid, ids, context=None):
 		'''
@@ -229,20 +459,19 @@ class account_voucher(osv.osv):
 
 			# Create the writeoff line if needed
 			ml_writeoff = self.writeoff_move_line_get(cr, uid, voucher.id, line_total, move_id, name, company_currency, current_currency, context)
+			#raise osv.except_osv('a',str(ml_writeoff))
 			if ml_writeoff:
 				move_line_pool.create(cr, uid, ml_writeoff, context)
 			# We post the voucher.
 			self.write(cr, uid, [voucher.id], {
 				'move_id': move_id,
-				'state': 'posted',
 				'number': name,
 			})
-			if voucher.journal_id.entry_posted:
-				move_pool.post(cr, uid, [move_id], context={})
+
 			# We automatically reconcile the account move lines.
 			for rec_ids in rec_list_ids:
 				if len(rec_ids) >= 2:
-				    move_line_pool.reconcile_partial(cr, uid, rec_ids, writeoff_acc_id=voucher.writeoff_acc_id.id, writeoff_period_id=voucher.period_id.id, writeoff_journal_id=voucher.journal_id.id)
+				    move_line_pool.reconcile_partial(cr, uid, rec_ids, writeoff_acc_id=False, writeoff_period_id=False, writeoff_journal_id=False)
 		return True
 		
 	def voucher_move_line_create(self, cr, uid, voucher_id, line_total, move_id, company_currency, current_currency, context=None):

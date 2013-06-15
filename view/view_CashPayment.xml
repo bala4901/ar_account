@@ -10,13 +10,22 @@
             <field name="arch" type="xml">
                 <search string="Search Cash Payment">
                     <group>
-                        <filter icon="terp-document-new" string="Draft" domain="[('state','=','draft')]" help="Draft Vouchers"/>
-                        <filter icon="terp-camera_test" string="Posted" domain="[('state','=','posted')]" help="Posted Vouchers"/>
+                        <filter icon="terp-document-new" name="draft" string="Draft" domain="[('state','=','draft')]"/>
+                        <filter icon="gtk-apply" name="confirm" string="Confirm" domain="[('state','=','confirm')]"/>
+                        <filter icon="gtk-media-pause" name="waiting" string="Waiting" domain="[('state','=','waiting')]"/>
+						<filter icon="gtk-yes" name="ready" string="Ready" domain="[('state','=','ready')]"/>
+						<filter icon="gtk-media-forward" name="proforma" string="Proforma" domain="[('state','=','proforma')]"/>
+						<filter icon="gtk-media-next" name="post" string="Posted" domain="[('state','=','posted')]"/>
                         <separator orientation="vertical"/>
-                        <field name="date"/>
-                        <field name="number"/>
-                        <field name="journal_id" widget="selection" context="{'journal_id': self, 'set_visible':False}" domain="[('type','in',('bank','cash'))]"/>
-                        <field name="period_id" groups="base.group_extended"/>
+                        <filter icon="gtk-cancel" name="cancel" string="Cancelled" domain="[('state','=','cancel')]"/>
+                        <newline/>
+                        <field name="number" string="# Voucher"/>
+                        <field name="name" string="Description"/>
+                        <field name="journal_id" widget="selection" domain="[('type','=','bank')]"/>
+                        <newline/>
+						<field name="date" string="Date From" filter_domain="[('date','&gt;=',self)]"/>
+						<field name="date" string="Date To" filter_domain="[('date','&gt;=',self)]"/>
+                        <field name="period_id"/>
                     </group>
                    <newline/>
                     <group expand="0" string="Group By...">
@@ -82,13 +91,14 @@
                 		</group>       
 
                     	<group colspan="1" col="2" name="group_1_2">
-                    		<separator string="Amount" colspan="2"/>
+                    		<separator string="Amount Total" colspan="2"/>
                     		<field name="amount" invisible="context.get('line_type', False)"/>
                     		<field name="currency_id"/>
+                    		<separator string="Amount In Company Currency" colspan="2"/>
                     		<field name="is_multi_currency" invisible="1"/>
-                            <field name="payment_rate" required="1" on_change="onchange_rate(payment_rate, amount, currency_id, payment_rate_currency_id, company_id, context)"/>
-                            <field name="payment_rate_currency_id"  on_change="onchange_payment_rate_currency(currency_id, payment_rate, payment_rate_currency_id, date, amount, company_id, context)"/>
-                            <field name="paid_amount_in_company_currency"/>                    		
+                            <field name="payment_rate" required="1" on_change="onchange_rate(payment_rate, amount, currency_id, payment_rate_currency_id, company_id, context)" string="Rate"/>
+                            <field name="payment_rate_currency_id"  on_change="onchange_payment_rate_currency(currency_id, payment_rate, payment_rate_currency_id, date, amount, company_id, context)" string="Company Currency"/>
+                            <field name="paid_amount_in_company_currency" string="Total"/>                    		               		
                 		</group>                     		               		    		
                     </group>
                     <notebook colspan="4">
@@ -124,8 +134,18 @@
                                     <field name="amount" sum="Total Allocation" on_change="onchange_amount(amount, amount_unreconciled, context)"/>
                                 </tree>
                             </field>
-                            <button name="%(waction_stock_wizardImportMoveLine)d" string="Import Invoice" states="draft" icon="gtk-execute" type="action" context="{'move_type' : 'dr'}"/>
-							<field name="writeoff_amount"/>
+                            
+                            <group name="group_4" colspan="4" col="2">
+                            	<group name="group_4_1" colspan="1" col="2">
+                            		<button name="%(waction_stock_wizardImportMoveLine)d" string="Import Invoice" states="draft" icon="gtk-execute" type="action" context="{'move_type' : 'dr'}"/>
+                        		</group>
+                        		<group name="group_4_2" colspan="1" col="2">
+                        			<separator string="Difference Amount" colspan="2"/>
+									<field name="writeoff_amount"/>
+									<field name="payment_option" invisible="1"/>
+									<field name="writeoff_acc_id" domain="[('type','!=','view')]" attrs="{'required':[('writeoff_amount','!=',0)]}"/>
+								</group>
+							</group>
                         </page>
                         <page string="Notes">
                         	<field name="narration" colspan="4" nolabel="1"/>
@@ -163,10 +183,13 @@
                     	</group>
                     	<group name="group_2_3" colspan="1" col="2">
                     		<separator string="Workflow" colspan="2"/>
-		                    <button name="button_cancel_voucher" type="object" string="Cancel" states="draft,proforma"  icon="gtk-cancel" invisible="context.get('line_type', False)" colspan="2" groups="ar_account.group_account_cashPaymentCancel"/>
-		                    <button name="cancel_voucher" string="Unreconcile" type="object" states="posted" icon="terp-stock_effects-object-colorize" invisible="context.get('line_type', False)" confirm="Are you sure to unreconcile and cancel this record ?" colspan="2" groups="ar_account.group_account_cashPaymentCancel"/>
-		                    <button name="action_cancel_draft" type="object" states="cancel" string="Set to Draft" icon="terp-stock_effects-object-colorize" invisible="context.get('line_type', False)" colspan="2" groups="ar_account.group_account_cashPaymentCancel"/>
-		                    <button name="button_proforma_voucher" type="object" string="Validate" states="draft" icon="gtk-go-forward" invisible="context.get('line_type', False)" colspan="2" groups="ar_account.group_account_cashPaymentValidator"/>                    		
+                    		<button name="button_workflow_action_confirm" type="object" string="Confirm" colspan="2" icon="gtk-yes" states="draft"/>
+                    		<button name="button_workflow_action_proforma" type="object" string="Proforma" colspan="2" icon="gtk-yes" states="ready"/>
+                    		<button name="button_workflow_action_ready" type="object" string="Approve" colspan="2" icon="gtk-yes" states="waiting"/>
+                    		<button name="button_workflow_action_posted" type="object" string="Posted" colspan="2" icon="gtk-yes" states="proforma,ready"/>
+                    		<button name="button_workflow_action_cancel" type="object" string="Cancel" colspan="2" icon="gtk-cancel" states="draft,confirm,waiting,proforma,ready"/>
+                    		<button name="button_cancel" type="object" string="Cancel" colspan="2" icon="gtk-cancel" states="posted"/>
+                    		<button name="button_set_to_draft" type="object" string="Set To Draft" colspan="2" icon="terp-stock_effects-object-colorize" states="cancel"/>                  		
                     	</group>                    	
                     </group>
                 </form>
