@@ -189,6 +189,66 @@ class account_invoice(osv.osv):
 			
 		return True		
 		
+	def refund(self, cr, uid, ids, date=None, period_id=None, description=None, journal_id=None):
+		invoices = self.read(cr, uid, ids, ['name', 'type', 'number', 'reference', 'comment', 'date_due', 'partner_id', 'address_contact_id', 'address_invoice_id', 'partner_contact', 'partner_insite', 'partner_ref', 'payment_term', 'account_id', 'currency_id', 'invoice_line', 'tax_line', 'journal_id', 'user_id', 'fiscal_position'])
+		obj_invoice_line = self.pool.get('account.invoice.line')
+		obj_invoice_tax = self.pool.get('account.invoice.tax')
+		obj_journal = self.pool.get('account.journal')
+
+		new_ids = []
+		for invoice in invoices:
+			invoice_obj = self.browse(cr, uid, [invoice['id']])[0]
+			del invoice['id']
+		
+			type_dict = {
+			    'out_invoice': 'out_refund', # Customer Invoice
+			    'in_invoice': 'in_refund',   # Supplier Invoice
+			    'out_refund': 'out_invoice', # Customer Refund
+			    'in_refund': 'in_invoice',   # Supplier Refund
+			}
+
+			invoice_lines = obj_invoice_line.read(cr, uid, invoice['invoice_line'])
+			invoice_lines = self._refund_cleanup_lines(cr, uid, invoice_lines)
+
+			tax_lines = obj_invoice_tax.read(cr, uid, invoice['tax_line'])
+			tax_lines = filter(lambda l: l['manual'], tax_lines)
+			tax_lines = self._refund_cleanup_lines(cr, uid, tax_lines)
+			if journal_id:
+			    refund_journal_ids = [journal_id]
+			elif invoice['type'] == 'in_invoice':
+			    refund_journal_ids = obj_journal.search(cr, uid, [('type','=','purchase_refund')])
+			else:
+			    refund_journal_ids = obj_journal.search(cr, uid, [('type','=','sale_refund')])
+
+			if not date:
+			    date = time.strftime('%Y-%m-%d')
+			invoice.update({
+			    'type': type_dict[invoice['type']],
+			    'date_invoice': date,
+			    'state': 'draft',
+			    'number': False,
+			    'invoice_line': invoice_lines,
+			    'tax_line': tax_lines,
+			    'journal_id': refund_journal_ids
+			})
+			if period_id:
+			    invoice.update({
+			        'period_id': period_id,
+			    })
+			if description:
+			    invoice.update({
+			        'name': description,
+			    })
+			# take the id part of the tuple returned for many2one fields
+			for field in ('address_contact_id', 'address_invoice_id', 'partner_id',
+			        'account_id', 'currency_id', 'payment_term', 'journal_id',
+			        'user_id', 'fiscal_position'):
+			    invoice[field] = invoice[field] and invoice[field][0]
+			# create the new invoice
+			new_ids.append(self.create(cr, uid, invoice, context={'invoice_type' : invoice_obj.invoice_type_id.refund_invoice_type_id.name}))
+
+		return new_ids		
+		
 			
 					
       

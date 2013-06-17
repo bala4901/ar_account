@@ -37,8 +37,8 @@
                 		<group name="group_1_1" colspan="1" col="2">
                 			<separator string="Credit Note" colspan="2"/>
                 			<field name="number" string="# Credit Note"/>
-                			<field name="journal_id" on_change="onchange_journal_id(journal_id, context)" invisible="0"/>
-                			<field name="type" invisible="0"/>
+                			<field name="journal_id" on_change="onchange_journal_id(journal_id, context)" invisible="1"/>
+                			<field name="type" invisible="1"/>
                 			<field name="currency_id" width="50"/>
                 			<field name="invoice_type_id" invisible="1"/>
                 			<!--

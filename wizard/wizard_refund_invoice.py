@@ -42,10 +42,10 @@ class wizard_refund_invoice(osv.osv_memory):
         
         invoice = obj_invoice.browse(cr, uid, context['active_ids'])[0]
         
-        period_id = 0
+        period_id = False
         description = 'Refund from %s' % (str(invoice.number))
-        journal_id = invoice.invoice_type_id.voucher_type_refund_id and invoice.invoice_type_id.voucher_type_refund_id.id or False
-        refund_id = obj_invoice.refund(cr, uid, [invoice.id], wizard.date, period_id, description, journal_id)
+        journal_id = invoice.invoice_type_id.refund_invoice_type_id and invoice.invoice_type_id.refund_invoice_type_id.id or False
+        refund_id = obj_invoice.refund(cr, uid, [invoice.id], wizard.date_refund, period_id, description, journal_id)
         obj_invoice.button_compute(cr, uid, refund_id)
         
         return {}
