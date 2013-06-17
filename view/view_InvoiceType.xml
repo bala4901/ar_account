@@ -25,6 +25,7 @@
 							<field name="name"/>
 							<field name="kode"/>
 							<field name="default_invoice_type"/>
+							<field name="refund_invoice_type_id"/>
 						</group>
 						<group name="group_1_2" colspan="1" col="2">
 							<separator string="State" colspan="2"/>

@@ -56,6 +56,7 @@
                     'report/credit_note.xml',
                     'workflow/workflow_AccountVoucher.xml',
                     'wizard/wizard_import_move_line.xml',
+                    'wizard/wizard_refund_invoice.xml',
                     'view/view_VoucherType.xml',
                     'view/view_InvoiceType.xml',
                     'view/view_MemorialJournal.xml',

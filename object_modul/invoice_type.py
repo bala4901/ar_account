@@ -42,6 +42,7 @@ class invoice_type(osv.osv):
 							'default_invoice_type' : fields.selection(selection=[('out_invoice','Customer Invoice'),('in_invoice','Supplier Invoice'),('out_refund','Customer Refund'),('in_refund','Supplier Refund')], string='Default Invoice Type', required=True),
 							'description' : fields.text(string='Description'),
 							'line_ids' : fields.one2many(string='Invoice Type Line', obj='account.invoice_type_line', fields_id='invoice_type_id'),
+							'refund_invoice_type_id'  : fields.property(string='Refund Invoice Type', type='many2one', relation='account.invoice_type'),
 							}
 				
 	_defaults =	{

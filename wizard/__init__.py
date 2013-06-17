@@ -20,5 +20,6 @@
 ##############################################################################
 
 import wizard_import_move_line
+import wizard_refund_invoice
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
