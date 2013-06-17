@@ -12,13 +12,14 @@
 			<field name="domain">[('invoice_type_id.name','=','Credit Note')]</field>
 			<field name="context">{'invoice_type' : 'Credit Note', 'type' : 'out_refund'}</field>
 		</record>
-		
+
 		<record id="wactionView_account_treeCreditNote" model="ir.actions.act_window.view">
 			<field eval="1" name="sequence"/>
 			<field name="view_mode">tree</field>
 			<field name="view_id" ref="tree_account_creditNote"/>
 			<field name="act_window_id" ref="waction_account_creditNote"/>
 		</record>
+
 
 		<record id="wactionView_account_formCreditNote" model="ir.actions.act_window.view">
 			<field eval="2" name="sequence"/>
