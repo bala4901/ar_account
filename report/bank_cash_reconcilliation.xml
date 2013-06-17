@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		
+		<!-- CASH RECEIPT -->
+        <report id="report_account_bankCashReconcilliation" 
+        		auto="False" 
+        		model="account.bank.statement" 
+        		name="account.bank_cash_reconcilliation_form"
+                rml="ar_account/report/bank_cash_reconcilliation.prpt"
+                string="Bank/Cash Reconcilliation"
+                menu="True"/>
+
+		<record id="report_account_bankCashReconcilliation" model="ir.actions.report.xml">
+			<field name="is_pentaho_report" eval="1"/>
+			<field name="pentaho_load_file" eval="1"/>
+			<field name="pentaho_report_output_type">pdf</field>
+			<field name="pentaho_report_model_id" ref="account.model_account_bank_statement"/>
+			<field name="pentaho_filename">ar_account/report/bank_cash_reconcilliation.prpt</field>
+		</record>	
+		
+
+	</data>
+</openerp>

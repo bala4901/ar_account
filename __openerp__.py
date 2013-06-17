@@ -54,6 +54,7 @@
                     'report/memorial_journal.xml',
                     'report/customer_invoice.xml',
                     'report/credit_note.xml',
+                    'report/bank_cash_reconcilliation.xml',
                     'workflow/workflow_AccountVoucher.xml',
                     'wizard/wizard_import_move_line.xml',
                     'wizard/wizard_refund_invoice.xml',
