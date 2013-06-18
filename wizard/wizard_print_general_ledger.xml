@@ -10,7 +10,7 @@
                 <form string="Print General Ledger">
                 	<field name="company_id" widget="selection"/>
                 	<newline/>
-                	<field name="account_id" domain="[('coumpany_id','=',company_id)]"/>
+                	<field name="account_id" domain="[('company_id','=',company_id)]"/>
                 	<newline/>
                 	<field name="from_date"/>
                 	<newline/>
