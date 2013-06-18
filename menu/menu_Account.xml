@@ -125,7 +125,14 @@
         			parent="account.menu_finance_payables"
 					name="Debit Note"
 					sequence="2" 
-					action="waction_account_debitNote"/>															
+					action="waction_account_debitNote"/>			
+					
+		<!-- PRINT GENERAL LEDGER -->					
+		<menuitem 	id="menu_account_printGeneralLedger"
+        			parent="account.menu_finance_reporting"
+					name="General Ledger"
+					sequence="1" 
+					action="waction_account_wizardPrintGeneralLedger"/>																		
 					
 			
 					
