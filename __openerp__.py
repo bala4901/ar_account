@@ -56,6 +56,7 @@
                     'report/credit_note.xml',
                     'report/bank_cash_reconcilliation.xml',
                     'report/general_ledger.xml',
+                    'report/report_account_receivable.xml',
                     'workflow/workflow_AccountVoucher.xml',
                     'wizard/wizard_import_move_line.xml',
                     'wizard/wizard_refund_invoice.xml',

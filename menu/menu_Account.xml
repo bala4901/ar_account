@@ -132,7 +132,13 @@
         			parent="account.menu_finance_reporting"
 					name="General Ledger"
 					sequence="1" 
-					action="waction_account_wizardPrintGeneralLedger"/>																		
+					action="waction_account_wizardPrintGeneralLedger"/>			
+					
+		<menuitem 	id="menu_account_reportAccountReceivable"
+        			parent="account.menu_finance_reporting"
+					name="A/R Report"
+					sequence="2" 
+					action="waction_account_reportAccountReceivable"/>																						
 					
 			
 					

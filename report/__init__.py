@@ -20,10 +20,7 @@
 #
 ##############################################################################
 
-import object_other
-import object_modul
-import wizard
-import report
+import report_account_receivable
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

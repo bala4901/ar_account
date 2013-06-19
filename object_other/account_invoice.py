@@ -30,6 +30,7 @@ from osv.orm import except_orm
 import pooler
 from tools import config
 from tools.translate import _
+from datetime import date, datetime
 
 class account_invoice(osv.osv):
 	_name = 'account.invoice'
@@ -96,16 +97,28 @@ class account_invoice(osv.osv):
 		obj_account_invoice = self.pool.get('account.invoice')
 		obj_res_currency = self.pool.get('res.currency')
 
-		for account_invoice in obj_account_invoice.browse(cr, uid, ids):
+		for account_invoice in self.browse(cr, uid, ids):
 
 			#amount_to_text = obj_res_currency.terbilang(cr, uid, account_invoice.currency_id.id, account_invoice.amount_total)
 			res[account_invoice.id] = '-' #amount_to_text
 		return res		
+		
+	def function_aging(self, cr, uid, ids, field_name, args, context=None):
+		res = {}
+		for invoice in self.browse(cr, uid, ids):
+			aging = 0
+			if invoice.date_invoice and invoice.date_due:
+				date_invoice_ordinal = datetime.toordinal(date(int(invoice.date_invoice[0:4]), int(invoice.date_invoice[5:7]), int(invoice.date_invoice[8:10])))
+				date_due_ordinal = datetime.toordinal(date(int(invoice.date_due[0:4]), int(invoice.date_due[5:7]), int(invoice.date_due[8:10])))
+				aging = date_invoice_ordinal - date_due_ordinal
+			res[invoice.id] = aging
+		return res
 			
 
 	_columns =	{
 								'invoice_type_id' : fields.many2one(string='Invoice Type', obj='account.invoice_type'),
                                 'amount_to_text' : fields.function(fnct=get_amount_to_text, string='Terbilang', type='text', method=True, store=True),
+                                'aging' : fields.function(fnct=function_aging, string='Aging', type='integer', method=True, store=True),
 			            }
 			
 	_defaults =	{
