@@ -138,7 +138,13 @@
         			parent="account.menu_finance_reporting"
 					name="A/R Report"
 					sequence="2" 
-					action="waction_account_reportAccountReceivable"/>																						
+					action="waction_account_reportAccountReceivable"/>	
+					
+		<menuitem 	id="menu_account_reportAccountPayable"
+        			parent="account.menu_finance_reporting"
+					name="A/P Report"
+					sequence="3" 
+					action="waction_account_reportAccountPayable"/>																											
 					
 			
 					

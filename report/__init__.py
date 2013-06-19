@@ -21,6 +21,7 @@
 ##############################################################################
 
 import report_account_receivable
+import report_account_payable
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
