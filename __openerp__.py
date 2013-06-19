@@ -34,9 +34,6 @@
                             'account_accountant', 
                             'account_voucher',
                             'account_analytic_plans',
-                            'ar_base_waktu',
-                            'ar_base_sequence',
-                            'ar_base_amount_to_text',
                             'ar_base'],
     'init_xml': [],
     'update_xml': [ 
@@ -103,5 +100,6 @@
     'test': [],
     'installable': True,
     'auto_install': False,
+    'application':True,
 }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
