@@ -134,16 +134,22 @@
 					sequence="1" 
 					action="waction_account_wizardPrintGeneralLedger"/>			
 					
+		<menuitem 	id="menu_account_printTrialBalance"
+        			parent="account.menu_finance_reporting"
+					name="Trial Balance"
+					sequence="2" 
+					action="waction_account_wizardPrintTrialBalance"/>						
+					
 		<menuitem 	id="menu_account_reportAccountReceivable"
         			parent="account.menu_finance_reporting"
 					name="A/R Report"
-					sequence="2" 
+					sequence="3" 
 					action="waction_account_reportAccountReceivable"/>	
 					
 		<menuitem 	id="menu_account_reportAccountPayable"
         			parent="account.menu_finance_reporting"
 					name="A/P Report"
-					sequence="3" 
+					sequence="4" 
 					action="waction_account_reportAccountPayable"/>																											
 					
 			

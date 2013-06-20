@@ -22,5 +22,6 @@
 import wizard_import_move_line
 import wizard_refund_invoice
 import wizard_print_general_ledger
+import wizard_print_trial_balance
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -94,7 +94,7 @@
                     		<field name="cheque_number" attrs="{'required' : [('payment_method','!=','bank_transfer')], 'invisible':[('payment_method','!=','cheque'),('payment_method','!=','giro')]}"/>
                     		<field name="cheque_date" attrs="{'required' : [('payment_method','!=','bank_transfer')], 'invisible':[('payment_method','!=','cheque'),('payment_method','!=','giro')]}"/>
                     		<field name="cheque_recepient" attrs="{'invisible':[('payment_method','!=','cheque')]}"/>
-                    		<field name="cheque_partner_bank_id" domain="[('partner_id','=',partner_id)]" attrs="{'required' : [('payment_method','=','giro')], 'invisible':[('payment_method','!=','giro')]}"/>
+                    		<field name="cheque_partner_bank_id" attrs="{'required' : [('payment_method','=','giro')], 'invisible':[('payment_method','!=','giro')]}"/>
                     		<field name="cheque_bank_id" attrs="{'invisible':[('payment_method','!=','giro')]}"/>
                 		</group>  
                     	<group colspan="1" col="2" name="group_1_2">
