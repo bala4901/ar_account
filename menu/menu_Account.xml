@@ -138,18 +138,36 @@
         			parent="account.menu_finance_reporting"
 					name="Trial Balance"
 					sequence="2" 
-					action="waction_account_wizardPrintTrialBalance"/>						
+					action="waction_account_wizardPrintTrialBalance"/>			
+					
+		<menuitem 	id="menu_account_printBalanceSheet"
+        			parent="account.menu_finance_reporting"
+					name="Balance Sheet"
+					sequence="3" 
+					action="waction_account_wizardPrintBalanceSheet"/>					
+					
+		<menuitem 	id="menu_account_printProfitLoss"
+        			parent="account.menu_finance_reporting"
+					name="Profit Loss"
+					sequence="4" 
+					action="waction_account_wizardPrintProfitLoss"/>			
+					
+		<menuitem 	id="menu_account_printCashFlow"
+        			parent="account.menu_finance_reporting"
+					name="Cash Flow"
+					sequence="5" 
+					action="waction_account_wizardPrintCashFlow"/>														
 					
 		<menuitem 	id="menu_account_reportAccountReceivable"
         			parent="account.menu_finance_reporting"
 					name="A/R Report"
-					sequence="3" 
+					sequence="6" 
 					action="waction_account_reportAccountReceivable"/>	
 					
 		<menuitem 	id="menu_account_reportAccountPayable"
         			parent="account.menu_finance_reporting"
 					name="A/P Report"
-					sequence="4" 
+					sequence="7" 
 					action="waction_account_reportAccountPayable"/>																											
 					
 			
