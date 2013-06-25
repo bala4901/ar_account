@@ -41,6 +41,7 @@ class res_company(osv.osv):
 							'account_expense_id' : fields.many2one(string='Expense Account', obj='account.account', domain=[('type','=','view')]),
 							'account_other_income_id' : fields.many2one(string='Other Income Account', obj='account.account', domain=[('type','=','view')]),
 							'account_other_expense_id' : fields.many2one(string='Other Expense Account', obj='account.account', domain=[('type','=','view')]),
+							'account_root_id' : fields.many2one(string='Root Account', obj='account.account', domain=[('type','=','view')]),
 							}
 res_company()
 

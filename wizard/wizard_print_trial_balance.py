@@ -39,29 +39,29 @@ class wizard_print_trial_balance(osv.osv_memory):
                             }
                             
     def button_print_report(self, cr, uid, ids, data, context=None):
-        wizard = self.browse(cr, uid, ids)[0]
-        obj_account = self.pool.get('account.account')
-        obj_period = self.pool.get('account.period')
-
-        
-        period_ids = obj_period.find(cr, uid, wizard.to_date)
-        
-        if not period_ids:
-            raise osv.except_osv('Warning!', 'Please define period for start date')
-            
-        period = obj_period.browse(cr, uid, period_ids)[0]
-        
-        from_date = period.fiscalyear_id.date_start
-        to_date = wizard.to_date  
-        
-        data['ids'] = self.pool.get('account.account').search(cr, uid, [])
-        data['model'] = 'account.account'
-        data['output_type'] = 'pdf'
-        val =   {
-                    'to_date' : '%s 00:00:00' % (wizard.to_date),
-                    }
-        data['variables'] = val
-        return {'type': 'ir.actions.report.xml', 'report_name': 'account.report_trial_balance', 'datas': data, 'context' : {'date_from' : from_date, 'date_to' : to_date}}
+		obj_user = self.pool.get('res.users')
+		if context is None:
+			context = {}
+			
+			
+		user = obj_user.browse(cr, uid, [uid])[0]
+		
+		if not user.company_id.account_root_id:
+			raise osv.except_osv('Peringatan!', 'Akun root aset belum ditentukan')
+			
+		data = {}
+		wizard = self.browse(cr, uid, ids, context)[0]
+		res =	{
+		            'to_date' : wizard.to_date,
+		            }
+				
+		data['form'] = res
+		
+		return	{
+				'type': 'ir.actions.report.xml',
+				'report_name': 'report_trial_balance',
+				'datas': data,
+				}
 
         
         

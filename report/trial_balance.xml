@@ -7,16 +7,16 @@
         		auto="False" 
         		model="account.account" 
         		name="account.report_trial_balance"
-                rml="ar_account/report/trial_balance.prpt"
+                rml="ar_account/report/trial_balance.rml"
                 string="Trial Balance"
                 menu="False"/>
 
 		<record id="report_account_trialBalance" model="ir.actions.report.xml">
-			<field name="is_pentaho_report" eval="1"/>
-			<field name="pentaho_load_file" eval="1"/>
+			<field name="is_pentaho_report" eval="0"/>
+			<field name="pentaho_load_file" eval="0"/>
 			<field name="pentaho_report_output_type">pdf</field>
 			<field name="pentaho_report_model_id" ref="account.model_account_account"/>
-			<field name="pentaho_filename">ar_account/report/trial_balance.prpt</field>
+			<field name="pentaho_filename">ar_account/report/trial_balance.rml</field>
 		</record>					
 
 	</data>

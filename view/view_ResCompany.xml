@@ -12,6 +12,7 @@
 						<group name="group_1" colspan="4" col="2">
 							<group name="group_1_1" colspan="1" col="2">
 								<separator string="Balance/Profit Account" colspan="2"/>
+								<field name="account_root_id"/>
 								<field name="account_balance_sheet_id"/>
 								<field name="account_profit_loss_id"/>
 							</group>
