@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<document filename="Balance Sheet.pdf"> <!-- TODO: SESUAIKAN NAMA FILE REPORT -->
+	<!-- TODO: TEMPLATE -->
+	<template pageSize="(29.7cm, 21.0cm)" title="Balance Sheet" author="Andhitia rama &amp; Michael Viriyananda" showBoundary="0" allowSplitting="20">
+
+		<pageTemplate id="First">		
+      		<frame id="firstCol" x1="1.0cm" y1="1.0cm" width="13.5cm" height="19.0cm"/>	
+      		<frame id="secondCol" x1="15.2cm" y1="1.0cm" width="13.5cm" height="19.0cm"/>
+		</pageTemplate>
+	</template>
+	
+	<!-- TODO: DEFINISIKAN STYLESHEET DISINI -->
+	<stylesheet> 
+		<paraStyle
+			name="JUDUL_LAPORAN"
+			fontName="Courier"
+			fontSize="12.0"
+			alignment="RIGHT"
+		/>
+		
+		<paraStyle
+			name="NORMAL_TEXT"
+			fontName="Courier"
+			fontSize="8.0"
+			alignment="LEFT"
+		/>		
+		
+		<paraStyle
+			name="NORMAL_CURRENCY"
+			fontName="Courier"
+			fontSize="8.0"
+			alignment="RIGHT"
+		/>		
+		
+		<paraStyle
+			name="RATA_KANAN"
+			alignment="RIGHT"
+		/>
+		
+		<paraStyle
+			name="HEADER_TABEL"
+			fontName="Times-Bold"
+		/>		
+
+		<blockTableStyle id="TABEL_STANDAR">		
+			<!-- GARIS BAWAH HEADER -->
+			<lineStyle kind="GRID" colorName="#000000" start="0,0" stop="-1,-1"/>		
+			
+		
+		</blockTableStyle>		
+				
+		
+		<blockTableStyle id="REPORT_HEADER_TABLE">		
+			<!-- GARIS BAWAH HEADER -->
+			<lineStyle kind="GRID" colorName="#FFFFFF" start="0,0" stop="-1,0"/>		
+			
+		
+		</blockTableStyle>
+		
+		<blockTableStyle id="TABEL_LUAR">		
+			<!-- GARIS BAWAH HEADER -->
+			<lineStyle kind="GRID" colorName="#000000" start="0,0" stop="-1,-1"/>
+		  	<blockTopPadding lenght="0" start="0,1" stop="-1,-2"/>
+		  	<blockBottomPadding lenght="0" start="0,1" stop="-1,-2"/>
+		  	<blockLeftPadding lenght="0" start="0,1" stop="-1,-2"/>
+		  	<blockRightPadding lenght="0" start="0,1" stop="-1,-2"/>	
+		  	<blockValign value="TOP"/>		
+		</blockTableStyle>		
+		
+	</stylesheet>
+	
+
+	
+	<!-- TODO: ISI LAPORAN -->
+	<story>	
+		<para>[[ repeatIn(objects, 'p') ]]</para>		
+		<section>
+		<keepInFrame maxWidth="0" maxHeight="0">
+		<blockTable colWidths="3.0cm,8.0cm,2.5cm" style="TABEL_STANDAR" repeatRows="1">
+			<tr>
+				<td><para style="NORMAL_TEXT">CODE</para></td>
+				<td><para style="NORMAL_TEXT">ACCOUNT</para></td>
+				<td><para style="NORMAL_TEXT">BALANCE</para></td>
+			</tr>
+			<tr>
+				<td><para style="NORMAL_TEXT">[[ repeatIn(isi_laporan(data['form']), 'a') ]] [[ a['code'] ]]</para></td>
+				<td><para style="NORMAL_TEXT">[[ a['name'] ]]</para></td>
+				<td><para style="NORMAL_CURRENCY">[[ locale.format('%.2f',a['balance'],True) ]]</para></td>
+			</tr>			
+		</blockTable>
+		</keepInFrame>
+		
+
+
+		<blockTable colWidths="3.0cm,8.0cm,2.5cm" style="TABEL_STANDAR" repeatRows="1">
+			<tr>
+				<td><para style="NORMAL_TEXT">CODE</para></td>
+				<td><para style="NORMAL_TEXT">ACCOUNT</para></td>
+				<td><para style="NORMAL_TEXT">BALANCE</para></td>
+			</tr>
+			<tr>
+				<td><para style="NORMAL_TEXT">[[ repeatIn(isi_laporan(data['form']), 'a') ]] [[ a['code'] ]]</para></td>
+				<td><para style="NORMAL_TEXT">[[ a['name'] ]]</para></td>
+				<td><para style="NORMAL_CURRENCY">[[ locale.format('%.2f',a['balance'],True) ]]</para></td>
+			</tr>			
+		</blockTable>		
+		</section>
+
+	</story>
+
+</document>

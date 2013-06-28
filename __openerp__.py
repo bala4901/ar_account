@@ -56,6 +56,7 @@
                     'report/report_account_receivable.xml',
                     'report/report_account_payable.xml',
                     'report/trial_balance.xml',
+                    'report/balance_sheet.xml',
                     'workflow/workflow_AccountVoucher.xml',
                     'wizard/wizard_import_move_line.xml',
                     'wizard/wizard_refund_invoice.xml',
