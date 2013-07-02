@@ -24,6 +24,7 @@ import report_account_receivable
 import report_account_payable
 import report_trial_balance
 import report_balance_sheet
+import report_equity_change
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

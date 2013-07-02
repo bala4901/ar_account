@@ -35,13 +35,16 @@ class res_company(osv.osv):
 							'account_activa_id' : fields.many2one(string='Activa Account', obj='account.account', domain=[('type','=','view')]),
 							'account_pasiva_id' : fields.many2one(string='Pasiva Account', obj='account.account', domain=[('type','=','view')]),
 							'account_liabillity_id' : fields.many2one(string='Liabillity Account', obj='account.account', domain=[('type','=','view')]),
-							'account_equity_id' : fields.many2one(string='Equity Account', obj='account.account', domain=[('type','=','view')]),
+							'account_equity_id' : fields.many2one(string='Equity Account', obj='account.account'),
 							'account_income_id' : fields.many2one(string='Income Account', obj='account.account', domain=[('type','=','view')]),
 							'account_cogs_id' : fields.many2one(string='CoGS Account', obj='account.account', domain=[('type','=','view')]),
 							'account_expense_id' : fields.many2one(string='Expense Account', obj='account.account', domain=[('type','=','view')]),
 							'account_other_income_id' : fields.many2one(string='Other Income Account', obj='account.account', domain=[('type','=','view')]),
 							'account_other_expense_id' : fields.many2one(string='Other Expense Account', obj='account.account', domain=[('type','=','view')]),
 							'account_root_id' : fields.many2one(string='Root Account', obj='account.account', domain=[('type','=','view')]),
+							'account_equity1_id' : fields.many2one(string='Equity Account', obj='account.account', domain=[('type','=','view')]),
+							'account_pl_id' : fields.many2one(string='Profit Loss Account', obj='account.account'),
+							'account_deviden_id' : fields.many2one(string='Deviden Account', obj='account.account'),
 							}
 res_company()
 

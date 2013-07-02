@@ -35,6 +35,9 @@
 							<group name="group_1_4" colspan="1" col="2">
 								<separator string="Other  Account" colspan="2"/>
 								<field name="account_writeoff_id"/>
+								<field name="account_equity1_id"/>
+								<field name="account_deviden_id"/>
+								<field name="account_pl_id"/>
 							</group>																			
 						</group>
 						
