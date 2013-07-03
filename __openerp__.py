@@ -34,6 +34,7 @@
                             'account_accountant', 
                             'account_voucher',
                             'account_analytic_plans',
+                            'account_cancel',
                             'ar_base_waktu',
                             'ar_base_sequence',
                             'ar_base_amount_to_text',
