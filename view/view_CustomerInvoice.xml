@@ -135,6 +135,7 @@
                             <button name="action_cancel_draft" states="cancel" string="Reset to Draft" type="object" icon="terp-stock_effects-object-colorize" colspan="2" groups="ar_account.group_account_customerInvoiceCancel"/>
                             <button name="button_invoice_proforma2" type="object" states="draft" string="PRO-FORMA" icon="terp-gtk-media-pause" colspan="2" groups="ar_account.group_account_customerInvoiceValidator"/>
                             <button name="button_invoice_open" type="object" states="draft,proforma2" string="Validate" icon="gtk-go-forward" colspan="2" groups="ar_account.group_account_customerInvoiceValidator"/>                    		
+                            <button name="%(waction_account_wizardRefundInvoice)d" type="action" string="Refund Invoice" icon="gtk-go-forward" colspan="2" groups="ar_account.group_account_customerInvoiceValidator"/>   
                     	</group>                    	
                     </group>
                 </form>

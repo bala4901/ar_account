@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>  
+
+        <record id="form_account_wizardPrintCashFlow" model="ir.ui.view">
+            <field name="name">Print Cash Flow</field>
+            <field name="model">account.wizard_print_cash_flow</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Print Cash Flow">
+                	<field name="company_id" widget="selection"/>
+                	<newline/>
+                	<field name="to_date"/>
+                	<newline/>
+                    <group col="2" colspan="4">
+                        <button special="cancel" string="_Cancel" icon="gtk-cancel"/>
+                        <button name="button_print_report" string="Print Cash Flow" colspan="1" type="object" icon="gtk-apply"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        
+        <record id="waction_account_wizardPrintCashFlow" model="ir.actions.act_window">
+            <field name="name">Print Cash Flow</field>
+            <field name="res_model">account.wizard_print_cash_flow</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="form_account_wizardPrintCashFlow"/>
+            <field name="target">new</field>
+        </record>          
+        
+    </data>
+</openerp>

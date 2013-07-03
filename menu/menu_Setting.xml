@@ -109,6 +109,18 @@
         
         <!-- HIDE : SUPPLIER REFUND -->
         <menuitem action="account.action_invoice_tree4" id="account.menu_action_invoice_tree4" parent="menu_account_accountingHideHeader"/>
+        
+        <!-- HIDE : DASHBOARD ACCOUNTING -->
+        <menuitem id="account.menu_dashboard_acc" name="Dashboard" sequence="2" parent="menu_account_accountingHideHeader" groups="account.group_account_user,account.group_account_manager"/>
+        
+        <!-- HIDE : LEGAL REPORT -->
+        <menuitem id="account.menu_finance_legal_statement" name="Legal Reports" parent="menu_account_accountingHideHeader"/>
+        
+        <!-- HIDE : GENERIC REPORTING -->
+        <menuitem id="account.menu_finance_generic_reporting" name="Generic Reporting" parent="menu_account_accountingHideHeader" sequence="100"/>
+        
+        <!-- HIDE : STATISTIC REPORT -->
+        <menuitem id="account.menu_finance_statistic_report_statement" name="Statistic Reports" parent="menu_account_accountingHideHeader" sequence="300"/>
 																																																		
 																																																
 	</data>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+    <record id="tree_account_reportAccountReceivable" model="ir.ui.view">
+        <field name="name">Tree Report Account Receivable</field>
+        <field name="model">account.report_account_receivable</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Report Account Receivable">
+				<field name="name"/>
+				<field name="partner_code"/>
+				<field name="partner_id"/>
+				<field name="date_invoice"/>
+				<field name="date_due"/>
+				<field name="aging"/>
+				<field name="amount_untaxed" sum="Total Amount Untaxed"/>
+				<field name="amount_tax" sum="Total Amount Tax"/>
+				<field name="amount_total" sum="Total Amount"/>
+				<field name="amount_residual" sum="Total Amount Residual"/>
+           </tree>
+        </field>
+    </record>
+
+    <record id="search_account_reportAccountReceivable" model="ir.ui.view">
+        <field name="name">Search Report Account Receivable</field>
+        <field name="model">account.report_account_receivable</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search string="Report Account Receivable">
+                <field name="date_invoice" string="Date Invoice From" filter_domain="[('date_invoice','&gt;=',self)]"/>
+                <field name="date_invoice" string="Date Invoice To" filter_domain="[('date_invoice','&lt;=',self)]"/>
+                <separator orientation="vertical"/>
+                <field name="date_due" string="Date Due From" filter_domain="[('date_due','&gt;=',self)]"/>
+                <field name="date_due" string="Date Due To" filter_domain="[('date_due','&lt;=',self)]"/>     
+				<separator orientation="vertical"/>
+				<field name="aging" string="Aging From" filter_domain="[('aging','&gt;=',self)]"/>
+				<field name="aging" string="Aging To" filter_domain="[('aging','&lt;=',self)]"/>                      
+                <newline/>
+                <field name="partner_id"/>
+                <newline/>
+                <group expand="0" string="Group By...">
+					<filter string="Customer" icon="terp-partner" domain="[]" context="{'group_by':'partner_id'}"/>
+                </group>                
+            </search>
+        </field>
+    </record>
+    
+		<record id="waction_account_reportAccountReceivable" model="ir.actions.act_window">
+			<field name="name">A/R Report</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">account.report_account_receivable</field>
+			<field name="search_view_id" ref="search_account_reportAccountReceivable"/>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree</field>
+		</record>
+		
+		<record id="wactionView_account_treeReportAccountReceivable" model="ir.actions.act_window.view">
+			<field eval="10" name="sequence"/>
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="tree_account_reportAccountReceivable"/>
+			<field name="act_window_id" ref="waction_account_reportAccountReceivable"/>
+		</record>    
+
+</data>
+</openerp>

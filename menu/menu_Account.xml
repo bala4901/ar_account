@@ -125,7 +125,76 @@
         			parent="account.menu_finance_payables"
 					name="Debit Note"
 					sequence="2" 
-					action="waction_account_debitNote"/>															
+					action="waction_account_debitNote"/>			
+					
+		<!-- PRINT GENERAL LEDGER -->	
+		<menuitem 	id="menu_account_printAccountingHeader"
+        			parent="account.menu_finance_reporting"
+					name="Generic Report"
+					sequence="1" />		
+											
+		<menuitem 	id="menu_account_printGeneralLedger"
+        			parent="menu_account_printAccountingHeader"
+					name="General Ledger"
+					sequence="1" 
+					action="waction_account_wizardPrintGeneralLedger"/>			
+					
+		<menuitem 	id="menu_account_printTrialBalance"
+        			parent="menu_account_printAccountingHeader"
+					name="Trial Balance"
+					sequence="2" 
+					action="waction_account_wizardPrintTrialBalance"/>			
+					
+		<menuitem 	id="menu_account_printBalanceSheet"
+        			parent="menu_account_printAccountingHeader"
+					name="Balance Sheet"
+					sequence="3" 
+					action="waction_account_wizardPrintBalanceSheet"/>					
+					
+		<menuitem 	id="menu_account_printProfitLoss"
+        			parent="menu_account_printAccountingHeader"
+					name="Profit Loss"
+					sequence="4" 
+					action="waction_account_wizardPrintProfitLoss"/>			
+					
+		<menuitem 	id="menu_account_printCashFlow"
+        			parent="menu_account_printAccountingHeader"
+					name="Cash Flow"
+					sequence="5" 
+					action="waction_account_wizardPrintCashFlow"/>			
+					
+		<menuitem 	id="menu_account_printEquityChange"
+        			parent="menu_account_printAccountingHeader"
+					name="Equity Change"
+					sequence="6" 
+					action="waction_account_wizardPrintEquityChange"/>			
+					
+		<menuitem 	id="menu_account_queryAccountingHeader"
+        			parent="account.menu_finance_reporting"
+					name="Generic Query"
+					sequence="2" />																				
+					
+		<menuitem 	id="menu_account_reportAccountReceivable"
+        			parent="menu_account_queryAccountingHeader"
+					name="A/R Report"
+					sequence="1" 
+					action="waction_account_reportAccountReceivable"/>	
+					
+		<menuitem 	id="menu_account_reportAccountPayable"
+        			parent="menu_account_queryAccountingHeader"
+					name="A/P Report"
+					sequence="2" 
+					action="waction_account_reportAccountPayable"/>		
+					
+		<menuitem 	id="menu_account_customPrintAccountingHeader"
+        			parent="account.menu_finance_reporting"
+					name="Custom Report"
+					sequence="3" />		
+					
+		<menuitem 	id="menu_account_customQueryAccountingHeader"
+        			parent="account.menu_finance_reporting"
+					name="Custom Query"
+					sequence="4" />																																		
 					
 			
 					

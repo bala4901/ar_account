@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<document filename="Equity Change.pdf"> <!-- TODO: SESUAIKAN NAMA FILE REPORT -->
+	<!-- TODO: TEMPLATE -->
+	<template pageSize="(21.0cm, 29.7cm)" title="Equity Change" author="Andhitia rama &amp; Michael Viriyananda" showBoundary="0" allowSplitting="20">
+
+		<pageTemplate id="First">				
+      		<frame id="first" x1="1.0cm" y1="1.0cm" width="19.0cm" height="25.7cm"/>	
+   		
+		</pageTemplate>
+	</template>
+	
+	<!-- TODO: DEFINISIKAN STYLESHEET DISINI -->
+	<stylesheet> 
+		<paraStyle
+			name="JUDUL_LAPORAN"
+			fontName="Courier"
+			fontSize="12.0"
+			alignment="RIGHT"
+		/>
+		
+		<paraStyle
+			name="NORMAL_TEXT"
+			fontName="Courier"
+			fontSize="10.0"
+			alignment="LEFT"
+		/>		
+		
+		<paraStyle
+			name="NORMAL_CURRENCY"
+			fontName="Courier"
+			fontSize="10.0"
+			alignment="RIGHT"
+		/>		
+		
+		<paraStyle
+			name="RATA_KANAN"
+			alignment="RIGHT"
+		/>
+		
+		<paraStyle
+			name="HEADER_TABEL"
+			fontName="Times-Bold"
+		/>		
+
+		<blockTableStyle id="TABEL_STANDAR">		
+			<!-- GARIS BAWAH HEADER -->
+			<lineStyle kind="GRID" colorName="#000000" start="0,0" stop="-1,-1"/>		
+			
+		
+		</blockTableStyle>		
+				
+		
+		<blockTableStyle id="REPORT_HEADER_TABLE">		
+			<!-- GARIS BAWAH HEADER -->
+			<lineStyle kind="GRID" colorName="#FFFFFF" start="0,0" stop="-1,0"/>		
+			
+		
+		</blockTableStyle>
+		
+		<blockTableStyle id="TABEL_LUAR">		
+			<!-- GARIS BAWAH HEADER -->
+			<lineStyle kind="GRID" colorName="#000000" start="0,0" stop="-1,-1"/>
+		  	<blockTopPadding lenght="0" start="0,1" stop="-1,-2"/>
+		  	<blockBottomPadding lenght="0" start="0,1" stop="-1,-2"/>
+		  	<blockLeftPadding lenght="0" start="0,1" stop="-1,-2"/>
+		  	<blockRightPadding lenght="0" start="0,1" stop="-1,-2"/>	
+		  	<blockValign value="TOP"/>		
+		</blockTableStyle>		
+		
+	</stylesheet>
+	
+
+	
+	<!-- TODO: ISI LAPORAN -->
+	<story>	
+		<section>
+		<blockTable style="TABEL_STANDAR" repeatRows="1">
+			<tr>
+				<td><para style="NORMAL_TEXT">MODAL AWAL</para></td>
+				<td><para style="NORMAL_TEXT"></para></td>
+				<td><para style="NORMAL_TEXT">Rp. xxxxxxxxxx</para></td>
+			</tr>		
+			<tr>
+				<td><para style="NORMAL_TEXT">LABA DITAHAN DI AWAL</para></td>
+				<td><para style="NORMAL_TEXT">Rp. xxxxxxxxxx</para></td>
+				<td><para style="NORMAL_TEXT"></para></td>
+			</tr>			
+			<tr>
+				<td><para style="NORMAL_TEXT">DEVIDEN</para></td>
+				<td><para style="NORMAL_TEXT">Rp. xxxxxxxxxx</para></td>
+				<td><para style="NORMAL_TEXT"></para></td>
+			</tr>						
+			<tr>
+				<td><para style="NORMAL_TEXT">LABA (RUGI) BULAN INI</para></td>
+				<td><para style="NORMAL_TEXT">Rp. xxxxxxxxxx</para></td>
+				<td><para style="NORMAL_TEXT"></para></td>
+			</tr>			
+			<tr>
+				<td><para style="NORMAL_TEXT">LABA DITAHAN AKHIR</para></td>
+				<td><para style="NORMAL_TEXT"></para></td>
+				<td><para style="NORMAL_TEXT">Rp. xxxxxxxxxx</para></td>
+			</tr>		
+			<tr>
+				<td><para style="NORMAL_TEXT">MODAL AKHIR</para></td>
+				<td><para style="NORMAL_TEXT"></para></td>
+				<td><para style="NORMAL_TEXT">Rp. xxxxxxxxxx</para></td>
+			</tr>								
+		</blockTable>
+		</section>
+
+	</story>
+
+</document>

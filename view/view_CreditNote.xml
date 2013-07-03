@@ -4,7 +4,7 @@
 		<!-- TREE VIEW -->
         <record id="tree_account_creditNote" model="ir.ui.view">
             <field name="name">Tree Credit Note</field>
-            <field name="model">account.cerdit_note</field>
+            <field name="model">account.credit_note</field>
             <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree colors="blue:state == 'draft';black:state in ('proforma','proforma2','open');gray:state == 'cancel'" string="Credit Note">
@@ -29,7 +29,7 @@
         <!-- FORM VIEW -->
         <record id="form_account_creditNote" model="ir.ui.view">
             <field name="name">Form Credit Note</field>
-            <field name="model">account.cerdit_note</field>
+            <field name="model">account.credit_note</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Credit Note">
@@ -61,6 +61,8 @@
                 			<separator string="Date &amp; Period" colspan="2"/>
                 			<field name="date_invoice" required="1" string="Date"/>
                 			<field name="period_id" domain="[('state', '=', 'draft')]" widget="selection" string="Period"/>
+                			<field name="payment_term" widget="selection" invisible="1"/>
+                			<field name="date_due" invisible="1"/>
                 		</group>                		
                 	</group>
                     <notebook colspan="4">
@@ -141,7 +143,7 @@
 		<!-- SEARCH VIEW -->
         <record id="search_account_creditNote" model="ir.ui.view">
             <field name="name">Search Credit Note</field>
-            <field name="model">account.cerdit_note</field>
+            <field name="model">account.credit_note</field>
             <field name="type">search</field>
             <field name="arch" type="xml">
                 <search string="Credit Notes">

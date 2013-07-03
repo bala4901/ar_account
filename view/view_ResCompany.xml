@@ -9,7 +9,38 @@
             <field name="arch" type="xml">
             	<notebook>
 					<page string="Accounting Confirguration">
-						<field name="account_writeoff_id"/>
+						<group name="group_1" colspan="4" col="2">
+							<group name="group_1_1" colspan="1" col="2">
+								<separator string="Balance/Profit Account" colspan="2"/>
+								<field name="account_root_id"/>
+								<field name="account_balance_sheet_id"/>
+								<field name="account_profit_loss_id"/>
+							</group>
+							<group name="group_1_2" colspan="1" col="2">
+								<separator string="Activa/Pasiva  Account" colspan="2"/>
+								<field name="account_activa_id"/>
+								<field name="account_pasiva_id"/>
+							</group>		
+							<group name="group_1_3" colspan="1" col="2">
+								<separator string="Account Group  Account" colspan="2"/>
+								<field name="account_asset_id"/>
+								<field name="account_liabillity_id"/>
+								<field name="account_equity_id"/>
+								<field name="account_income_id"/>
+								<field name="account_cogs_id"/>
+								<field name="account_expense_id"/>
+								<field name="account_other_income_id"/>
+								<field name="account_other_expense_id"/>
+							</group>		
+							<group name="group_1_4" colspan="1" col="2">
+								<separator string="Other  Account" colspan="2"/>
+								<field name="account_writeoff_id"/>
+								<field name="account_equity1_id"/>
+								<field name="account_deviden_id"/>
+								<field name="account_pl_id"/>
+							</group>																			
+						</group>
+						
 					</page>
 				</notebook>
             </field>

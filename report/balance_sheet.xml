@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<!-- TRIAL BALANCE -->
+        <report id="report_account_balanceSheet" 
+        		auto="False" 
+        		model="account.account" 
+        		name="account.report_balance"
+                rml="ar_account/report/balance_sheet.rml"
+                string="Balance Sheet"
+                menu="False"/>
+
+				
+
+	</data>
+</openerp>
