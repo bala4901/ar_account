@@ -71,6 +71,7 @@
                      'wizard/wizard_print_profit_loss.xml',
                     'wizard/wizard_print_cash_flow.xml',
                     'wizard/wizard_print_equity_change.xml',
+                    'wizard/wizard_cash_receipt.xml',
                     'view/view_VoucherType.xml',
                     'view/view_InvoiceType.xml',
                     'view/view_MemorialJournal.xml',
