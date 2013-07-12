@@ -99,8 +99,8 @@ class account_invoice(osv.osv):
 
 		for account_invoice in self.browse(cr, uid, ids):
 
-			#amount_to_text = obj_res_currency.terbilang(cr, uid, account_invoice.currency_id.id, account_invoice.amount_total)
-			res[account_invoice.id] = '-' #amount_to_text
+			amount_to_text = obj_res_currency.terbilang(cr, uid, account_invoice.currency_id.id, account_invoice.amount_total)
+			res[account_invoice.id] = amount_to_text
 		return res		
 		
 	def function_aging(self, cr, uid, ids, field_name, args, context=None):
