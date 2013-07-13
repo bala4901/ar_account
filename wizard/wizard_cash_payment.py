@@ -136,7 +136,7 @@ class wizard_cash_payment(osv.osv_memory):
             move_line_ids = obj_account_move_line.search(cr, uid, [('move_id','=',invoice_id.move_id.id)])
 
             for move_line in obj_account_move_line.browse(cr, uid, move_line_ids):
-                if move_line.account_id.type == 'receivable':
+                if move_line.account_id.type == 'payable':
                     amount = obj_account_voucher_line.compute_amount(cr, uid, move_line.id, move_line.journal_id.id, move_line.currency_id.id)['amount']
                     val = {
                             'voucher_id' : new_account_cash_payment_id,
