@@ -73,6 +73,8 @@
                     'wizard/wizard_print_equity_change.xml',
                     'wizard/wizard_cash_receipt.xml',
                     'wizard/wizard_bank_receipt.xml',
+                    'wizard/wizard_cash_payment.xml',
+                    'wizard/wizard_bank_payment.xml',
                     'view/view_VoucherType.xml',
                     'view/view_InvoiceType.xml',
                     'view/view_MemorialJournal.xml',
