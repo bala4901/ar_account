@@ -27,8 +27,10 @@ import wizard_print_balance_sheet
 import wizard_print_profit_loss
 import wizard_print_cash_flow
 import wizard_print_equity_change
+import wizard_print_statement
 import wizard_cash_receipt
 import wizard_bank_receipt
 import wizard_cash_payment
 import wizard_bank_payment
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

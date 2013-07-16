@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>  
+
+        <record id="form_account_wizardPrintStatement" model="ir.ui.view">
+            <field name="name">Print Statement</field>
+            <field name="model">account.wizard_print_statement</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Print Statement">
+                	<field name="company_id" widget="selection"/>
+                	<newline/>
+                	<field name="partner_id" widget="selection" on_change="onchange_partner_id(partner_id)" options='{"quick_create": false}'/>
+                	<newline/>
+                	<field name="contact_partner_id" domain="[('partner_id','=',partner_id)]" options='{"quick_create": false}'/>
+                	<newline/>
+                	<field name="from_date"/>
+                	<newline/>
+                	<field name="to_date"/>
+                	<newline/>
+                    <group col="2" colspan="4">
+                        <button special="cancel" string="_Cancel" icon="gtk-cancel"/>
+                        <button name="button_print_report" string="Print Statement" colspan="1" type="object" icon="gtk-apply"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        
+        <record id="waction_account_wizardPrintStatement" model="ir.actions.act_window">
+            <field name="name">Print Statement</field>
+            <field name="res_model">account.wizard_print_statement</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="form_account_wizardPrintStatement"/>
+            <field name="target">new</field>
+        </record>          
+        
+    </data>
+</openerp>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<!-- MEMORIAL JOURNAL -->
+        <report id="report_account_statement" 
+        		auto="False" 
+        		model="account.invoice" 
+        		name="account.report_statement"
+                rml="ar_account/report/statement.prpt"
+                string="Statement"
+                menu="False"/>
+
+		<record id="report_account_statement" model="ir.actions.report.xml">
+			<field name="is_pentaho_report" eval="1"/>
+			<field name="pentaho_load_file" eval="1"/>
+			<field name="pentaho_report_output_type">pdf</field>
+			<field name="pentaho_report_model_id" ref="account.model_account_invoice"/>
+			<field name="pentaho_filename">ar_account/report/statement.prpt</field>
+		</record>					
+
+	</data>
+</openerp>

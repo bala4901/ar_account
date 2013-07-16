@@ -167,7 +167,13 @@
         			parent="menu_account_printAccountingHeader"
 					name="Equity Change"
 					sequence="6" 
-					action="waction_account_wizardPrintEquityChange"/>			
+					action="waction_account_wizardPrintEquityChange"/>		
+
+		<menuitem 	id="menu_account_printStatement"
+        			parent="menu_account_printAccountingHeader"
+					name="Statement"
+					sequence="7" 
+					action="waction_account_wizardPrintStatement"/>		
 					
 		<menuitem 	id="menu_account_queryAccountingHeader"
         			parent="account.menu_finance_reporting"
