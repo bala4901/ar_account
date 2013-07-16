@@ -58,10 +58,9 @@ class wizard_print_statement(osv.osv_memory):
         wizard = self.browse(cr, uid, ids)[0]
         obj_account_invoice = self.pool.get('account.invoice')
 
-        kriteria = [ ('partner_id','=',wizard.partner_id.id), ('date_invoice','>=',wizard.from_date + ' 00:00:00'), ('date_invoice','<=',wizard.to_date + ' 23:59:00')]
+        kriteria = [ ('partner_id','=',wizard.partner_id.id), ('date_invoice','>=',wizard.from_date + ' 00:00:00'), ('date_invoice','<=',wizard.to_date + ' 23:59:00'),('company_id','=',wizard.company_id.id)]
 
         invoice_ids = obj_account_invoice.search(cr, uid, kriteria)
-        #raise osv.except_osv(_('Error !'), _('%s')%invoice_ids)
         if invoice_ids:
             data['ids'] = invoice_ids
             data['model'] = 'account.invoice'
@@ -71,8 +70,7 @@ class wizard_print_statement(osv.osv_memory):
                         'to_date' : '%s 23:59:00' % (wizard.to_date),
                         }
             data['variables'] = val
-        #raise osv.except_osv(_('Error !'), _('%s')%data)
-        return {'type': 'ir.actions.report.xml', 'report_name': 'account.report_statement', 'datas': data, 'context' : {'pentaho_defaults' : {'from_date' : wizard.from_date}}}
+        return {'type': 'ir.actions.report.xml', 'report_name': 'account.report_statement', 'datas': data}
                           
 wizard_print_statement()
 
