@@ -28,6 +28,7 @@
 								<field name="account_equity_id"/>
 								<field name="account_income_id"/>
 								<field name="account_cogs_id"/>
+								<field name="account_production_expense_id"/>
 								<field name="account_expense_id"/>
 								<field name="account_other_income_id"/>
 								<field name="account_other_expense_id"/>
