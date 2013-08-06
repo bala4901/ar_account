@@ -38,7 +38,8 @@
                             'ar_base_waktu',
                             'ar_base_sequence',
                             'ar_base_amount_to_text',
-                            'ar_base'],
+                            'ar_base',
+                            'report_webkit'],
     'init_xml': [],
     'update_xml': [ 
                     'security/ir.model.access.csv',
@@ -48,6 +49,7 @@
                     'data/data_AccountJournal.xml',
                     'data/data_VoucherType.xml',
                     'data/data_InvoiceType.xml',
+                    'data/financial_webkit_header.xml',
                     'report/bank_payment.xml',
                     'report/cash_payment.xml',
                     'report/bank_receipt.xml',

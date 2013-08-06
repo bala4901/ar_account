@@ -20,39 +20,26 @@
 #
 ##############################################################################
 
-import xml
-import copy
-from operator import itemgetter
-import time
-import datetime
 from report import report_sxw
-import locale
+from tools.translate import _
+import pooler
+from datetime import datetime
 
 class report_balance_sheet(report_sxw.rml_parse):
     def __init__(self, cr, uid, name, context):
         super(report_balance_sheet, self).__init__(cr, uid, name, context=context)
         self.isi_laporan = []
-        self.localcontext.update({
-            'time': time,
-            'isi_laporan' : self.lines,
-			'locale':locale,            
-        })
-        self.context = context
-        
-    def set_context(self, objects, data, ids, report_type=None):
-        obj_period = self.pool.get('account.period')
-        self.to_date = data['form']['to_date']        
-        
-        period_ids = obj_period.find(self.cr, self.uid, self.to_date)
-        
-        if not period_ids:
-            return super(report_balance_sheet, self).set_context(objects, data, ids, report_type=report_type)           
-            
-        period = obj_period.browse(self.cr, self.uid, period_ids)[0]
-        
-        self.from_date =  period.fiscalyear_id.date_start        
 
-        return super(report_balance_sheet, self).set_context(objects, data, ids, report_type=report_type)           
+        company = self.pool.get('res.users').browse(self.cr, uid, uid, context=context).company_id
+        header_report_name = ' - '.join((_('BALANCE SHEET'), company.name, company.currency_id.name))
+
+        footer_date_time = self.formatLang(str(datetime.today()), date_time=True)
+
+        self.localcontext.update({
+            'report_name': _('Balance Sheet'),
+            'isi_laporan' : self.lines,       
+        })
+        self.context = context        
         
     def lines(self, form):
         def _process_child(accounts, parent, level):
@@ -122,11 +109,8 @@ class report_balance_sheet(report_sxw.rml_parse):
         
     def get_to_date(self):
         return self.to_date
-        
 
-        
-
-report_sxw.report_sxw('report.report_balance_sheet', 'account.account', 'addons/ar_account/report/balance_sheet.rml', parser=report_balance_sheet, header=False)
+report_sxw.report_sxw('report.report_balance_sheet', 'account.account', 'addons/ar_account/report/templates/account_report_balance_sheet.mako', parser=report_balance_sheet, header=False)
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
