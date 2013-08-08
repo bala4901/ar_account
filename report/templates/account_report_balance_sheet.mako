@@ -18,32 +18,58 @@
 			${css} 
 		</style> 
 	</head>
-	<body style="border:0; margin: 0;" onload="subst()"> 
-        <div class="act_as_table data_table">
-            <div class="act_as_row labels">
-		            <div class="act_as_cell">${_('Aktiva')}</div>
-		            <div class="act_as_cell"> </div>
-		            <div class="act_as_cell"> </div>
+	<body> 
+		<table>
+			<tr>
+				<td>
+					<div class="act_as_table data_table">
+						<div class="act_as_row labels">
+								<div class="act_as_cell"> </div>
+								<div class="act_as_cell">${_('Aktiva')}</div>
+								<div class="act_as_cell"> </div>
+						</div>
+						<div class="act_as_row labels">
+								<div class="act_as_cell">${_('Account')}</div>
+								<div class="act_as_cell">${_('Year To Date')}</div>
+								<div class="act_as_cell">${_('Balance')}</div>
+						</div>
+						%for account in objects:
+							%if account['akun_type'] == 'aktiva':
+								<div class="act_as_row">
+									<div class="act_as_cell">${account['name']}</div>
+									<div class="act_as_cell">${account['year_to_date']}</div>
+									<div class="act_as_cell">${account['balance']}</div>
+								</div>
+							%endif
+						%endfor
+					</div>
+				</td>
+				<td>
+					<div class="act_as_table data_table">
+						<div class="act_as_row labels">
+								<div class="act_as_cell"> </div>
+								<div class="act_as_cell">${_('Pasiva')}</div>
+								<div class="act_as_cell"> </div>
+						</div>
+						<div class="act_as_row labels">
+								<div class="act_as_cell">${_('Account')}</div>
+								<div class="act_as_cell">${_('Year To Date')}</div>
+								<div class="act_as_cell">${_('Balance')}</div>
+						</div>
+						%for account in objects:
+							%if account['akun_type'] == 'pasiva':
+								<div class="act_as_row">
+									<div class="act_as_cell">${account['name']}</div>
+									<div class="act_as_cell">${account['year_to_date']}</div>
+									<div class="act_as_cell">${account['balance']}</div>
+								</div>
+							%endif
+						%endfor
+					</div>
+				</td>
+			<tr>
 
-		            <div class="act_as_cell"> </div>
-		            <div class="act_as_cell"> </div>
-		            <div class="act_as_cell">${_('Pasiva')}</div>
-			</div>
-            <div class="act_as_row labels">
-		            <div class="act_as_cell">${_('Account')}</div>
-		            <div class="act_as_cell">${_('Year To Date')}</div>
-		            <div class="act_as_cell">${_('Balance')}</div>
-
-		            <div class="act_as_cell">${_('Account')}</div>
-		            <div class="act_as_cell">${_('Year To Date')}</div>
-		            <div class="act_as_cell">${_('Balance')}</div>
-			</div>
-			%for account in objects:
-			    <div class="act_as_row">
-			        <div class="act_as_cell">${objects}</div>
-				</div>
-			%endfor
-		</div>
+		</table>
 
     </body>
 </html>

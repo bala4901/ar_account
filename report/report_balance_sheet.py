@@ -36,17 +36,81 @@ class report_balance_sheet(report_sxw.rml_parse):
         footer_date_time = self.formatLang(str(datetime.today()), date_time=True)
 
         self.localcontext.update({
-            'report_name': _('Balance Sheet'),
-            'isi_laporan' : self.lines,       
+            'report_name': _('Balance Sheet'),   
+            'tanggal' : self.get_tanggal, 
         })
-        self.context = context        
-        
-    def lines(self, form):
-        def _process_child(accounts, parent, level):
-            # Cari akun yang akan diproses            
-            account_rec = [acct for acct in accounts if acct['id'] == parent][0]    
+        self.context = context     
 
-            # Buat dict
+    def get_tanggal(self, data):
+        tanggal = data['form']['to_date']
+
+        month = tanggal[5:7]
+        nama_bulan = ''
+        tanggal_cnvt = ''
+        
+        bulan = {
+                '01' : 'Januai',
+                '02' : 'Pebruari',
+                '03' : 'Maret',
+                '04' : 'April',
+                '05' : 'Mei',
+                '06' : 'Juni',
+                '07' : 'Juli',
+                '08' : 'Agustus',
+                '09' : 'September',
+                '10' : 'Oktober',
+                '11' : 'November',
+                '12' : 'Desember'
+                }
+
+        nama_bulan = bulan.get(month, False)
+        if not nama_bulan:
+            return '-'
+        
+        tanggal_cnvt = tanggal[8:10] + ' ' + nama_bulan + ' ' + tanggal[:4]
+
+        return tanggal
+
+    def get_tanggal_tahun_selanjutnya(self, tanggal_tahun_selanjutnya):
+        obj_fiscalyear = self.pool.get('account.fiscalyear')
+        tanggal = tanggal_tahun_selanjutnya
+        tahun = int(tanggal[:4]) - 1
+        tanggal_periode_bulan = ''
+
+        fiscalyear_ids = obj_fiscalyear.search(self.cr, self.uid, [('name', '=', str(tahun))])
+        if fiscalyear_ids:
+            fiscalyear = obj_fiscalyear.browse(self.cr, self.uid, fiscalyear_ids)[0]
+            return fiscalyear.date_stop
+        else:  
+            return False
+
+    def get_tanggal_tahun(self, tanggal_tahun):
+        obj_fiscalyear = self.pool.get('account.fiscalyear')
+        tanggal = tanggal_tahun
+        tahun = tanggal[:4]
+        tanggal_periode_bulan = ''
+
+        fiscalyear_ids = obj_fiscalyear.search(self.cr, self.uid, [('name', '=', tahun)])
+        if fiscalyear_ids:
+            fiscalyear = obj_fiscalyear.browse(self.cr, self.uid, fiscalyear_ids)[0]
+            return fiscalyear.date_start
+        else:  
+            return False
+
+    def set_context(self, objects, data, ids, report_type=None):
+        def _process_child(accounts, parent, level, akun_type):    
+            account_rec = [acct for acct in accounts if acct['id'] == parent][0]  
+            year_to_date = 0.00
+
+            ctx_2 = {}
+            ctx_2['date_to'] =  self.get_tanggal_tahun_selanjutnya(data['form']['to_date'])
+
+            if ctx_2:
+                account = self.pool.get('account.account').browse(self.cr, self.uid, account_rec['id'] , ctx_2)
+
+                if account:
+                    year_to_date = account.balance
+
             res =   {
                         'id' : account_rec['id'],
                         'type' : account_rec['type'],
@@ -57,58 +121,76 @@ class report_balance_sheet(report_sxw.rml_parse):
                         'credit' : account_rec['credit'],
                         'balance' : abs(account_rec['balance']),
                         'parent_id' : account_rec['parent_id'],
+                        'year_to_date' : year_to_date,
+                        'akun_type' : akun_type
                         }                                                     
 
-            # Append res ke dalam result_acc
-            self.isi_laporan.append(res)          
+            objects.append(res)          
 
-            # Jika akun mempunyai sub-akun, maka proses sub-akun
             if account_rec['child_id']:
                 level += 1
                 for child in account_rec['child_id']:
-                    _process_child(accounts, child, level)
+                    _process_child(accounts, child, level, akun_type)
     
         obj_account_acoount = self.pool.get('account.account')
         obj_users = self.pool.get('res.users')
+        objects = []
         
         ids = {}
         done = None
         level = 1
         user = obj_users.browse(self.cr, self.uid, [self.uid])[0]
               
-        # Proses context untuk pencarian sub-akun
         ctx = {}
-        ctx['date_from'] = self.get_from_date()
-        ctx['date_to'] =  self.get_to_date()
+        ctx['date_to'] =  data['form']['to_date']
+        ctx['date_from'] = self.get_tanggal_tahun(data['form']['to_date'])
 
-        # Ambil default id dari neraca saldo
-        akun_id = user.company_id.account_activa_id.id  
-        ids = [akun_id]
+        akun_activa_id = user.company_id.account_activa_id.id
+        akun_pasiva_id = user.company_id.account_pasiva_id.id
 
-        parents = ids
-        
-        # Ambil ids dari akun anak dari 'Neraca Saldo'        
-        child_ids = obj_account_acoount._get_children_and_consol(self.cr, self.uid, ids, ctx)
+        if akun_activa_id:
+            ids = [akun_activa_id]
+            akun_type = 'aktiva'
 
-        if child_ids:
-            ids = child_ids
+            parents = ids
+                
+            child_ids = obj_account_acoount._get_children_and_consol(self.cr, self.uid, ids, ctx)
 
-        # Ambil data account.account dari akun anak dari 'Neraca Saldo'
-        account_fields = ['type', 'code', 'name', 'debit', 'credit', 'balance', 'parent_id', 'child_id']
-        accounts = obj_account_acoount.read(self.cr, self.uid, ids, account_fields, ctx)
+            if child_ids:
+                ids = child_ids
 
-        # Gw ga tau nih fungsinya buat apa, wkwkwkwkwkwkwkwk        
-        for parent in parents:
-            level = 1
-            _process_child(accounts, parent, level)
+            account_fields = ['type', 'code', 'name', 'debit', 'credit', 'balance', 'parent_id', 'child_id']
+            accounts = obj_account_acoount.read(self.cr, self.uid, ids, account_fields, ctx)
+         
+            for parent in parents:
+                level = 1
+                _process_child(accounts, parent, level, akun_type)
 
-        return self.isi_laporan
+        if akun_pasiva_id:
+            ids = [akun_pasiva_id]
+            akun_type = 'pasiva'
 
-    def get_from_date(self):
-        return self.from_date
-        
-    def get_to_date(self):
-        return self.to_date
+            parents = ids
+                
+            child_ids = obj_account_acoount._get_children_and_consol(self.cr, self.uid, ids, ctx)
+
+            if child_ids:
+                ids = child_ids
+
+            account_fields = ['type', 'code', 'name', 'debit', 'credit', 'balance', 'parent_id', 'child_id']
+            accounts = obj_account_acoount.read(self.cr, self.uid, ids, account_fields, ctx)
+         
+            for parent in parents:
+                level = 1
+                _process_child(accounts, parent, level, akun_type)
+
+        self.localcontext.update({
+            'report_name': _('Balance Sheet'),   
+            'tanggal' : self.get_tanggal, 
+        })
+
+        return super(report_balance_sheet, self).set_context(objects, data, ids,
+                                                            report_type=report_type)
 
 report_sxw.report_sxw('report.report_balance_sheet', 'account.account', 'addons/ar_account/report/templates/account_report_balance_sheet.mako', parser=report_balance_sheet, header=False)
 

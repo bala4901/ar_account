@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <openerp>
-    <data noupdate="1">
+    <data noupdate="0">
         <record id="financial_landscape_header" model="ir.header_webkit">
             <field name="footer_html"><![CDATA[
 <html>
@@ -234,7 +234,25 @@ act_as_colgroup {
     <body style="border:0; margin: 0;" onload="subst()">
         <table class="header" style="border-bottom: 0px solid black; width: 100%">
             <tr>
-                <td style="text-align:left; font-size:11px; font-weight: bold;"><span style="text-transform:uppercase; font-size:12px;">${report_name}</span> - ${company.partner_id.name | entity} - ${company.currency_id.name | entity}</td>
+                <td style="text-align:center; font-size:11px; font-weight: bold;">
+					<span style="text-transform:uppercase; font-size:12px;">
+						${company.partner_id.name | entity}
+					</span>
+				</td>
+            </tr>
+            <tr>
+                <td style="text-align:center; font-size:11px; font-weight: bold;">
+					<span style="text-transform:uppercase; font-size:12px;">
+						${report_name}
+					</span>
+				</td>
+            </tr>
+            <tr>
+                <td style="text-align:center; font-size:11px; font-weight: bold;">
+					<span style="text-transform:uppercase; font-size:12px;">
+						${tanggal}
+					</span>
+				</td>
             </tr>
         </table> ${_debug or ''|n} </body>
 </html>]]>
