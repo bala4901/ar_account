@@ -39,6 +39,7 @@
                 'workflow/workflow_AccountVoucher.xml',
                 'report/bank_payment.xml',
                 'report/bank_receipt.xml',
+                'report/cash_payment.xml',
                 'wizard/wizard_import_move_line.xml',
                 'view/view_VoucherType.xml',
                 'view/view_BankPayment.xml',
