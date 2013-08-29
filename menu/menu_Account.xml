@@ -33,6 +33,11 @@
 					action="waction_account_cashReceipt"
 		/>				
 
+		<menuitem 	id="menu_account_memorialJournal"
+        			parent="account.menu_finance_entries"
+					name="Memorial Journal"
+					sequence="10" 
+					action="waction_account_memorialJournal"/>		
 																																																								
 																																																
 	</data>

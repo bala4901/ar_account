@@ -61,7 +61,6 @@
                         </h1>
 		                <group colspan="4" col="2" name="group_1" >
 		                	<group colspan="1" col="2" name="group_1_1">
-		                		<separator string="Bank Receipt" colspan="2"/>
 		                		<field name="number" string="# Voucher"/>
 		                		<field name="date" select="1" invisible="context.get('line_type', False)" on_change="onchange_date(date, currency_id, payment_rate_currency_id, amount, company_id, context)" required="1"/>
 				                <field name="journal_id" invisible="context.get('line_type', False)" select="1" string="Journal" on_change="onchange_journal_id(journal_id)"/>   
@@ -73,7 +72,6 @@
 								<field name="voucher_type_id" invisible="1"/>		
 		            		</group>       
 		                	<group colspan="1" col="2" name="group_1_3">
-		                		<separator string="Payment Method" colspan="2"/>
 		                		<field name="payment_method" required="1"/>
 		                		<field name="cheque_number" attrs="{'required' : [('payment_method','!=','bank_transfer')], 'invisible':[('payment_method','!=','cheque'),('payment_method','!=','giro')]}"/>
 		                		<field name="cheque_date" attrs="{'required' : [('payment_method','!=','bank_transfer')], 'invisible':[('payment_method','!=','cheque'),('payment_method','!=','giro')]}"/>
