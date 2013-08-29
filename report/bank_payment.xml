@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<openerp>
+<data>    
+    <record id="report_account_bankPayment" model="ir.actions.report.xml">
+        <field name="name">Bank Payment</field>
+        <field name="type">ir.actions.report.xml</field>
+        <field name="model">account.bank_payment</field>
+        <field name="report_name">bank_payment</field>
+        <field name="report_type">aeroo</field>
+        <field name="in_format">oo-ods</field>
+        <field name="report_rml">ar_account/report/bank_payment.odt</field>
+        <field name="parser_state">default</field>
+        <field name="tml_source">file</field>
+    </record>    
+    
+    <record id="actBinding_account_bankPayment" model="ir.values">
+        <field name="name">Bank Payment</field>
+        <field name="key2">client_print_multi</field>
+        <field name="key">action</field>
+        <field name="model">account.bank_payment</field>
+        <field name="value" eval="'ir.actions.report.xml,'+str(report_account_bankPayment)"/>
+        <field name="isobject" eval="True"/>
+        <field name="replace" eval="True"/>
+    </record>
+
+ 
+
+</data>
+</openerp>
+
