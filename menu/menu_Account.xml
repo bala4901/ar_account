@@ -11,6 +11,27 @@
 					name="Bank Payment"
 					action="waction_account_bankPayment"
 		/>
+		
+		<menuitem 	
+					id="menu_account_cashPayment"
+					parent="account.menu_finance_bank_and_cash"
+					name="Cash Payment"
+					action="waction_account_cashPayment"
+		/>		
+		
+		<menuitem 	
+					id="menu_account_bankReceipt"
+					parent="account.menu_finance_bank_and_cash"
+					name="Bank Receipt"
+					action="waction_account_bankReceipt"
+		/>
+		
+		<menuitem 	
+					id="menu_account_cashReceipt"
+					parent="account.menu_finance_bank_and_cash"
+					name="Cash Receipt"
+					action="waction_account_cashReceipt"
+		/>				
 
 																																																								
 																																																
