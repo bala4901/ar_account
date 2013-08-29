@@ -130,6 +130,7 @@ class account_voucher(osv.osv):
 
         if voucher_type and view_type == 'form':
 
+            # raise osv.except_osv('a','a')
             kriteria = [('name','=',voucher_type)]
             voucher_type_ids = obj_account_voucher_type.search(cr, uid, kriteria)[0]
 
@@ -138,6 +139,9 @@ class account_voucher(osv.osv):
             result = mod_obj.get_object_reference(cr, uid, voucher.modul_origin, voucher.model_view_form)
             result = result and result[1] or False
             view_id = result
+
+            # SET journal_id DOMAIN SO IF ALLOWED JOURNAL IS FALSE
+            res['fields']['journal_id']['domain'] = [('id','=',0)]
                         
             if voucher.allowed_journal_ids:
                 for journal in voucher.allowed_journal_ids:

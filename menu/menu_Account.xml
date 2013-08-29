@@ -38,6 +38,13 @@
 					name="Memorial Journal"
 					sequence="10" 
 					action="waction_account_memorialJournal"/>		
+
+		<menuitem 	id="menu_account_voucherType"
+					parent="account.menu_finance_configuration"
+					sequence="1"
+					name="Voucher Type"
+					action="waction_account_voucherType"
+		/>		
 																																																								
 																																																
 	</data>
