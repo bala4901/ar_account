@@ -36,6 +36,7 @@
                 'security/data_GroupsCashReceipt.xml',
                 'security/data_GroupsMemorialJournal.xml',
                 'data/data_VoucherType.xml',
+                'workflow/workflow_AccountVoucher.xml',
                 'wizard/wizard_import_move_line.xml',
                 'view/view_VoucherType.xml',
                 'view/view_BankPayment.xml',

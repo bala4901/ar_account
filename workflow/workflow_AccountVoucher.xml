@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+    	<!-- MODIFIKASI DATA -->
+
+        <record id="account_voucher.act_proforma" model="workflow.activity">
+            <field name="wkf_id" ref="account_voucher.wkf"/>
+            <field name="flow_start" eval="0"/>
+            <field name="name">proforma</field>
+            <field name="action">write({'state':'draft'})</field>
+            <field name="kind">function</field>
+        </record>
+
+		<!-- ACTIVITY BARU -->
+        <record id="act_account_draftVoucher" model="workflow.activity">
+            <field name="wkf_id" ref="account_voucher.wkf"/>
+            <field name="name">draft</field>
+			<field name="flow_start">True</field>
+            <field name="kind">dummy</field>
+        </record>   		    
+
+        <record id="act_account_confirmVoucher" model="workflow.activity">
+            <field name="wkf_id" ref="account_voucher.wkf"/>
+            <field name="name">confirm</field>
+            <field name="action">workflow_action_confirm()</field>
+            <field name="kind">function</field>
+        </record>
+
+        <record id="act_account_approveVoucher" model="workflow.activity">
+            <field name="wkf_id" ref="account_voucher.wkf"/>
+            <field name="name">approve</field>
+            <field name="action">workflow_action_approve()</field>
+            <field name="kind">function</field>
+        </record>   
+        
+        <record id="act_account_proformaVoucher" model="workflow.activity">
+            <field name="wkf_id" ref="account_voucher.wkf"/>
+            <field name="name">proforma</field>
+            <field name="action">workflow_action_proforma()</field>
+            <field name="kind">function</field>
+        </record>       
+        
+        <record id="act_account_postedVoucher" model="workflow.activity">
+            <field name="wkf_id" ref="account_voucher.wkf"/>
+            <field name="name">posted</field>
+            <field name="action">workflow_action_posted()</field>
+            <field name="kind">function</field>
+            <field name="flow_stop">True</field>
+        </record>       
+        
+        <record id="act_account_cancelVoucher" model="workflow.activity">
+            <field name="wkf_id" ref="account_voucher.wkf"/>
+            <field name="name">cancel</field>
+            <field name="action">workflow_action_cancel()</field>
+            <field name="kind">function</field>
+            <field name="flow_stop">True</field>
+        </record>                
+        
+        <!-- TRANSITION -->
+        <record id="transition_account_voucherDraft2Confirm" model="workflow.transition">
+            <field name="act_from" ref="act_account_draftVoucher"/>
+            <field name="act_to" ref="act_account_confirmVoucher"/>
+            <field name="signal">button_confirm</field>
+            <field name="condition">True</field>
+        </record>      
+        
+        <record id="transition_account_voucherConfirm2Approve" model="workflow.transition">
+            <field name="act_from" ref="act_account_confirmVoucher"/>
+            <field name="act_to" ref="act_account_approveVoucher"/>
+            <field name="condition">True</field>            
+        </record>            
+        
+        <record id="transition_account_voucherApprove2Proforma" model="workflow.transition">
+            <field name="act_from" ref="act_account_approveVoucher"/>
+            <field name="act_to" ref="act_account_proformaVoucher"/>
+            <field name="signal">button_proforma</field>
+            <field name="condition">True</field>            
+        </record>  
+        
+        <record id="transition_account_voucherApprove2Posted" model="workflow.transition">
+            <field name="act_from" ref="act_account_approveVoucher"/>
+            <field name="act_to" ref="act_account_postedVoucher"/>
+            <field name="signal">button_posted</field>
+            <field name="condition">True</field>            
+        </record> 
+        
+        <record id="transition_account_voucherProforma2Posted" model="workflow.transition">
+            <field name="act_from" ref="act_account_proformaVoucher"/>
+            <field name="act_to" ref="act_account_postedVoucher"/>
+            <field name="signal">button_posted</field>
+            <field name="condition">True</field>            
+        </record>          
+        
+        <record id="transition_account_voucherDraft2Cancel" model="workflow.transition">
+            <field name="act_from" ref="act_account_draftVoucher"/>
+            <field name="act_to" ref="act_account_cancelVoucher"/>
+            <field name="signal">button_cancel</field>
+            <field name="condition">True</field>
+        </record>      
+        
+        <record id="transition_account_voucherConfirm2Cancel" model="workflow.transition">
+            <field name="act_from" ref="act_account_confirmVoucher"/>
+            <field name="act_to" ref="act_account_cancelVoucher"/>
+            <field name="signal">button_cancel</field>
+            <field name="condition">True</field>
+        </record>                                       
+        
+        <record id="transition_account_voucherApprove2Cancel" model="workflow.transition">
+            <field name="act_from" ref="act_account_approveVoucher"/>
+            <field name="act_to" ref="act_account_cancelVoucher"/>
+            <field name="signal">button_cancel</field>
+            <field name="condition">True</field>
+        </record>              
+        
+        <record id="transition_account_voucherProforma2Cancel" model="workflow.transition">
+            <field name="act_from" ref="act_account_proformaVoucher"/>
+            <field name="act_to" ref="act_account_cancelVoucher"/>
+            <field name="signal">button_cancel</field>
+            <field name="condition">True</field>
+        </record>         
+        
+
+
+    </data>
+</openerp>
+
