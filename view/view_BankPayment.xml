@@ -46,13 +46,13 @@
             <field name="arch" type="xml">
                 <form string="Bank Payment" version="7.0">
                     <header>
-                        <button name="button_workflow_action_confirm" type="object" string="Confirm" colspan="2" icon="gtk-yes" states="draft" groups="ar_account.group_account_bankPaymentValidator"/>
-                        <button name="button_workflow_action_proforma" type="object" string="Proforma" colspan="2" icon="gtk-yes" states="ready" groups="ar_account.group_account_bankPaymentUser"/>
-                        <button name="button_workflow_action_ready" type="object" string="Approve" colspan="2" icon="gtk-yes" states="waiting" groups="ar_account.group_account_bankPaymentApprove"/>
-                        <button name="button_workflow_action_posted" type="object" string="Posted" colspan="2" icon="gtk-yes" states="proforma,ready" groups="ar_account.group_account_bankPaymentPost"/>
-                        <button name="button_workflow_action_cancel" type="object" string="Cancel" colspan="2" icon="gtk-cancel" states="draft,confirm,waiting,proforma,ready" groups="ar_account.group_account_bankPaymentCancel"/>
-                        <button name="button_cancel" type="object" string="Cancel" colspan="2" icon="gtk-cancel" states="posted" groups="ar_account.group_account_bankPaymentCancel"/>
-                        <button name="button_set_to_draft" type="object" string="Set To Draft" colspan="2" icon="terp-stock_effects-object-colorize" states="cancel" groups="ar_account.group_account_bankPaymentCancel"/>
+                        <button name="button_confirm" type="workflow" string="Confirm" colspan="2" icon="gtk-yes" states="draft" groups="ar_account.group_account_bankPaymentValidator"/>
+						<button name="button_approve" type="workflow" string="Approve" colspan="2" icon="gtk-yes" states="confirm" groups="ar_account.group_account_bankPaymentValidator"/>
+                        <button name="button_proforma" type="workflow" string="Proforma" colspan="2" icon="gtk-yes" states="approve" groups="ar_account.group_account_bankPaymentUser"/>
+                        <button name="button_posted" type="workflow" string="Posted" colspan="2" icon="gtk-yes" states="proforma,approve" groups="ar_account.group_account_bankPaymentPost"/>
+                        <button name="button_cancel" type="workflow" string="Cancel" colspan="2" icon="gtk-cancel" states="draft,confirm,proforma,approve" groups="ar_account.group_account_bankPaymentCancel"/>
+                        <button name="button_action_cancel" type="object" string="Cancel" colspan="2" icon="gtk-cancel" states="posted" groups="ar_account.group_account_bankPaymentCancel"/>
+                        <button name="button_action_set_to_draft" type="object" string="Set To Draft" colspan="2" icon="terp-stock_effects-object-colorize" states="cancel" groups="ar_account.group_account_bankPaymentCancel"/>
                         <field name="state" widget="statusbar" statusbar_visible="draft,confirm,approve,proforma,posted" statusbar_colors='{"posted":"green","cancel":"red"}'/> 
                     </header>
                     <sheet>
@@ -118,7 +118,7 @@
                         <page string="Notes">
                         	<field name="narration" colspan="4" nolabel="1"/>
                         </page>
-                        <page string="Journal Items" groups="base.group_extended" attrs="{'invisible': [('state','!=','posted')]}">
+                        <page string="Journal Items" attrs="{'invisible': [('state','!=','posted')]}">
                             <group col="6" colspan="4">
                                 <field name="period_id"/>
                             </group>

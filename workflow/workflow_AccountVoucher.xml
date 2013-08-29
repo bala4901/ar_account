@@ -68,6 +68,7 @@
         <record id="transition_account_voucherConfirm2Approve" model="workflow.transition">
             <field name="act_from" ref="act_account_confirmVoucher"/>
             <field name="act_to" ref="act_account_approveVoucher"/>
+			<field name="signal">button_approve</field>
             <field name="condition">True</field>            
         </record>            
         

@@ -58,6 +58,12 @@ class account_voucher(osv.osv):
 
         return voucher_type.default_header_type
 
+    def default_created_user_id(self, cr, uid, context={}):
+        return uid
+
+    def default_created_time(self, cr, uid, context={}):
+        return datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
     def get_amount_to_text(self, cr, uid, ids, field_name, args, context=None):
         res = {}
         amount_to_text = []
@@ -115,6 +121,8 @@ class account_voucher(osv.osv):
                         'journal_id' : default_journal_id,
                         'payment_option' : default_payment_option,
                         #'writeoff_acc_id' : default_writeoff_acc_id,
+                        'created_user_id' : default_created_user_id,
+                        'created_time' : default_created_time,
                         }
 
                                 
@@ -248,23 +256,24 @@ class account_voucher(osv.osv):
         return True
 
     def button_action_set_to_draft(self, cr, uid, ids, context={}):
-        if not self.delete_workflow_instance(cr, uid, id):
-            return False
+        for id in ids:
+            if not self.delete_workflow_instance(cr, uid, id):
+                return False
 
-        if not self.create_workflow_instance(cr, uid, id):
-            return False
+            if not self.create_workflow_instance(cr, uid, id):
+                return False
 
-        if not self.clear_log_audit(cr, uid, id):
-            return False
+            if not self.clear_log_audit(cr, uid, id):
+                return False
 
-        if not self.log_audit_trail(cr, uid, id, 'created'):
-            return False
+            if not self.log_audit_trail(cr, uid, id, 'created'):
+                return False
 
         return True
         
         
     def log_audit_trail(self, cr, uid, id, state):
-        if state not in ['created','confirmed','approved','processed','cancelled']:
+        if state not in ['created','confirmed','approved','proforma','posted','cancelled']:
             raise osv.except_osv(_('Peringatan!'),_('Error pada method log_audit'))
             return False
             
@@ -272,7 +281,8 @@ class account_voucher(osv.osv):
                         'created' : 'draft',
                         'confirmed' : 'confirm',
                         'approved' : 'approve',
-                        'processed' : 'done',
+                        'proforma' : 'proforma',
+                        'posted' : 'posted',
                         'cancelled' : 'cancel'
                         }
                 
@@ -292,8 +302,10 @@ class account_voucher(osv.osv):
                 'confirmed_time' : False,
                 'approved_user_id' : False,
                 'approved_time' : False,
-                'processed_user_id' : False,
-                'processed_time' : False,
+                'proforma_user_id' : False,
+                'proforma_time' : False,
+                'posted_user_id' : False,
+                'posted_time' : False,
                 'cancelled_user_id' : False,
                 'cancelled_time' : False,
                 }
@@ -528,8 +540,8 @@ class account_voucher(osv.osv):
                 'move_id': move_id,
                 'partner_id': line.move_line_id and line.move_line_id.partner_id.id or False,
                 'currency_id': line.move_line_id and (company_currency <> line.move_line_id.currency_id.id and line.move_line_id.currency_id.id) or False,
-                'analytic_account_id': line.account_analytic_id and line.account_analytic_id.id or False,
-                'analytics_id' : line.analytics_id and line.analytics_id.id or False,
+                # 'analytic_account_id': line.account_analytic_id and line.account_analytic_id.id or False,
+                # 'analytics_id' : line.analytics_id and line.analytics_id.id or False,
                 'quantity': 1,
                 'credit': 0.0,
                 'debit': 0.0,
@@ -658,7 +670,7 @@ class account_voucher(osv.osv):
                 'debit': diff < 0 and -diff or 0.0,
                 'amount_currency': company_currency <> current_currency and voucher_brw.writeoff_amount or False,
                 'currency_id': company_currency <> current_currency and current_currency or False,
-                'analytic_account_id': voucher_brw.analytic_id and voucher_brw.analytic_id.id or False,
+                # 'analytic_account_id': voucher_brw.analytic_id and voucher_brw.analytic_id.id or False,
             }
 
         return move_line
