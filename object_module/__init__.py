@@ -23,6 +23,10 @@
 import voucher_type
 
 import bank_payment
+import bank_receipt
+import cash_receipt
+import cash_payment
+import memorial_journal
 
 
 

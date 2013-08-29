@@ -53,12 +53,15 @@
                         <button name="button_workflow_action_cancel" type="object" string="Cancel" colspan="2" icon="gtk-cancel" states="draft,confirm,waiting,proforma,ready" groups="ar_account.group_account_bankPaymentCancel"/>
                         <button name="button_cancel" type="object" string="Cancel" colspan="2" icon="gtk-cancel" states="posted" groups="ar_account.group_account_bankPaymentCancel"/>
                         <button name="button_set_to_draft" type="object" string="Set To Draft" colspan="2" icon="terp-stock_effects-object-colorize" states="cancel" groups="ar_account.group_account_bankPaymentCancel"/>
-                        <field name="state" widget="statusbar"/> 
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,approve,proforma,posted" statusbar_colors='{"posted":"green","cancel":"red"}'/> 
                     </header>
                     <sheet>
-                    <group colspan="4" col="3" name="group_1" >
+                        <h1>
+                            <label string="Bank Payment"/>
+                        </h1>
+
+                    <group colspan="4" col="2" name="group_1" >
                     	<group colspan="1" col="2" name="group_1_1">
-                    		<separator string="Bank Payment" colspan="2"/>
                     		<field name="number" string="# Voucher"/>
                             <field name="date" select="1" invisible="context.get('line_type', False)" on_change="onchange_date(date, currency_id, payment_rate_currency_id, amount, company_id, context)" required="1"/>
                             <field name="journal_id" invisible="context.get('line_type', False)" select="1" string="Journal" on_change="onchange_journal_id(journal_id)"/>   
@@ -70,8 +73,7 @@
 							<field name="currency_id" invisible="1" colspan="4"/>				
 							<field name="voucher_type_id" invisible="1"/>		
                 		</group>       
-                    	<group colspan="1" col="2" name="group_1_3">
-                    		<separator string="Payment Method" colspan="2"/>
+                    	<group colspan="1" col="2" name="group_1_2">
                     		<field name="payment_method" required="1"/>
                     		<field name="cheque_number" attrs="{'required' : [('payment_method','!=','bank_transfer')], 'invisible':[('payment_method','!=','cheque'),('payment_method','!=','giro')]}"/>
                     		<field name="cheque_date" attrs="{'required' : [('payment_method','!=','bank_transfer')], 'invisible':[('payment_method','!=','cheque'),('payment_method','!=','giro')]}"/>
@@ -79,17 +81,7 @@
                     		<field name="cheque_partner_bank_id" attrs="{'required' : [('payment_method','=','giro')], 'invisible':[('payment_method','!=','giro')]}"/>
                     		<field name="cheque_bank_id" attrs="{'invisible':[('payment_method','!=','giro')]}"/>
                 		</group>  
-                    	<group colspan="1" col="2" name="group_1_2">
-                    		<separator string="Amount Total" colspan="2"/>
-                    		<field name="amount" invisible="context.get('line_type', False)"/>
-                    		<field name="currency_id"/>
-                    		<separator string="Amount In Company Currency" colspan="2"/>
-                    		<field name="is_multi_currency" invisible="1"/>
-                            <field name="payment_rate" required="1" on_change="onchange_rate(payment_rate, amount, currency_id, payment_rate_currency_id, company_id, context)" string="Rate"/>
-                            <field name="payment_rate_currency_id"  on_change="onchange_payment_rate_currency(currency_id, payment_rate, payment_rate_currency_id, date, amount, company_id, context)" string="Company Currency"/>
-                            <field name="paid_amount_in_company_currency" string="Total"/>                    		
-                		</group>                     		               		    		
-                    </group>
+                   </group>
                     <notebook colspan="4">
                         <page string="Voucher Detail">
                             <field name="line_dr_ids" colspan="4" nolabel="1" height="140">
@@ -106,8 +98,15 @@
                                 </tree>
                             </field>
                             <group name="group_4" colspan="4" col="2">
+                                <group colspan="1" col="2" name="group_4_1">
+                                    <field name="amount" invisible="context.get('line_type', False)"/>
+                                    <field name="currency_id"/>
+                                    <field name="is_multi_currency" invisible="1"/>
+                                    <field name="payment_rate" required="1" on_change="onchange_rate(payment_rate, amount, currency_id, payment_rate_currency_id, company_id, context)" string="Rate"/>
+                                    <field name="payment_rate_currency_id"  on_change="onchange_payment_rate_currency(currency_id, payment_rate, payment_rate_currency_id, date, amount, company_id, context)" string="Company Currency"/>
+                                    <field name="paid_amount_in_company_currency" string="Total"/>                    		
+                                </group>                     		               		    		
                         		<group name="group_4_2" colspan="1" col="2">
-                        			<separator string="Difference Amount" colspan="2"/>
 									<field name="writeoff_amount"/>
 									<field name="payment_option" invisible="1"/>
 									<field name="writeoff_acc_id" domain="[('type','!=','view')]" attrs="{'required':[('writeoff_amount','!=',0)]}"/>

@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+data_accessRight_accountBankPayment,data_accessRight_accountBankPayment,ar_account.model_account_bank_payment,,1,1,1,1
+data_accessRight_accountBankReceipt,data_accessRight_accountBankReceipt,ar_account.model_account_bank_receipt,,1,1,1,1
+data_accessRight_accountCashPayment,data_accessRight_accountCashPayment,ar_account.model_account_cash_payment,,1,1,1,1
+data_accessRight_accountCashReceipt,data_accessRight_accountCashReceipt,ar_account.model_account_cash_receipt,,1,1,1,1
+data_accessRight_accountVoucherType,data_accessRight_accountVoucherType,ar_account.model_account_voucher_type,,1,1,1,1
+data_accessRight_accountMemorialJournal,data_accessRight_accountMemorialJournal,ar_account.model_account_memorial_journal,,1,1,1,1

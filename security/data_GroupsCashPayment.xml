@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="application_account_cashPayment" model="ir.module.category">
+			<field name="name">Cash Payment</field>
+		</record>	
+		
+		<!-- CASH PAYMENT -->
+		<record id="group_account_cashPaymentUser" model="res.groups">
+			<field name="name">Create Cash Payment</field>
+			<field name="category_id" ref="application_account_cashPayment"/>
+		</record>
+		
+		<record id="group_account_cashPaymentValidator" model="res.groups">
+			<field name="name">Validate Cash Payment</field>
+			<field name="category_id" ref="application_account_cashPayment"/>
+		</record>	
+		
+		<record id="group_account_cashPaymentApprove" model="res.groups">
+			<field name="name">Approve Cash Payment</field>
+			<field name="category_id" ref="application_account_cashPayment"/>
+		</record>		
+		
+		<record id="group_account_cashPaymentProforma" model="res.groups">
+			<field name="name">Proforma Cash Payment</field>
+			<field name="category_id" ref="application_account_cashPayment"/>
+		</record>			
+		
+		<record id="group_account_cashPaymentPost" model="res.groups">
+			<field name="name">Post Cash Payment</field>
+			<field name="category_id" ref="application_account_cashPayment"/>
+		</record>					
+		
+		<record id="group_account_cashPaymentCancel" model="res.groups">
+			<field name="name">Cancel Cash Payment</field>
+			<field name="category_id" ref="application_account_cashPayment"/>
+		</record>		
+	
+
+	</data>
+</openerp>

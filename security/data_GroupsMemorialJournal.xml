@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="application_account_memorialJournal" model="ir.module.category">
+			<field name="name">Memorial Journal</field>
+		</record>		
+		
+		<!-- MEMORIAL JOURNAL -->
+		<record id="group_account_memorialJournalUser" model="res.groups">
+			<field name="name">Create Memorial Journal</field>
+			<field name="category_id" ref="application_account_memorialJournal"/>
+		</record>
+		
+		<record id="group_account_memorialJournalValidator" model="res.groups">
+			<field name="name">Validate Memorial Journal</field>
+			<field name="category_id" ref="application_account_memorialJournal"/>
+		</record>		
+		
+		<record id="group_account_memorialJournalApprove" model="res.groups">
+			<field name="name">Approve Memorial Journal</field>
+			<field name="category_id" ref="application_account_memorialJournal"/>
+		</record>			
+		
+		<record id="group_account_memorialJournalProforma" model="res.groups">
+			<field name="name">Proforma Memorial Journal</field>
+			<field name="category_id" ref="application_account_memorialJournal"/>
+		</record>			
+		
+		<record id="group_account_memorialJournalPost" model="res.groups">
+			<field name="name">Post Memorial Journal</field>
+			<field name="category_id" ref="application_account_memorialJournal"/>
+		</record>					
+		
+		<record id="group_account_memorialJournalCancel" model="res.groups">
+			<field name="name">Cancel Memorial Journal</field>
+			<field name="category_id" ref="application_account_memorialJournal"/>
+		</record>			
+			
+
+
+	</data>
+</openerp>
