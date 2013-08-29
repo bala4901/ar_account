@@ -180,6 +180,12 @@ class account_voucher(osv.osv):
         move_line.update(res)
 
         return move_line
+
+    def name_get(self, cr, uid, ids, context=None):
+        if not ids:
+            return []
+        if context is None: context = {}
+        return [(r['id'], (r['number'] or '')) for r in self.read(cr, uid, ids, ['number'], context, load='_classic_write')]
         
     def workflow_action_confirm(self, cr, uid, ids, context={}):
         """
