@@ -47,6 +47,7 @@
                 'window_action/waction_CashPayment.xml',
                 'window_action/waction_CashReceipt.xml',
                 'window_action/waction_MemorialJournal.xml',
+                'menu/menu_Unused.xml',
                 'menu/menu_Account.xml',],
     'js' : [],
     'qweb' : [],
