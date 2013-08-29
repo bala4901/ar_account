@@ -116,7 +116,8 @@ class account_voucher(osv.osv):
 			            'payment_option' : default_payment_option,
 			            #'writeoff_acc_id' : default_writeoff_acc_id,
 			            }
-			            
+
+        			            
 			            
         def fields_view_get(self, cr, uid, view_id=None, view_type=False, context=None, toolbar=False, submenu=False):
                 res = super(account_voucher, self).fields_view_get(cr, uid, view_id=view_id, view_type=view_type, context=context, toolbar=toolbar, submenu=submenu)
@@ -250,12 +251,7 @@ class account_voucher(osv.osv):
 	def button_workflow_action_confirm(self, cr, uid, ids, context={}):
 		wkf_service = netsvc.LocalService('workflow')
 		
-		for id in ids:
-		
-			#if not self.check_total_voucher(cr, uid, id):
-				#raise osv.except_osv('Warning!', 'Total voucher is not equal with line total')
-				#return False		
-				
+		for id in ids:				
 			wkf_service.trg_validate(uid, 'account.voucher', id, 'button_confirm', cr)
 			
 
@@ -300,6 +296,49 @@ class account_voucher(osv.osv):
 			wkf_service.trg_validate(uid, 'account.voucher', id, 'button_ready', cr)
 			
 		return True						
+		
+    def log_audit_trail(self, cr, uid, id, state):
+        if state not in ['created','confirmed','approved','processed','cancelled']:
+            raise osv.except_osv(_('Peringatan!'),_('Error pada method log_audit'))
+            return False
+            
+        state_dict =    {
+                        'created' : 'draft',
+                        'confirmed' : 'confirm',
+                        'approved' : 'approve',
+                        'processed' : 'done',
+                        'cancelled' : 'cancel'
+                        }
+                
+        val =   {
+                '%s_user_id' % (state) : uid ,
+                '%s_time' % (state) : datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                'state' : state_dict.get(state, False),
+                }          
+        self.write(cr, uid, [id], val)
+        return True
+        
+    def clear_log_audit(self, cr, uid, id):
+        val =	{
+                'created_user_id' : False,
+                'created_time' : False,		
+                'confirmed_user_id' : False,
+                'confirmed_time' : False,
+                'approved_user_id' : False,
+                'approved_time' : False,
+                'processed_user_id' : False,
+                'processed_time' : False,
+                'cancelled_user_id' : False,
+                'cancelled_time' : False,
+                }
+			
+        self.write(cr, uid, [id], val)
+
+        return True      
+        
+    def write_cancel_description(self, cr, uid, id, reason):
+        self.write(cr, uid, [id], {'cancelled_reason' : reason})
+        return True          		
 
 	def post_journal_entry(self, cr, uid, id):
 		obj_move = self.pool.get('account.move')
