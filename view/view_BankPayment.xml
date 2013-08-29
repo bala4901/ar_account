@@ -59,7 +59,6 @@
                         <h1>
                             <label string="Bank Payment"/>
                         </h1>
-
                     <group colspan="4" col="2" name="group_1" >
                     	<group colspan="1" col="2" name="group_1_1">
                     		<field name="number" string="# Voucher"/>
