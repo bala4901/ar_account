@@ -8,6 +8,11 @@
                     sequence="1"
 		/>
 
+		<menuitem 
+				action="account_voucher.action_voucher_list" 
+				id="account_voucher.menu_encode_entries_by_voucher" 
+				parent="menu_account_unusedAccMenuHeader" />
+
         <menuitem 
         		action="account_voucher.action_vendor_payment" 
         		icon="STOCK_JUSTIFY_FILL"

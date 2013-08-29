@@ -7,13 +7,12 @@
             <field name="model">account.wizard_import_move_line</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
-                <form string="Import Move Line">
+                <form string="Import Move Line" version="7.0">
                 	<field name="move_line_ids" nolabel="1" colspan="4"/>
-                    <separator string="" colspan="4" />
-                    <group col="2" colspan="4">
+                    <footer>
                         <button special="cancel" string="_Cancel" icon="gtk-cancel"/>
-                        <button name="import_move_lines" string="Import" colspan="1" type="object" icon="gtk-apply"/>
-                    </group>
+                        <button name="import_move_lines" string="Import" type="object" icon="gtk-apply"/>
+                    </footer>
                 </form>
             </field>
         </record>
