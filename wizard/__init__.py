@@ -19,9 +19,7 @@
 #
 ##############################################################################
 
-import object_other
-import object_module
-import wizard
+import wizard_import_move_line
 
 
 
