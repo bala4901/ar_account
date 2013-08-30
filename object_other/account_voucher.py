@@ -26,6 +26,7 @@ from datetime import datetime
 from lxml import etree
 from tools.translate import _
 import netsvc
+import decimal_precision as dp
 
 class account_voucher(osv.osv):
     _name = 'account.voucher'
@@ -88,6 +89,19 @@ class account_voucher(osv.osv):
         
         return user.company_id.account_writeoff_id and user.company_id.account_writeoff_id.id or False
 
+    def function_amount_all(self, cr, uid, ids, name, args, context={}):
+        res = {}
+        for voucher in self.browse(cr, uid, ids):
+            res[voucher.id] =   {
+                                'total_cr' : 0.0,
+                                'total_dr' : 0.0,
+                                }
+            if voucher.line_ids:
+                for detail in voucher.line_ids:
+                    if detail.type == 'dr' : res[voucher.id]['total_dr'] += detail.amount
+                    if detail.type == 'cr' : res[voucher.id]['total_cr'] += detail.amount
+        return res
+
     _columns =  {
                                 'voucher_type_id' : fields.many2one(obj='account.voucher_type', string='Voucher Type', readonly=True, states={'draft':[('readonly',False)]}),
                                 'payment_method' : fields.selection(string='Payment Method', selection=[('bank_transfer','Bank Transfer'),('cheque','Cheque'),('giro','Giro')], readonly=True, states={'draft':[('readonly',False)]}),
@@ -99,6 +113,9 @@ class account_voucher(osv.osv):
                                 'cheque_is_giro' : fields.boolean('Is Giro?'),
                                 'amount_to_text' : fields.function(fnct=get_amount_to_text, string='Terbilang', type='text', method=True, store=True),
                                 'account_id':fields.many2one('account.account', 'Account', required=False, readonly=True, states={'draft':[('readonly',False)]}),
+                                'total_dr' : fields.function(string='Total Debit', fnct=function_amount_all, type='float', digits_compute=dp.get_precision('Account'), method=True, store=True, multi='all'),
+                                'total_cr' : fields.function(string='Total Credit', fnct=function_amount_all, type='float', digits_compute=dp.get_precision('Account'), method=True, store=True, multi='all'),
+
                                 'state' : fields.selection(selection=[('draft','Draft'),('confirm','Waiting For Approval'),('approve','Ready To Process'),('proforma','Pro-forma'),('posted','Posted'),('cancel','Cancelled')], string='State', readonly=True),
                                 'created_time' : fields.datetime(string='Created Time', readonly=True),
                                 'created_user_id' : fields.many2one(string='Created By', obj='res.users', readonly=True),
@@ -180,12 +197,6 @@ class account_voucher(osv.osv):
         move_line.update(res)
 
         return move_line
-
-    def name_get(self, cr, uid, ids, context=None):
-        if not ids:
-            return []
-        if context is None: context = {}
-        return [(r['id'], (r['number'] or '')) for r in self.read(cr, uid, ids, ['number'], context, load='_classic_write')]
         
     def workflow_action_confirm(self, cr, uid, ids, context={}):
         """
