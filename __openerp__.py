@@ -28,7 +28,7 @@
     """,
     'website': 'http://andhitiarama.wordpress.com',
     'images' : [],
-    'depends' : ['ar_base', 'account_accountant', 'account_voucher', 'report_aeroo_ooo'],
+    'depends' : ['ar_base', 'account_accountant', 'account_voucher', 'account_cancel','report_aeroo_ooo'],
     'data' : [  'security/ir.model.access.csv',
                 'security/data_GroupsBankPayment.xml',
                 'security/data_GroupsBankReceipt.xml',
