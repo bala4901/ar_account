@@ -20,6 +20,10 @@
 ##############################################################################
 
 import wizard_import_move_line
+import wizard_cash_receipt
+import wizard_bank_receipt
+import wizard_cash_payment
+import wizard_bank_payment
 
 
 
