@@ -58,6 +58,8 @@
                 'view/view_CashPayment.xml',
                 'view/view_CashReceipt.xml',
                 'view/view_MemorialJournal.xml',
+                'view/view_CustomerInvoices.xml',
+                'view/view_SupplierInvoices.xml',
                 'window_action/waction_VoucherType.xml',
                 'window_action/waction_BankPayment.xml',
                 'window_action/waction_BankReceipt.xml',

@@ -7,7 +7,7 @@
             <field name="model">account.wizard_bank_payment</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
-                <form string="Bank Payment">
+                <form string="Bank Payment" version="7.0">
                     <group col="2" colspan="4">
                     	<group colspan="1" col="2" name="group_1_2">
                 			<separator string="General Information" colspan="2"/>
@@ -27,11 +27,11 @@
                     		<field name="cheque_bank_id" attrs="{'invisible':[('payment_method','!=','giro')]}"/>
                 		</group>  
 		        		<newline/>
-		                <group col="2" colspan="4">
-				            <button special="cancel" string="_Cancel" icon="gtk-cancel"/>
-				            <button name="bank_payment" string="Select" colspan="1" type="object" icon="gtk-apply"/>
-						</group>
 					</group>
+                    <footer>
+			            <button special="cancel" string="_Cancel" icon="gtk-cancel"/>
+			            <button name="bank_payment" string="Select" colspan="1" type="object" icon="gtk-apply"/>
+                    </footer>
                 </form>
             </field>
         </record>
