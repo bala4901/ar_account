@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+        <record id="form_account_accountCustomerInvoices" model="ir.ui.view">
+            <field name="name">Form Customer Invoices - AR Account</field>
+            <field name="model">account.invoice</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <button name="invoice_print" string="Print Invoice" type="object" attrs="{'invisible':['|',('sent','=',False), ('state', '!=', 'open')]}" groups="base.group_user" position="after">
+                        <button name="%(action_account_wizardBankReceipt)d" string="Bank Receipt" type="action" class="oe_highlight" attrs="{'invisible':[('state', '!=', 'open')]}"/>
+                        <button name="%(action_account_wizardCashReceipt)d" string="Cash Receipt" type="action" class="oe_highlight" attrs="{'invisible':[('state', '!=', 'open')]}"/>
+                    </button>
+                </data>                    
+            </field>
+        </record>
+        
+        <record id="form_account_accountPayCustomerInvoices" model="ir.ui.view">
+            <field name="name">Form Pay Customer Invoices - AR Account</field>
+            <field name="model">account.invoice</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account_voucher.view_invoice_customer"/>
+            <field name="arch" type="xml">
+                <data>
+                    <button name="invoice_pay_customer" type="object" string="Register Payment" attrs="{'invisible': ['|', ('state','!=','open'), ('sent','=',True)]}" groups="base.group_user" position="replace">
+                        <button name="invoice_pay_customer" type="object" string="Register Payment" groups="base.group_user" invisible="1"/>
+                    </button>
+                    <button name="invoice_pay_customer" type="object" string="Register Payment" attrs="{'invisible': ['|', ('state','!=','open'), ('sent','=',False)]}" class="oe_highlight" groups="base.group_user" position="replace">
+                        <button name="invoice_pay_customer" type="object" string="Register Payment" class="oe_highlight" groups="base.group_user" invisible="1"/>
+                    </button>
+                </data>                    
+            </field>
+        </record>
+
+	</data>
+</openerp>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+        <record id="form_account_accountSupplierInvoices" model="ir.ui.view">
+            <field name="name">Form Supplier Invoices - AR Account</field>
+            <field name="model">account.invoice</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <button name="invoice_open" states="draft,proforma2" string="Validate" class="oe_highlight" groups="account.group_account_invoice" position="before">
+                        <button name="%(action_account_wizardBankPayment)d" string="Bank Payment" type="action" class="oe_highlight" attrs="{'invisible':[('state', '!=', 'open')]}"/>
+                        <button name="%(action_account_wizardCashPayment)d" string="Cash Payment" type="action" class="oe_highlight" attrs="{'invisible':[('state', '!=', 'open')]}"/>
+                    </button>
+                </data>                    
+            </field>
+        </record>
+        
+        
+        <record id="form_account_accountPaySupplierInvoices" model="ir.ui.view">
+            <field name="name">Form Pay Supplier Invoices - AR Account</field>
+            <field name="model">account.invoice</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account_voucher.view_invoice_supplier"/>
+            <field name="arch" type="xml">
+                <data>
+                    <button name="invoice_pay_customer" type="object" string="Pay" states="open" class="oe_highlight" groups="base.group_user" position="replace">
+                        <button name="invoice_pay_customer" type="object" string="Pay" states="open" class="oe_highlight" groups="base.group_user" invisible="1"/>
+                    </button>
+                </data>                    
+            </field>
+        </record>
+        
+        
+	</data>
+</openerp>

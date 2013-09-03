@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>  
+
+        <record id="form_account_wizardCashReceipt" model="ir.ui.view">
+            <field name="name">Cash Receipt</field>
+            <field name="model">account.wizard_cash_receipt</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Cash Receipt" version="7.0">
+                    <group col="2" colspan="4">
+						<field name="date"/>
+						<field name="journal_id"/>
+		        		<newline/>
+						<field name="name"/>
+		        		<newline/>
+					</group>
+					<footer>
+			            <button special="cancel" string="_Cancel" icon="gtk-cancel"/>
+			            <button name="cash_receipt" string="Select" colspan="1" type="object" icon="gtk-apply"/>
+					</footer>
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_account_wizardCashReceipt" model="ir.actions.act_window">
+            <field name="name">Cash Receipt</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.wizard_cash_receipt</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="form_account_wizardCashReceipt"/>
+            <field name="target">new</field>
+            <field name="multi">True</field>
+			<field name="context">{'voucher_type' : 'Cash Receipt'}</field>
+        </record>          
+
+        <record id="waction_account_wizardCashReceipt" model="ir.values">
+            <field name="model_id" ref="account.model_account_invoice" />
+            <field name="name">Cash Receipt</field>
+            <field name="key2">client_action_multi</field>
+            <field name="value" eval="'ir.actions.act_window,' + str(ref('action_account_wizardCashReceipt'))" />
+            <field name="key">action</field>
+            <field name="model">account.invoice</field>
+			<field name="context">{'voucher_type' : 'Cash Receipt', 'search_default_draft' : 1, 'search_default_confirm' : 1, 'search_default_waiting' : 1, 'search_default_ready' : 1, 'search_default_proforma' : 1}</field>
+			<field name="domain">[('voucher_type_id.name','=','Cash Receipt')]</field>
+        </record>
+        
+    </data>
+</openerp>

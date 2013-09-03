@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>  
+
+        <record id="form_account_wizardBankReceipt" model="ir.ui.view">
+            <field name="name">Bank Receipt</field>
+            <field name="model">account.wizard_bank_receipt</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="bank Receipt" version="7.0">
+                    <group col="2" colspan="4">
+                    	<group colspan="1" col="2" name="group_1_2">
+                			<separator string="General Information" colspan="2"/>
+							<field name="date"/>
+							<field name="journal_id"/>
+				    		<newline/>
+							<field name="name"/>
+				    		<newline/>
+                		</group> 
+                    	<group colspan="1" col="2" name="group_1_3">
+                    		<separator string="Payment Method" colspan="2"/>
+                    		<field name="payment_method" required="1"/>
+                    		<field name="cheque_number" attrs="{'required' : [('payment_method','!=','bank_transfer')], 'invisible':[('payment_method','!=','cheque'),('payment_method','!=','giro')]}"/>
+                    		<field name="cheque_date" attrs="{'required' : [('payment_method','!=','bank_transfer')], 'invisible':[('payment_method','!=','cheque'),('payment_method','!=','giro')]}"/>
+                    		<field name="cheque_recepient" attrs="{'invisible':[('payment_method','!=','cheque')]}"/>
+                    		<field name="cheque_partner_bank_id" attrs="{'required' : [('payment_method','=','giro')], 'invisible':[('payment_method','!=','giro')]}"/>
+                    		<field name="cheque_bank_id" attrs="{'invisible':[('payment_method','!=','giro')]}"/>
+                		</group>  
+		        		<newline/> 
+					</group>
+					<footer>
+				            <button special="cancel" string="_Cancel" icon="gtk-cancel"/>
+				            <button name="bank_receipt" string="Select" colspan="1" type="object" icon="gtk-apply"/>					
+					</footer>
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_account_wizardBankReceipt" model="ir.actions.act_window">
+            <field name="name">Bank Receipt</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.wizard_bank_receipt</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="form_account_wizardBankReceipt"/>
+            <field name="target">new</field>
+            <field name="multi">True</field>
+			<field name="context">{'voucher_type' : 'Bank Receipt'}</field>
+        </record>          
+
+        <record id="waction_account_wizardBankReceipt" model="ir.values">
+            <field name="model_id" ref="account.model_account_invoice" />
+            <field name="name">Bank Receipt</field>
+            <field name="key2">client_action_multi</field>
+            <field name="value" eval="'ir.actions.act_window,' + str(ref('action_account_wizardBankReceipt'))" />
+            <field name="key">action</field>
+            <field name="model">account.invoice</field>
+			<field name="context">{'voucher_type' : 'Bank Receipt', 'search_default_draft' : 1, 'search_default_confirm' : 1, 'search_default_waiting' : 1, 'search_default_ready' : 1, 'search_default_proforma' : 1}</field>
+			<field name="domain">[('voucher_type_id.name','=','Bank Receipt')]</field>
+        </record>
+        
+    </data>
+</openerp>
