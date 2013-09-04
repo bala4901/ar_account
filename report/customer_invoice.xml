@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<openerp>
+<data>    
+    <record id="report_account_customerInvoice" model="ir.actions.report.xml">
+        <field name="name">Customer Invoice</field>
+        <field name="type">ir.actions.report.xml</field>
+        <field name="model">account.invoice</field>
+        <field name="report_name">customer_invoice</field>
+        <field name="report_type">aeroo</field>
+        <field name="in_format">oo-odt</field>
+        <field name="report_rml">ar_account/report/customer_invoice.odt</field>
+		<field name="out_format" ref="report_aeroo_ooo.report_mimetypes_pdf_odt"/>
+        <field name="parser_state">default</field>
+        <field name="tml_source">file</field>
+    </record>    
+    
+    <record id="actBinding_account_customerInvoice" model="ir.values">
+        <field name="name">Customer Invoice</field>
+        <field name="key2">client_print_multi</field>
+        <field name="key">action</field>
+        <field name="model">account.invoice</field>
+        <field name="value" eval="'ir.actions.report.xml,'+str(report_account_customerInvoice)"/>
+        <field name="isobject" eval="True"/>
+        <field name="replace" eval="True"/>
+    </record>
+
+ 
+
+</data>
+</openerp>
+

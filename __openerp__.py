@@ -32,7 +32,7 @@
                     'account_accountant', 
                     'account_voucher', 
                     'account_cancel',
-                    #'report_aeroo_ooo'
+                    'report_aeroo_ooo'
                 ],
     'data' : [  'security/ir.model.access.csv',
                 'security/data_GroupsBankPayment.xml',
@@ -47,6 +47,7 @@
                 'report/cash_payment.xml',
                 'report/cash_receipt.xml',
                 'report/memorial_journal.xml',
+                'report/customer_invoice.xml',
                 'wizard/wizard_import_move_line.xml',
                 'wizard/wizard_cash_receipt.xml',
                 'wizard/wizard_bank_receipt.xml',
