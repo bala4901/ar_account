@@ -374,7 +374,7 @@ class account_voucher(osv.osv):
             if line.reconcile_id:
                 move_lines = [move_line.id for move_line in line.reconcile_id.line_id]
                 move_lines.remove(line.id)
-                obj_reconcile.unlink(cr, uid, line.reconcile_id.id)
+                obj_reconcile.unlink(cr, uid, [line.reconcile_id.id])
                 if len(move_lines) >= 2:
                     obj_move_line.reconcile_partial(cr, uid, move_lines, 'auto',context=context)
                     
