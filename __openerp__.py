@@ -61,6 +61,7 @@
                 'view/view_MemorialJournal.xml',
                 'view/view_CustomerInvoices.xml',
                 'view/view_SupplierInvoices.xml',
+                'view/view_ResCompany.xml',
                 'window_action/waction_VoucherType.xml',
                 'window_action/waction_BankPayment.xml',
                 'window_action/waction_BankReceipt.xml',

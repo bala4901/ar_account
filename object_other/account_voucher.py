@@ -137,7 +137,7 @@ class account_voucher(osv.osv):
                         'type' : default_type,
                         'journal_id' : default_journal_id,
                         'payment_option' : default_payment_option,
-                        #'writeoff_acc_id' : default_writeoff_acc_id,
+                        'writeoff_acc_id' : default_writeoff_acc_id,
                         'created_user_id' : default_created_user_id,
                         'created_time' : default_created_time,
                         }
