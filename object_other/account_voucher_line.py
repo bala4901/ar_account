@@ -45,7 +45,22 @@ class account_voucher_line(osv.osv):
     _columns =   {
                 'total_dr' : fields.function(string='Total Debit', fnct=function_amount_all, type='float', digits_compute=dp.get_precision('Account'), method=True, store=True, multi='all'),
                 'total_cr' : fields.function(string='Total Credit', fnct=function_amount_all, type='float', digits_compute=dp.get_precision('Account'), method=True, store=True, multi='all'),
+                'product_id' : fields.many2one(obj='product.product', string='Product', readonly=True, states={'draft':[('readonly',False)]}),
                 }
+                
+    def onchange_product_id(self, cr, uid, ids, product_id):
+
+        obj_res_product = self.pool.get('product.product')
+
+        value = {}
+        domain = {}
+        warning = {}
+
+        if product_id:
+            account_id = obj_res_product.browse(cr, uid, product_id).property_account_expense.id
+            value.update({'account_id' : account_id})
+        
+        return {'value' : value, 'domain' : domain, 'warning' : warning}
 
     
 
