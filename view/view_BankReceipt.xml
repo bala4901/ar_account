@@ -168,7 +168,7 @@
             <field name="arch" type="xml">
                 <tree colors="blue:state == 'draft';gray:state == 'cancel'" string="Voucher Entries">
                     <field name="number" string="# Voucher"/>
-                    <field name="reference" string="Description"/>
+                    <field name="name" string="Description"/>
                     <field name="date"/>
                     <field name="period_id"/>
                     <field name="company_id"/>
