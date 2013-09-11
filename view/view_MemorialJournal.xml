@@ -117,7 +117,7 @@
                     		<button name="button_workflow_action_confirm" type="object" string="Confirm" colspan="2" icon="gtk-yes" states="draft" groups="ar_account.group_account_memorialJournalValidator"/>
                     		<button name="button_workflow_action_proforma" type="object" string="Proforma" colspan="2" icon="gtk-yes" states="ready" groups="ar_account.group_account_memorialJournalUser"/>
                     		<button name="button_workflow_action_ready" type="object" string="Approve" colspan="2" icon="gtk-yes" states="waiting" groups="ar_account.group_account_memorialJournalApprove"/>
-                    		<button name="button_workflow_action_posted" type="object" string="Posted" colspan="2" icon="gtk-yes" states="proforma,ready" groups="ar_account.group_account_memorialJournalPost"/>
+                    		<button name="%(waction_account_wizardPostVoucher)d" type="object" string="Posted" colspan="2" icon="gtk-yes" states="proforma,ready" groups="ar_account.group_account_memorialJournalPost"/>
                     		<button name="button_workflow_action_cancel" type="object" string="Cancel" colspan="2" icon="gtk-cancel" states="draft,confirm,waiting,proforma,ready" groups="ar_account.group_account_memorialJournalCancel"/>
                     		<button name="button_cancel" type="object" string="Cancel" colspan="2" icon="gtk-cancel" states="posted" groups="ar_account.group_account_memorialJournalCancel"/>
                     		<button name="button_set_to_draft" type="object" string="Set To Draft" colspan="2" icon="terp-stock_effects-object-colorize" states="cancel" groups="ar_account.group_account_memorialJournalCancel"/>
@@ -136,7 +136,7 @@
             <field name="arch" type="xml">
                 <tree colors="blue:state == 'draft';gray:state == 'cancel'" string="Voucher Entries">
                     <field name="number" string="# Voucher"/>
-                    <field name="reference" string="Description"/>
+                    <field name="name" string="Description"/>
                     <field name="date"/>
                     <field name="period_id"/>
                     <field name="company_id"/>

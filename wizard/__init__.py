@@ -32,5 +32,6 @@ import wizard_cash_receipt
 import wizard_bank_receipt
 import wizard_cash_payment
 import wizard_bank_payment
+import wizard_post_voucher
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -65,6 +65,7 @@
                     'report/statement.xml',
                     'workflow/workflow_AccountVoucher.xml',
                     'wizard/wizard_import_move_line.xml',
+                    'wizard/wizard_post_voucher.xml',
                     'wizard/wizard_refund_invoice.xml',
                     'wizard/wizard_print_general_ledger.xml',
                     'wizard/wizard_print_trial_balance.xml',
