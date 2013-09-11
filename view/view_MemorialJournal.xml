@@ -11,9 +11,8 @@
                 <search string="Search Memorial Journal">
                     <group>
                         <filter icon="terp-document-new" name="draft" string="Draft" domain="[('state','=','draft')]"/>
-                        <filter icon="gtk-apply" name="confirm" string="Confirm" domain="[('state','=','confirm')]"/>
-                        <filter icon="gtk-media-pause" name="waiting" string="Waiting" domain="[('state','=','waiting')]"/>
-						<filter icon="gtk-yes" name="ready" string="Ready" domain="[('state','=','ready')]"/>
+                        <filter icon="gtk-apply" name="confirm" string="Waiting" domain="[('state','=','confirm')]"/>
+                        <filter icon="gtk-media-pause" name="approve" string="Ready" domain="[('state','=','approve')]"/>
 						<filter icon="gtk-media-forward" name="proforma" string="Proforma" domain="[('state','=','proforma')]"/>
 						<filter icon="gtk-media-next" name="post" string="Posted" domain="[('state','=','posted')]"/>
                         <separator orientation="vertical"/>
@@ -73,16 +72,20 @@
 						</group>	
 		                <notebook colspan="4">
 		                    <page string="Voucher Detail">
+                                <div class="oe_right oe_button_box" name="buttons">
+                                    <button name="%(waction_stock_wizardImportMoveLine)d" string="Import Move Lines" states="draft" icon="gtk-execute" type="action" context="{'move_type' : 'all'}" colspan="2"/> 
+                                </div>
 		                        <field name="line_ids" colspan="4" nolabel="1" height="140">     
 		                            <tree string="Voucher Detail" editable="bottom" colors="gray:amount==0">
+                                        <field name="move_line_id" domain="[('reconcile_id','=',False),('account_id.reconcile','=',True)]" on_change="onchange_move_line_id(move_line_id, parent.journal_id, parent.currency_id)" readonly="1"/>
 		                                <field name="account_id" domain="[('type','!=','view')]"/>
 		                                <field name="name" required="1"/>
 										<field name="type" required="1"/>
-		                                <field name="date_original" readonly="1" invisible="1"/>
-		                                <field name="date_due" readonly="1" invisible="1"/>
-		                                <field name="amount_original" readonly="1" invisible="1"/>
-		                                <field name="amount_unreconciled" readonly="1" invisible="1"/>
-		                                <field name="reconcile" on_change="onchange_reconcile(reconcile, amount, amount_unreconciled, context)" invisible="1"/>
+		                                <field name="date_original" readonly="1" invisible="0"/>
+		                                <field name="date_due" readonly="1" invisible="0"/>
+		                                <field name="amount_original" readonly="1" invisible="0"/>
+		                                <field name="amount_unreconciled" readonly="1" invisible="0"/>
+		                                <field name="reconcile" on_change="onchange_reconcile(reconcile, amount, amount_unreconciled, context)" invisible="0"/>
 		                                <field name="amount" on_change="onchange_amount(amount, amount_unreconciled, context)" required="1"/>
 		                            </tree>
 		                        </field>

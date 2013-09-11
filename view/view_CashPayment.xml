@@ -11,9 +11,8 @@
                 <search string="Search Cash Payment">
                     <group>
                         <filter icon="terp-document-new" name="draft" string="Draft" domain="[('state','=','draft')]"/>
-                        <filter icon="gtk-apply" name="confirm" string="Confirm" domain="[('state','=','confirm')]"/>
-                        <filter icon="gtk-media-pause" name="waiting" string="Waiting" domain="[('state','=','waiting')]"/>
-						<filter icon="gtk-yes" name="ready" string="Ready" domain="[('state','=','ready')]"/>
+                        <filter icon="gtk-apply" name="confirm" string="Waiting" domain="[('state','=','confirm')]"/>
+                        <filter icon="gtk-media-pause" name="approve" string="Ready" domain="[('state','=','approve')]"/>
 						<filter icon="gtk-media-forward" name="proforma" string="Proforma" domain="[('state','=','proforma')]"/>
 						<filter icon="gtk-media-next" name="post" string="Posted" domain="[('state','=','posted')]"/>
                         <separator orientation="vertical"/>

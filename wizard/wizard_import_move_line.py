@@ -21,20 +21,16 @@
 
 from lxml import etree
 
-import netsvc
-import time
 
 from osv import osv,fields
-from tools.translate import _
-import decimal_precision as dp
 
 class wizard_import_move_line(osv.osv_memory):
     _name = 'account.wizard_import_move_line'
     _description = 'Wizard Import Move Line'
     
-    _columns = {
-                            'move_line_ids' : fields.many2many(string='Move Lines', obj='account.move.line', rel='account_import_move_line_rel', id1='import_id', id2='move_id', required=True),
-                            }
+    _columns =  {
+                'move_line_ids' : fields.many2many(string='Move Lines', obj='account.move.line', rel='account_import_move_line_rel', id1='import_id', id2='move_id', required=True),
+                }
                             
     def fields_view_get(self, cr, uid, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
         res = super(wizard_import_move_line, self).fields_view_get(cr, uid, view_id=view_id, view_type=view_type, context=context, toolbar=toolbar,submenu=False)
@@ -51,7 +47,7 @@ class wizard_import_move_line(osv.osv_memory):
                     elif record_id == 'dr':
                         res['fields'][field]['domain'] = [('reconcile_id','=',False),('account_id.reconcile','=',True),('credit','>',0),('state','=','valid')]
                     else:
-                        res['fields'][field]['domain'] = []
+                        res['fields'][field]['domain'] = [('reconcile_id','=',False),('account_id.reconcile','=',True),('state','=','valid')]
         return res
         
     def import_move_lines(self, cr, uid, ids, data, context=None):
@@ -72,6 +68,16 @@ class wizard_import_move_line(osv.osv_memory):
 
             voucher_line_ids = obj_account_voucher_line.search(cr, uid, kriteria)
 
+            if move_type in ('dr','cr'):
+                line_type = move_type
+            else:
+                if move_line.debit > 0:
+                    data['move_type'] = 'cr'
+                    line_type = 'cr'
+                elif move_line.credit > 0:
+                    data['move_type'] = 'dr'
+                    line_type = 'dr'
+
             if not voucher_line_ids:
                 amount = obj_account_voucher_line.compute_amount(cr, uid, move_line.id, voucher_id.journal_id.id, voucher_id.currency_id.id)['amount']
                 val = {
@@ -79,7 +85,7 @@ class wizard_import_move_line(osv.osv_memory):
                         'account_id' : move_line.account_id.id,
                         'move_line_id' : move_line.id,
                         'name' : move_line.name,
-                        'type' : move_type,
+                        'type' : line_type,
                         'amount' : amount,
                         }
                 obj_account_voucher_line.create(cr, uid, val, context=context)
