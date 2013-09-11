@@ -56,6 +56,7 @@
                     		
                     		
                     		<field name="date" select="1" invisible="context.get('line_type', False)" on_change="onchange_date(date, currency_id, payment_rate_currency_id, amount, company_id, context)" required="1"/>
+                            <field name="effective_date"/>
                     		<!--
 		                    <field name="journal_id"
 		                        domain="[('type','in',['bank', 'cash'])]"
