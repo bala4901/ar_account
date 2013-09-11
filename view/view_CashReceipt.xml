@@ -63,6 +63,7 @@
 		                	<group colspan="1" col="2" name="group_1_1">
 		                		<field name="number" string="# Voucher"/>
 		                		<field name="date" select="1" invisible="context.get('line_type', False)" on_change="onchange_date(date, currency_id, payment_rate_currency_id, amount, company_id, context)" required="1"/>
+                                <field name="period_id"/>
 				                <field name="journal_id" invisible="context.get('line_type', False)" select="1" string="Journal" on_change="onchange_journal_id(journal_id)"/>   
 		            		</group>       
 		                	<group colspan="1" col="2" name="group_1_2">
