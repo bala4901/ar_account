@@ -69,7 +69,7 @@
                     'wizard/wizard_refund_invoice.xml',
                     'wizard/wizard_print_general_ledger.xml',
                     'wizard/wizard_print_trial_balance.xml',
-                    'wizard/wizard_print_balance_sheet.xml',
+                    #'wizard/wizard_print_balance_sheet.xml',
                      'wizard/wizard_print_profit_loss.xml',
                     'wizard/wizard_print_cash_flow.xml',
                     'wizard/wizard_print_equity_change.xml',
