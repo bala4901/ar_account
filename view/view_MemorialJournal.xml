@@ -105,9 +105,6 @@
 		                        <field name="paid_amount_in_company_currency" string="Total"/>                    		
 		                    </page>
 		                    <page string="Journal Items" groups="base.group_extended" attrs="{'invisible': [('state','!=','posted')]}">
-		                        <group col="6" colspan="4">
-		                            <field name="period_id"/>
-		                        </group>
 		                        <field name="move_ids" colspan="4" nolabel="1" readonly="1">
 		                           <tree string="Journal Items">
 		                               <field name="move_id"/>
