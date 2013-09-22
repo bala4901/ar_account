@@ -22,5 +22,6 @@
 import account_voucher
 import account_voucher_line
 import res_company
+import account_move_reconcille
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
