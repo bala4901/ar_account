@@ -30,6 +30,10 @@ class account_move_reconcile(osv.osv):
     def _check_same_partner(self, cr, uid, ids, context=None):
         return True
 
+    _constraints =  [
+                    (_check_same_partner,'-', ['line_id']),
+                    ]
+
 
 account_move_reconcile()
 
