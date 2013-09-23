@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<openerp>
+<data>    
+    <record id="report_account_statement" model="ir.actions.report.xml">
+        <field name="name">Statement</field>
+        <field name="type">ir.actions.report.xml</field>
+        <field name="model">res.company</field>
+        <field name="report_name">report_statement</field>
+        <field name="report_type">aeroo</field>
+        <field name="in_format">oo-odt</field>
+		<field name="out_format" ref="report_aeroo_ooo.report_mimetypes_pdf_odt"/>
+        <field name="report_rml">ar_account/report/report_statement.odt</field>
+        <field name="parser_state">loc</field>
+        <field name="parser_loc">ar_account/report/report_statement.py</field>
+        <field name="tml_source">file</field>
+    </record>    
+
+
+ 
+
+</data>
+</openerp>
+

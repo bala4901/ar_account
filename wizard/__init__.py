@@ -24,6 +24,7 @@ import wizard_cash_receipt
 import wizard_bank_receipt
 import wizard_cash_payment
 import wizard_bank_payment
+import wizard_report_statement
 
 
 

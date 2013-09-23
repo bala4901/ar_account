@@ -44,7 +44,20 @@
 					sequence="1"
 					name="Voucher Type"
 					action="waction_account_voucherType"
-		/>		
+		/>	
+		
+		<menuitem 	id="menu_account_genericReportHeader"
+					parent="account.menu_finance_reports"
+					sequence="1"
+					name="Generic Report"
+		/>				
+		
+		<menuitem 	id="menu_account_reportStatement"
+					parent="menu_account_genericReportHeader"
+					sequence="1"
+					name="Statement"
+					action="waction_account_wizardReportStatement"
+		/>	      		
 																																																								
 																																																
 	</data>

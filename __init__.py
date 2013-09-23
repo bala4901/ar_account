@@ -22,6 +22,7 @@
 import object_other
 import object_module
 import wizard
+import report
 
 
 
