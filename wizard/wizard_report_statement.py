@@ -47,6 +47,9 @@ class wizard_report_statement(osv.osv_memory):
     _columns =  {
                 'company_id' : fields.many2one(string='Company', obj='res.company', required=True),
                 'partner_id' : fields.many2one(string='Customer', obj='res.partner', domain=[('customer','=',True)], required=True),
+                'contact_id' : fields.many2one(string='Contact', obj='res.partner', required=True),
+                'currency_id' : fields.many2one(string='Currency', obj='res.currency', required=True),
+                'bank_id' : fields.many2one(string='Bank', obj='res.partner.bank', required=True),
                 'date_from' : fields.date(string='Date From'),
                 'date_to' : fields.date(string='Date To', required=True),
                 'statement_date' : fields.date(string='Statement Date', required=True),
