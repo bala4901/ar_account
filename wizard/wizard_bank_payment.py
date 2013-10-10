@@ -112,6 +112,7 @@ class wizard_bank_payment(osv.osv_memory):
         obj_account_invoice = self.pool.get('account.invoice')
         obj_account_journal = self.pool.get('account.journal')
         obj_account_voucher_type = self.pool.get('account.voucher_type')
+        obj_account_period = self.pool.get('account.period')
 
         record_id = context.get('active_ids')
 
@@ -148,6 +149,7 @@ class wizard_bank_payment(osv.osv_memory):
                         'cheque_bank_id' : cheque_bank_id,
                         'cheque_recepient' : cheque_recepient,
                         'cheque_is_giro' : cheque_is_giro,
+                        'period_id' : obj_account_period.find(cr, uid, wizard['date'], context),
                         }
 
         new_account_bank_payment_id = obj_account_bank_payment.create(cr, uid, val_header, context)
