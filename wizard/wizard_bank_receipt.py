@@ -112,6 +112,7 @@ class wizard_bank_receipt(osv.osv_memory):
         obj_account_invoice = self.pool.get('account.invoice')
         obj_account_journal = self.pool.get('account.journal')
         obj_account_voucher_type = self.pool.get('account.voucher_type')
+        obj_account_period = self.pool.get('account.period')
 
         record_id = context.get('active_ids')
 
@@ -133,6 +134,8 @@ class wizard_bank_receipt(osv.osv_memory):
         cheque_recepient = wizard['cheque_recepient'] if wizard['cheque_recepient'] else False
         cheque_is_giro = wizard['cheque_is_giro'] if wizard['cheque_is_giro'] else False
         
+        period_id = obj_account_period.find(cr, uid, wizard['date'], context)
+        
         val_header = {
                         'journal_id' : wizard['journal_id'][0],
                         'name' : wizard['name'][0],
@@ -148,6 +151,7 @@ class wizard_bank_receipt(osv.osv_memory):
                         'cheque_bank_id' : cheque_bank_id,
                         'cheque_recepient' : cheque_recepient,
                         'cheque_is_giro' : cheque_is_giro,
+                        'period_id' : period_id[0],
                         }
 
         new_account_bank_receipt_id = obj_account_bank_receipt.create(cr, uid, val_header, context)

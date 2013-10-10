@@ -134,6 +134,8 @@ class wizard_bank_payment(osv.osv_memory):
         cheque_recepient = wizard['cheque_recepient'] if wizard['cheque_recepient'] else False
         cheque_is_giro = wizard['cheque_is_giro'] if wizard['cheque_is_giro'] else False
         
+        period_id = obj_account_period.find(cr, uid, wizard['date'], context)
+        
         val_header = {
                         'journal_id' : wizard['journal_id'][0],
                         'name' : wizard['name'][0],
@@ -149,7 +151,7 @@ class wizard_bank_payment(osv.osv_memory):
                         'cheque_bank_id' : cheque_bank_id,
                         'cheque_recepient' : cheque_recepient,
                         'cheque_is_giro' : cheque_is_giro,
-                        'period_id' : obj_account_period.find(cr, uid, wizard['date'], context),
+                        'period_id' : period_id[0],
                         }
 
         new_account_bank_payment_id = obj_account_bank_payment.create(cr, uid, val_header, context)

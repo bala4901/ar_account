@@ -105,6 +105,7 @@ class wizard_cash_payment(osv.osv_memory):
         obj_account_invoice = self.pool.get('account.invoice')
         obj_account_journal = self.pool.get('account.journal')
         obj_account_voucher_type = self.pool.get('account.voucher_type')
+        obj_account_period = self.pool.get('account.period')
 
         record_id = context.get('active_ids')
 
@@ -117,6 +118,8 @@ class wizard_cash_payment(osv.osv_memory):
         voucher_type_ids = obj_account_voucher_type.search(cr, uid, [('name','=','Cash Payment')])[0]
 
         voucher_type = obj_account_voucher_type.browse(cr, uid, voucher_type_ids)
+        
+        period_id = obj_account_period.find(cr, uid, wizard['date'], context)
 
         val_header = {
                         'journal_id' : wizard['journal_id'][0],
@@ -126,6 +129,7 @@ class wizard_cash_payment(osv.osv_memory):
                         'voucher_type_id' : voucher_type.id,
                         'type' : voucher_type.default_header_type,
                         'amount' : self.get_total(cr, uid, context),
+                        'period_id' : period_id[0],
                         }
 
         new_account_cash_payment_id = obj_account_cash_payment.create(cr, uid, val_header, context)
