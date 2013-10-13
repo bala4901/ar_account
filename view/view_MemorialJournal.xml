@@ -104,7 +104,7 @@
 		                        <field name="payment_rate_currency_id"  on_change="onchange_payment_rate_currency(currency_id, payment_rate, payment_rate_currency_id, date, amount, company_id, context)" string="Company Currency"/>
 		                        <field name="paid_amount_in_company_currency" string="Total"/>                    		
 		                    </page>
-		                    <page string="Journal Items" groups="base.group_extended" attrs="{'invisible': [('state','!=','posted')]}">
+		                    <page string="Journal Items" attrs="{'invisible': [('state','!=','posted')]}">
 		                        <field name="move_ids" colspan="4" nolabel="1" readonly="1">
 		                           <tree string="Journal Items">
 		                               <field name="move_id"/>
