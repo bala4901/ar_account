@@ -46,6 +46,7 @@ class account_voucher_line(osv.osv):
                 'total_dr' : fields.function(string='Total Debit', fnct=function_amount_all, type='float', digits_compute=dp.get_precision('Account'), method=True, store=True, multi='all'),
                 'total_cr' : fields.function(string='Total Credit', fnct=function_amount_all, type='float', digits_compute=dp.get_precision('Account'), method=True, store=True, multi='all'),
                 'product_id' : fields.many2one(obj='product.product', string='Product', readonly=True, states={'draft':[('readonly',False)]}),
+                'partner_id' : fields.many2one(string='Partner', obj='res.partner', ondelete='restrict'),
                 }
                 
     def onchange_product_id(self, cr, uid, ids, product_id):
@@ -119,8 +120,25 @@ class account_voucher_line(osv.osv):
             value['amount'] = res['amount']
             value['amount_original'] = res['amount_original']
             value['amount_unreconciled'] = res['amount_unreconciled']
+            value['partner_id'] = move.partner_id and move.partner_id.id or False
             
         return {'value' : value, 'domain' : domain, 'warning' : warning}        
+
+    def onchange_partner_id(self, cr, uid, ids, move_id):
+        value = {}
+        domain = {}
+        warning = {}
+
+        obj_move = self.pool.get('account.move.line')
+
+        if move_id:
+            move = obj_move.browse(cr, uid, [move_id])[0]
+            value['partner_id'] = move.partner_id and move.partner_id.id or False
+
+        return {'value' : value, 'domain' : domain, 'warning' : warning}
+
+
+
 
                             
 account_voucher_line()                          
