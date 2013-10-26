@@ -145,11 +145,11 @@
 					sequence="2" 
 					action="waction_account_wizardPrintTrialBalance"/>			
 					
-		<menuitem 	id="menu_account_printBalanceSheet"
+		<!-- <menuitem 	id="menu_account_printBalanceSheet"
         			parent="menu_account_printAccountingHeader"
 					name="Balance Sheet"
 					sequence="3" 
-					action="waction_account_wizardPrintBalanceSheet"/>					
+					action="waction_account_wizardPrintBalanceSheet"/> -->	
 					
 		<menuitem 	id="menu_account_printProfitLoss"
         			parent="menu_account_printAccountingHeader"

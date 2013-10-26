@@ -23,7 +23,7 @@ import wizard_import_move_line
 import wizard_refund_invoice
 import wizard_print_general_ledger
 import wizard_print_trial_balance
-import wizard_print_balance_sheet
+#import wizard_print_balance_sheet
 import wizard_print_profit_loss
 import wizard_print_cash_flow
 import wizard_print_equity_change
@@ -32,5 +32,6 @@ import wizard_cash_receipt
 import wizard_bank_receipt
 import wizard_cash_payment
 import wizard_bank_payment
+import wizard_post_voucher
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
