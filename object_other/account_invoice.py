@@ -110,9 +110,10 @@ class account_invoice(osv.osv):
         for invoice in self.browse(cr, uid, ids):
             aging = 0
             if invoice.date_invoice and invoice.date_due:
+                date_now = datetime.toordinal(datetime.now())
                 date_invoice_ordinal = datetime.toordinal(date(int(invoice.date_invoice[0:4]), int(invoice.date_invoice[5:7]), int(invoice.date_invoice[8:10])))
                 date_due_ordinal = datetime.toordinal(date(int(invoice.date_due[0:4]), int(invoice.date_due[5:7]), int(invoice.date_due[8:10])))
-                aging = date_invoice_ordinal - date_due_ordinal
+                aging = date_due_ordinal - date_now
             res[invoice.id] = aging
         return res
             
