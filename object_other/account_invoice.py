@@ -113,7 +113,7 @@ class account_invoice(osv.osv):
                 date_now = datetime.toordinal(datetime.now())
                 date_invoice_ordinal = datetime.toordinal(date(int(invoice.date_invoice[0:4]), int(invoice.date_invoice[5:7]), int(invoice.date_invoice[8:10])))
                 date_due_ordinal = datetime.toordinal(date(int(invoice.date_due[0:4]), int(invoice.date_due[5:7]), int(invoice.date_due[8:10])))
-                aging = date_due_ordinal - date_now
+                aging = date_now - date_due_ordinal
             res[invoice.id] = aging
         return res
             
