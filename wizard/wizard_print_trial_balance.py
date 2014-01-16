@@ -39,30 +39,7 @@ class wizard_print_trial_balance(osv.osv_memory):
                             }
                             
     def button_print_report(self, cr, uid, ids, data, context=None):
-		obj_user = self.pool.get('res.users')
-		if context is None:
-			context = {}
-			
-			
-		user = obj_user.browse(cr, uid, [uid])[0]
-		
-		if not user.company_id.account_root_id:
-			raise osv.except_osv('Peringatan!', 'Akun root aset belum ditentukan')
-			
-		data = {}
-		wizard = self.browse(cr, uid, ids, context)[0]
-		res =	{
-		            'to_date' : wizard.to_date,
-		            }
-				
-		data['form'] = res
-		
-		return	{
-				'type': 'ir.actions.report.xml',
-				'report_name': 'report_trial_balance',
-				'datas': data,
-				}
-
+        return {}
         
         
                             

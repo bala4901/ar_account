@@ -39,30 +39,7 @@ class wizard_print_profit_loss(osv.osv_memory):
                             }
                             
     def button_print_report(self, cr, uid, ids, data, context=None):
-        wizard = self.browse(cr, uid, ids)[0]
-        obj_account = self.pool.get('account.account')
-        obj_period = self.pool.get('account.period')
-
-        
-        period_ids = obj_period.find(cr, uid, wizard.to_date)
-        
-        if not period_ids:
-            raise osv.except_osv('Warning!', 'Please define period for start date')
-            
-        period = obj_period.browse(cr, uid, period_ids)[0]
-        
-        from_date = period.fiscalyear_id.date_start
-        to_date = wizard.to_date  
-        
-        data['ids'] = self.pool.get('account.account').search(cr, uid, [])
-        data['model'] = 'account.account'
-        data['output_type'] = 'pdf'
-        val =   {
-                    'to_date' : '%s 00:00:00' % (wizard.to_date),
-                    }
-        data['variables'] = val
-        return {'type': 'ir.actions.report.xml', 'report_name': 'account.report_profit_loss', 'datas': data, 'context' : {'date_from' : from_date, 'date_to' : to_date}}
-
+        return {}
         
         
                             

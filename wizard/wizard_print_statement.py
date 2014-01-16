@@ -55,22 +55,7 @@ class wizard_print_statement(osv.osv_memory):
         return {'value': val}
                             
     def button_print_report(self, cr, uid, ids, data, context=None):
-        wizard = self.browse(cr, uid, ids)[0]
-        obj_account_invoice = self.pool.get('account.invoice')
-
-        kriteria = [ ('partner_id','=',wizard.partner_id.id), ('date_invoice','>=',wizard.from_date + ' 00:00:00'), ('date_invoice','<=',wizard.to_date + ' 23:59:00'),('company_id','=',wizard.company_id.id)]
-
-        invoice_ids = obj_account_invoice.search(cr, uid, kriteria)
-        if invoice_ids:
-            data['ids'] = invoice_ids
-            data['model'] = 'account.invoice'
-            data['output_type'] = 'pdf'
-            val =   {
-                        'from_date' : '%s 00:00:00' % (wizard.from_date),
-                        'to_date' : '%s 23:59:00' % (wizard.to_date),
-                        }
-            data['variables'] = val
-        return {'type': 'ir.actions.report.xml', 'report_name': 'account.report_statement', 'datas': data}
+        return {}
                           
 wizard_print_statement()
 

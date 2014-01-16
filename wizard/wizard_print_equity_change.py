@@ -39,29 +39,7 @@ class wizard_print_equity_change(osv.osv_memory):
                             }
                             
     def button_print_report(self, cr, uid, ids, data, context=None):
-		obj_user = self.pool.get('res.users')
-		if context is None:
-			context = {}
-			
-			
-		user = obj_user.browse(cr, uid, [uid])[0]
-		
-	
-			
-		data = {}
-		wizard = self.browse(cr, uid, ids, context)[0]
-		res =	{
-		            'to_date' : wizard.to_date,
-		            }
-				
-		data['form'] = res
-		
-		return	{
-				'type': 'ir.actions.report.xml',
-				'report_name': 'report_equity_change',
-				'datas': data,
-				}
-
+        return {}
         
         
                             
