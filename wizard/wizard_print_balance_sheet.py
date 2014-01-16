@@ -19,19 +19,33 @@
 #
 ##############################################################################
 
-import wizard_import_move_line
-import wizard_refund_invoice
-import wizard_print_general_ledger
-import wizard_print_trial_balance
-import wizard_print_balance_sheet
-import wizard_print_profit_loss
-import wizard_print_cash_flow
-import wizard_print_equity_change
-import wizard_print_statement
-import wizard_cash_receipt
-import wizard_bank_receipt
-import wizard_cash_payment
-import wizard_bank_payment
-import wizard_post_voucher
+from lxml import etree
+
+import netsvc
+import time
+
+from osv import osv,fields
+from tools.translate import _
+import decimal_precision as dp
+from datetime import datetime, date
+
+class wizard_print_balance_sheet(osv.osv_memory):
+    _name = 'account.wizard_print_balance_sheet'
+    _description = 'Wizard Print Balance Sheet'
+    
+    _columns = {
+                            'company_id' : fields.many2one(string='Company', obj='res.company', required=True),
+                            'to_date' : fields.date(string='To Date', required=True),
+                            }
+                            
+    def button_print_report(self, cr, uid, ids, data, context=None):
+        return {}
+        
+        
+                            
+
+        
+wizard_print_balance_sheet()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+

@@ -136,36 +136,43 @@
 		<menuitem 	id="menu_account_printGeneralLedger"
         			parent="menu_account_printAccountingHeader"
 					name="General Ledger"
+					action="waction_account_wizardPrintGeneralLedger"
 					sequence="1"/>			
 					
 		<menuitem 	id="menu_account_printTrialBalance"
         			parent="menu_account_printAccountingHeader"
 					name="Trial Balance"
+					action="waction_account_wizardPrintTrialBalance"
 					sequence="2"/>			
 					
 		<menuitem 	id="menu_account_printBalanceSheet"
         			parent="menu_account_printAccountingHeader"
 					name="Balance Sheet"
+					action="waction_account_wizardPrintBalanceSheet"
 					sequence="3"/>
 					
 		<menuitem 	id="menu_account_printProfitLoss"
         			parent="menu_account_printAccountingHeader"
 					name="Profit Loss"
+					action="waction_account_wizardPrintProfitLoss"
 					sequence="4"/>			
 					
 		<menuitem 	id="menu_account_printCashFlow"
         			parent="menu_account_printAccountingHeader"
 					name="Cash Flow"
+					action="waction_account_wizardPrintCashFlow"
 					sequence="5"/>			
 					
 		<menuitem 	id="menu_account_printEquityChange"
         			parent="menu_account_printAccountingHeader"
 					name="Equity Change"
+					action="waction_account_wizardPrintEquityChange"
 					sequence="6"/>		
 
 		<menuitem 	id="menu_account_printStatement"
         			parent="menu_account_printAccountingHeader"
 					name="Statement"
+					action="waction_account_wizardPrintStatement"
 					sequence="7"/>		
 					
 		<menuitem 	id="menu_account_queryAccountingHeader"
