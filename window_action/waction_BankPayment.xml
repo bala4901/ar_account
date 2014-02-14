@@ -11,6 +11,16 @@
 			<field name="view_mode">tree,form</field>
 			<field name="context">{'voucher_type' : 'Bank Payment', 'search_default_draft' : 1, 'search_default_confirm' : 1, 'search_default_approve' : 1, 'search_default_proforma' : 1}</field>
 			<field name="domain">[('voucher_type_id.name','=','Bank Payment')]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a bank payment
+              </p><p>
+                Bank Payment is a document that manage money out from company bank account
+              </p><p>
+                The discussions regarding bank payment are automatically displayed at
+                the bottom of each document.
+              </p>
+            </field>			
 		</record>
 		
 		<record id="wactionView_account_treeBankPayment" model="ir.actions.act_window.view">
