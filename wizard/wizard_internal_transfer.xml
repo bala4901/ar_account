@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>  
+
+        <record id="form_account_wizardInternalTransfer" model="ir.ui.view">
+            <field name="name">Internal Transfer</field>
+            <field name="model">account.wizard_internal_transfer</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Internal Transfer" version="7.0">
+                    <group name="group_1" colspan="4" col="2">
+                        <group name="group_1_1" colspan="1" col="2">
+                            <field name="transfer_date"/>
+                            <field name="source_journal_id" on_change="onchange_source_journal_id(source_journal_id)" domain="['|',('type','=','cash'),('type','=','bank')]"/>
+                            <field name="source_currency_id" invisible="1"/>
+                            <field name="destination_journal_id" on_change="onchange_destination_journal_id(destination_journal_id)" domain="['|',('type','=','cash'),('type','=','bank')]"/>
+                            <field name="destination_currency_id" invisible="1"/>
+                            <field name="description"/>
+                        </group>
+                        <group name="group_1_2" colspan="1" col="3">
+                            <field name="amount_transfer" widget="monetary" options='{"currency_field" : "source_currency_id"}'/>
+                            <newline/>
+                            <field name="exchange_rate"/>
+                            <button name="button_update_rate" type="object" class="oe_link" string="Update Rate"/>
+                            <field name="amount_receive" widget="monetary" options='{"currency_field" : "destination_currency_id"}'/>
+                            <button name="button_recompute_amount_receive" type="object" class="oe_link" string="Recompute"/>
+                        </group>
+                        <group name="group_1_3" colspan="1" col="3">
+                            
+                        </group>
+                        <group name="group_1_4" colspan="1" col="2">
+                    		<field name="payment_method" required="1"/>
+                    		<field name="cheque_number" attrs="{'required' : [('payment_method','!=','bank_transfer')], 'invisible':[('payment_method','!=','cheque'),('payment_method','!=','giro')]}"/>
+                    		<field name="cheque_date" attrs="{'required' : [('payment_method','!=','bank_transfer')], 'invisible':[('payment_method','!=','cheque'),('payment_method','!=','giro')]}"/>
+                    		<field name="cheque_recepient" attrs="{'invisible':[('payment_method','!=','cheque')]}"/>
+                    		<field name="cheque_partner_bank_id" attrs="{'required' : [('payment_method','=','giro')], 'invisible':[('payment_method','!=','giro')]}"/>
+                    		<field name="cheque_bank_id" attrs="{'invisible':[('payment_method','!=','giro')]}"/>                        
+                        </group>
+                    </group>
+					<footer>
+			            <button name="execute_wizard" string="Ok" type="object" class="oe_highlight"/>
+			            Or
+                        <button special="cancel" string="_Cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        
+        <record id="waction_account_wizardInternalTransfer" model="ir.actions.act_window">
+            <field name="name">Internal Transfer</field>
+            <field name="res_model">account.wizard_internal_transfer</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="form_account_wizardInternalTransfer"/>
+            <field name="target">new</field>
+        </record>                  
+
+        
+    </data>
+</openerp>
