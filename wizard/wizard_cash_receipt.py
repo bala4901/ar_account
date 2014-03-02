@@ -123,7 +123,7 @@ class wizard_cash_receipt(osv.osv_memory):
 
         val_header = {
                         'journal_id' : wizard['journal_id'][0],
-                        'name' : wizard['name'][0],
+                        'name' : wizard['name'],
                         'date' : wizard['date'],
                         'account_id' : journal.default_debit_account_id.id,
                         'voucher_type_id' : voucher_type.id,
@@ -146,9 +146,10 @@ class wizard_cash_receipt(osv.osv_memory):
                             'voucher_id' : new_account_cash_receipt_id,
                             'account_id' : move_line.account_id.id,
                             'move_line_id' : move_line.id,
-                            'name' : move_line.name,
+                            'name' : wizard['name'],
                             'amount' : amount,
                             'type' : 'cr',
+                            'partner_id' : move_line.partner_id.id,
                             }
                     new_account_cash_receipt_detail_id = obj_account_voucher_line.create(cr, uid, val, context)
 
