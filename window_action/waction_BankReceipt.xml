@@ -11,6 +11,16 @@
 			<field name="view_mode">tree,form</field>
 			<field name="context">{'voucher_type' : 'Bank Receipt', 'search_default_draft' : 1, 'search_default_confirm' : 1, 'search_default_approve' : 1, 'search_default_proforma' : 1}</field>
 			<field name="domain">[('voucher_type_id.name','=','Bank Receipt')]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a bank receipt
+              </p><p>
+                Bank Receipt is a document that manage money in to company bank account
+              </p><p>
+                The discussions regarding bank receipt are automatically displayed at
+                the bottom of each document.
+              </p>
+            </field>			
 		</record>
 		
 		<record id="wactionView_account_treeBankReceipt" model="ir.actions.act_window.view">
