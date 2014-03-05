@@ -90,12 +90,14 @@ class account_voucher_line(osv.osv):
             # skip line that are totally used within partial reconcile
             #pass
         if line.currency_id and currency_id==line.currency_id.id:
+            #raise osv.except_osv('a','a')
             amount_original = abs(line.amount_currency)
             amount_unreconciled = abs(line.amount_residual_currency)
         else:
+            #raise osv.except_osv('b','b')
             amount_original = currency_pool.compute(cr, uid, company_currency, currency_id, line.credit or line.debit or 0.0)
             amount_unreconciled = currency_pool.compute(cr, uid, company_currency, currency_id, abs(line.amount_residual))
-        line_currency_id = line.currency_id and line.currency_id.id or company_currency
+
         rs = {
                 'amount_original': amount_original,
                 'amount': amount_unreconciled,

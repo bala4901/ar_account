@@ -114,6 +114,7 @@ class wizard_cash_payment(osv.osv_memory):
         #raise osv.except_osv(_('Error !'), _('%s')%record_id[0])
 
         journal = obj_account_journal.browse(cr, uid, wizard['journal_id'][0])
+        voucher_currency_id = journal.currency and journal.currency.id or journal.company_id.currency_id.id
 
         voucher_type_ids = obj_account_voucher_type.search(cr, uid, [('name','=','Cash Payment')])[0]
 
@@ -142,7 +143,7 @@ class wizard_cash_payment(osv.osv_memory):
 
             for move_line in obj_account_move_line.browse(cr, uid, move_line_ids):
                 if move_line.account_id.type == 'payable':
-                    amount = obj_account_voucher_line.compute_amount(cr, uid, move_line.id, move_line.journal_id.id, move_line.currency_id.id)['amount']
+                    amount = obj_account_voucher_line.compute_amount(cr, uid, move_line.id, move_line.journal_id.id, voucher_currency_id)['amount']
                     val = {
                             'voucher_id' : new_account_cash_payment_id,
                             'account_id' : move_line.account_id.id,
