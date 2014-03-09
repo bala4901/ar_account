@@ -22,7 +22,6 @@
 
 
 from osv import fields, osv
-from datetime import datetime
 import decimal_precision as dp
 
 class account_voucher_line(osv.osv):
@@ -42,11 +41,39 @@ class account_voucher_line(osv.osv):
                 res[line.id]['total_cr'] = line.amount
         return res
 
+    def _compute_balance(self, cr, uid, ids, name, args, context=None):
+        currency_pool = self.pool.get('res.currency')
+        rs_data = {}
+        for line in self.browse(cr, uid, ids, context=context):
+            ctx = context.copy()
+            ctx.update({'date': line.voucher_id.date})
+            voucher_rate = self.pool.get('res.currency').read(cr, uid, line.voucher_id.currency_id.id, ['rate'], context=ctx)['rate']
+            res = {}
+            company_currency = line.voucher_id.journal_id.company_id.currency_id.id
+            voucher_currency = line.voucher_id.currency_id and line.voucher_id.currency_id.id or company_currency
+            move_line = line.move_line_id or False
+
+            if not move_line:
+                res['amount_original'] = 0.0
+                res['amount_unreconciled'] = 0.0
+            elif move_line.currency_id and voucher_currency==move_line.currency_id.id:
+                res['amount_original'] = abs(move_line.amount_currency)
+                res['amount_unreconciled'] = abs(move_line.amount_residual_currency)
+            else:
+                #always use the amount booked in the company currency as the basis of the conversion into the voucher currency
+                res['amount_original'] = currency_pool.compute(cr, uid, company_currency, voucher_currency, move_line.credit or move_line.debit or 0.0, context=ctx)
+                res['amount_unreconciled'] = currency_pool.compute(cr, uid, company_currency, voucher_currency, abs(move_line.amount_residual), context=ctx)
+
+            rs_data[line.id] = res
+        return rs_data
+
     _columns =   {
                 'total_dr' : fields.function(string='Total Debit', fnct=function_amount_all, type='float', digits_compute=dp.get_precision('Account'), method=True, store=True, multi='all'),
                 'total_cr' : fields.function(string='Total Credit', fnct=function_amount_all, type='float', digits_compute=dp.get_precision('Account'), method=True, store=True, multi='all'),
                 'product_id' : fields.many2one(obj='product.product', string='Product', readonly=True, states={'draft':[('readonly',False)]}),
                 'partner_id' : fields.many2one(string='Partner', obj='res.partner', ondelete='restrict'),
+                'amount_original': fields.function(_compute_balance, multi='dc', type='float', string='Original Amount', store=True, digits_compute=dp.get_precision('Account')),
+                'amount_unreconciled': fields.function(_compute_balance, multi='dc', type='float', string='Open Balance', store=True, digits_compute=dp.get_precision('Account')),
                 }
                 
     def onchange_product_id(self, cr, uid, ids, product_id):
@@ -85,24 +112,22 @@ class account_voucher_line(osv.osv):
         
         currency_id = currency_id or journal.company_id.currency_id.id
         company_currency = journal.company_id.currency_id.id
+
+        context = {'date' : line.date}
         
-        #ine.reconcile_partial_id and line.amount_residual_currency < 0:
-            # skip line that are totally used within partial reconcile
-            #pass
         if line.currency_id and currency_id==line.currency_id.id:
-            #raise osv.except_osv('a','a')
             amount_original = abs(line.amount_currency)
             amount_unreconciled = abs(line.amount_residual_currency)
         else:
-            #raise osv.except_osv('b','b')
-            amount_original = currency_pool.compute(cr, uid, company_currency, currency_id, line.credit or line.debit or 0.0)
-            amount_unreconciled = currency_pool.compute(cr, uid, company_currency, currency_id, abs(line.amount_residual))
+            amount_original = currency_pool.compute(cr, uid, company_currency, currency_id, line.credit or line.debit or 0.0,context=context)
+            amount_unreconciled = currency_pool.compute(cr, uid, company_currency, currency_id, abs(line.amount_residual),context=context)
 
-        rs = {
+        rs =    {
                 'amount_original': amount_original,
                 'amount': amount_unreconciled,
                 'amount_unreconciled': amount_unreconciled,
                 }
+
         return rs
         
     def onchange_move_id(self, cr, uid, ids, move_id, journal_id, currency_id):

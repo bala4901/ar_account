@@ -103,7 +103,7 @@
                             <group name="group_4" colspan="4" col="2">
                                 <group colspan="1" col="2" name="group_4_1">
                                     <field name="amount" string="Total Voucher" widget="monetary" options="{'currency_field' : 'currency_id'}"/>
-                                    <field name="currency_id" string="Voucher Currency" invisible="1"/>
+                                    <field name="currency_id" string="Voucher Currency" invisible="0"/>
                                     <field name="is_multi_currency" invisible="1"/>
                                     <field name="payment_rate" required="1" on_change="onchange_rate(payment_rate, amount, currency_id, payment_rate_currency_id, company_id, context)" string="Exc. Rate"/>
                                     <field name="payment_rate_currency_id"  on_change="onchange_payment_rate_currency(currency_id, payment_rate, payment_rate_currency_id, date, amount, company_id, context)" string="Company Currency" invisible="1"/>
@@ -111,7 +111,7 @@
                                 </group>                     		               		    		
                         		<group name="group_4_2" colspan="1" col="2">
                                     <field name="writeoff_amount" widget="monetary" options="{'currency_field' : 'currency_id'}"/>
-									<field name="payment_option" invisible="1"/>
+									<field name="payment_option" invisible="0"/>
 									<field name="writeoff_acc_id" domain="[('type','!=','view')]" attrs="{'required':[('writeoff_amount','!=',0)]}"/>
 								</group>
 							</group>

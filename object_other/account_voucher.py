@@ -23,7 +23,6 @@
 
 from osv import fields, osv
 from datetime import datetime
-from lxml import etree
 from tools.translate import _
 import netsvc
 import decimal_precision as dp
@@ -412,18 +411,6 @@ class account_voucher(osv.osv):
         else:
             return True
             
-    def proforma_voucher(self, cr, uid, ids, context=None):
-        """
-        Override
-        """
-        
-        for id in ids:
-            pass
-            #if not self.check_total_voucher(cr, uid, id):
-                #raise osv.except_osv('Warning!', 'Total voucher is not equal with line total')
-                #return False
-
-        return super(account_voucher, self).proforma_voucher(cr, uid, ids, context)
         
     def onchange_journal_id(self, cr, uid, ids, journal_id):
         value = {}
@@ -478,14 +465,17 @@ class account_voucher(osv.osv):
                 line_total = line_total - self._convert_amount(cr, uid, voucher.tax_amount, voucher.id, context=ctx)
             elif voucher.type == 'purchase':
                 line_total = line_total + self._convert_amount(cr, uid, voucher.tax_amount, voucher.id, context=ctx)
+
+
             # Create one move line per voucher line where amount is not 0.0
             line_total, rec_list_ids = self.voucher_move_line_create(cr, uid, voucher.id, line_total, move_id, company_currency, current_currency, context)
 
-            # Create the writeoff line if needed
+            #Create the writeoff line if needed
             ml_writeoff = self.writeoff_move_line_get(cr, uid, voucher.id, line_total, move_id, name, company_currency, current_currency, False, context)
-            #raise osv.except_osv('a',str(ml_writeoff))
             if ml_writeoff:
                 move_line_pool.create(cr, uid, ml_writeoff, context)
+
+
             # We post the voucher.
             self.write(cr, uid, [voucher.id], {
                 'move_id': move_id,
@@ -512,12 +502,13 @@ class account_voucher(osv.osv):
         :return: Tuple build as (remaining amount not allocated on voucher lines, list of account_move_line created in this method)
         :rtype: tuple(float, list of int)
         '''
-        #raise osv.except_osv('a','c')
         if context is None:
             context = {}
+
         move_line_obj = self.pool.get('account.move.line')
         currency_obj = self.pool.get('res.currency')
         tax_obj = self.pool.get('account.tax')
+
         tot_line = line_total
         rec_lst_ids = []
 
@@ -530,40 +521,34 @@ class account_voucher(osv.osv):
                 continue
     
             amount = line.amount
-            # override jika ada penambahan maka di writeoff
-            if line.amount > line.amount_unreconciled and line.move_line_id:
-                #TODO: writeoff
-                #raise osv.except_osv('a','a')
-                amount = line.amount_unreconciled
-                ml_writeoff = self.writeoff_move_line_get(cr, uid, voucher_brw.id, line.amount - line.amount_unreconciled, move_id, voucher_brw.name, company_currency, current_currency, line.move_line_id.partner_id.id, context)
-                if ml_writeoff:
-                    move_line_obj.create(cr, uid, ml_writeoff, context)             
-    
-            #raise osv.except_osv('a','b')
+   
             # convert the amount set on the voucher line into the currency of the voucher's company
             amount = self._convert_amount(cr, uid, amount, voucher_brw.id, context=ctx)
             amount_real = self._convert_amount(cr, uid, line.amount, voucher_brw.id, context=ctx)
             # if the amount encoded in voucher is equal to the amount unreconciled, we need to compute the
             # currency rate difference
             if line.amount == line.amount_unreconciled:
-                currency_rate_difference = line.move_line_id.amount_residual - amount
+                currency_rate_difference = line.move_line_id.amount_residual - (line.amount * voucher_brw.payment_rate)
             else:
-                currency_rate_difference = 0.0
+                currency_rate_difference = amount - (line.amount * voucher_brw.payment_rate)
+
+
             move_line = {
-                'journal_id': voucher_brw.journal_id.id,
-                'period_id': voucher_brw.period_id.id,
-                'name': line.name or '/',
-                'account_id': line.account_id.id,
-                'move_id': move_id,
-                'partner_id': line.partner_id and line.partner_id.id or False,
-                'currency_id': line.move_line_id and (company_currency <> line.move_line_id.currency_id.id and line.move_line_id.currency_id.id) or False,
-                # 'analytic_account_id': line.account_analytic_id and line.account_analytic_id.id or False,
-                # 'analytics_id' : line.analytics_id and line.analytics_id.id or False,
-                'quantity': 1,
-                'credit': 0.0,
-                'debit': 0.0,
-                'date': voucher_brw.date
-            }
+                        'journal_id': voucher_brw.journal_id.id,
+                        'period_id': voucher_brw.period_id.id,
+                        'name': line.name or '/',
+                        'account_id': line.account_id.id,
+                        'move_id': move_id,
+                        'partner_id': line.partner_id and line.partner_id.id or False,
+                        'currency_id' : voucher_brw.journal_id.currency and voucher_brw.journal_id.currency.id or voucher_brw.journal_id.company_id.currency_id.id,
+                        # 'analytic_account_id': line.account_analytic_id and line.account_analytic_id.id or False,
+                        # 'analytics_id' : line.analytics_id and line.analytics_id.id or False,
+                        'quantity': 1,
+                        'credit': 0.0,
+                        'debit': 0.0,
+                        'date': voucher_brw.date
+                        }
+
             if amount < 0:
                 amount = -amount
                 if line.type == 'dr':
@@ -606,39 +591,39 @@ class account_voucher(osv.osv):
                         amount_currency = (move_line['debit'] - move_line['credit']) * voucher_brw.payment_rate * voucher_rate
                     else:
                         # otherwise we use the rates of the system (giving the voucher date in the context)
+                        #raise osv.except_osv('c','c')
                         amount_currency = currency_obj.compute(cr, uid, company_currency, line.move_line_id.currency_id.id, move_line['debit']-move_line['credit'], context=ctx)
                 if line.amount == line.amount_unreconciled and line.move_line_id.currency_id.id == voucher_currency:
                     sign = voucher_brw.type in ('payment', 'purchase') and -1 or 1
                     foreign_currency_diff = sign * line.move_line_id.amount_residual_currency + amount_currency
 
             move_line['amount_currency'] = amount_currency
-            #raise osv.except_osv('a', str(move_line))
             voucher_line = move_line_obj.create(cr, uid, move_line)
             rec_ids = [voucher_line, line.move_line_id.id]
 
             if not currency_obj.is_zero(cr, uid, voucher_brw.company_id.currency_id, currency_rate_difference):
                 # Change difference entry in company currency
                 exch_lines = self._get_exchange_lines(cr, uid, line, move_id, currency_rate_difference, company_currency, current_currency, context=context)
-                new_id = move_line_obj.create(cr, uid, exch_lines[0],context)
-                move_line_obj.create(cr, uid, exch_lines[1], context)
-                rec_ids.append(new_id)
+                tot_line += (exch_lines['debit'] - exch_lines['credit'])
+                move_line_obj.create(cr, uid, exch_lines, context)
+
 
             if line.move_line_id and line.move_line_id.currency_id and not currency_obj.is_zero(cr, uid, line.move_line_id.currency_id, foreign_currency_diff):
                 # Change difference entry in voucher currency
-                move_line_foreign_currency = {
-                    'journal_id': line.voucher_id.journal_id.id,
-                    'period_id': line.voucher_id.period_id.id,
-                    'name': _('change')+': '+(line.name or '/'),
-                    'account_id': line.account_id.id,
-                    'move_id': move_id,
-                    'partner_id': line.partner_id and line.partner_id.id or False,
-                    'currency_id': line.move_line_id.currency_id.id,
-                    'amount_currency': -1 * foreign_currency_diff,
-                    'quantity': 1,
-                    'credit': 0.0,
-                    'debit': 0.0,
-                    'date': line.voucher_id.date,
-                }
+                move_line_foreign_currency =    {
+                                                'journal_id': line.voucher_id.journal_id.id,
+                                                'period_id': line.voucher_id.period_id.id,
+                                                'name': _('change')+': '+(line.name or '/'),
+                                                'account_id': line.account_id.id,
+                                                'move_id': move_id,
+                                                'partner_id': line.partner_id and line.partner_id.id or False,
+                                                'currency_id': line.move_line_id.currency_id.id,
+                                                'amount_currency': -1 * foreign_currency_diff,
+                                                'quantity': 1,
+                                                'credit': 0.0,
+                                                'debit': 0.0,
+                                                'date': line.voucher_id.date,
+                                                }
                 new_id = move_line_obj.create(cr, uid, move_line_foreign_currency, context=context)
                 rec_ids.append(new_id)
 
@@ -677,20 +662,74 @@ class account_voucher(osv.osv):
                 account_id = voucher_brw.partner_id.property_account_receivable.id
             else:
                 account_id = voucher_brw.partner_id.property_account_payable.id
+
             move_line = {
-                'name': write_off_name or name,
-                'account_id': account_id,
-                'move_id': move_id,
-                'partner_id': partner_id,
-                'date': voucher_brw.date,
-                'credit': diff > 0 and diff or 0.0,
-                'debit': diff < 0 and -diff or 0.0,
-                'amount_currency': company_currency <> current_currency and voucher_brw.writeoff_amount or False,
-                'currency_id': company_currency <> current_currency and current_currency or False,
-                # 'analytic_account_id': voucher_brw.analytic_id and voucher_brw.analytic_id.id or False,
-            }
+                        'name': write_off_name or name,
+                        'account_id': account_id,
+                        'move_id': move_id,
+                        'partner_id': partner_id,
+                        'date': voucher_brw.date,
+                        'credit': diff > 0 and diff or 0.0,
+                        'debit': diff < 0 and -diff or 0.0,
+                        'amount_currency': company_currency <> current_currency and voucher_brw.writeoff_amount or False,
+                        'currency_id': company_currency <> current_currency and current_currency or False,
+                        # 'analytic_account_id': voucher_brw.analytic_id and voucher_brw.analytic_id.id or False,
+                        }
 
         return move_line
+
+    def _get_exchange_lines(self, cr, uid, line, move_id, amount_residual, company_currency, current_currency, context=None):
+        '''
+        Prepare the two lines in company currency due to currency rate difference.
+
+        :param line: browse record of the voucher.line for which we want to create currency rate difference accounting
+            entries
+        :param move_id: Account move wher the move lines will be.
+        :param amount_residual: Amount to be posted.
+        :param company_currency: id of currency of the company to which the voucher belong
+        :param current_currency: id of currency of the voucher
+        :return: the account move line and its counterpart to create, depicted as mapping between fieldname and value
+        :rtype: tuple of dict
+        '''
+        if amount_residual > 0:
+            account_id = line.voucher_id.company_id.expense_currency_exchange_account_id
+            if not account_id:
+                raise osv.except_osv(_('Insufficient Configuration!'),_("You should configure the 'Loss Exchange Rate Account' in the accounting settings, to manage automatically the booking of accounting entries related to differences between exchange rates."))
+        else:
+            account_id = line.voucher_id.company_id.income_currency_exchange_account_id
+            if not account_id:
+                raise osv.except_osv(_('Insufficient Configuration!'),_("You should configure the 'Gain Exchange Rate Account' in the accounting settings, to manage automatically the booking of accounting entries related to differences between exchange rates."))
+        # Even if the amount_currency is never filled, we need to pass the foreign currency because otherwise
+        # the receivable/payable account may have a secondary currency, which render this field mandatory
+        if line.account_id.currency_id:
+            account_currency_id = line.account_id.currency_id.id
+        else:
+            account_currency_id = company_currency <> current_currency and current_currency or False
+
+        account_currency_id = line.voucher_id.journal_id.currency and line.voucher_id.journal_id.currency.id or line.voucher_id.journal_id.company_id.currency_id.id
+
+        if line.type == 'cr':
+            debit = amount_residual > 0 and amount_residual or 0.0
+            credit = amount_residual < 0 and -amount_residual or 0.0
+        else:
+            debit = amount_residual < 0 and -amount_residual or 0.0
+            credit = amount_residual > 0 and amount_residual or 0.0
+
+        move_line_counterpart = {
+                                'journal_id': line.voucher_id.journal_id.id,
+                                'period_id': line.voucher_id.period_id.id,
+                                'name': _('change')+': '+(line.name or '/'),
+                                'account_id': account_id.id,
+                                'move_id': move_id,
+                                'amount_currency': 0.0,
+                                'partner_id': line.voucher_id.partner_id.id,
+                                'currency_id': account_currency_id,
+                                'quantity': 1,
+                                'debit': debit,
+                                'credit': credit,
+                                'date': line.voucher_id.date,
+                                }
+        return move_line_counterpart
         
         
         
