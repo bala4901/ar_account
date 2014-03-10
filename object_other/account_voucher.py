@@ -532,6 +532,8 @@ class account_voucher(osv.osv):
             else:
                 currency_rate_difference = amount - (line.amount * voucher_brw.payment_rate)
 
+            
+
 
             move_line = {
                         'journal_id': voucher_brw.journal_id.id,
@@ -540,7 +542,7 @@ class account_voucher(osv.osv):
                         'account_id': line.account_id.id,
                         'move_id': move_id,
                         'partner_id': line.partner_id and line.partner_id.id or False,
-                        'currency_id' : voucher_brw.journal_id.currency and voucher_brw.journal_id.currency.id or voucher_brw.journal_id.company_id.currency_id.id,
+                        'currency_id' : voucher_brw.journal_id.currency and voucher_brw.journal_id.currency.id or False,
                         # 'analytic_account_id': line.account_analytic_id and line.account_analytic_id.id or False,
                         # 'analytics_id' : line.analytics_id and line.analytics_id.id or False,
                         'quantity': 1,
