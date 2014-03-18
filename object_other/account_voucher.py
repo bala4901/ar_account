@@ -528,7 +528,7 @@ class account_voucher(osv.osv):
             # if the amount encoded in voucher is equal to the amount unreconciled, we need to compute the
             # currency rate difference
             if line.amount == line.amount_unreconciled:
-                currency_rate_difference = line.move_line_id.amount_residual - (line.amount * voucher_brw.payment_rate)
+                currency_rate_difference = 0.0 #line.move_line_id.amount_residual - (line.amount * voucher_brw.payment_rate)
             else:
                 #TODO:
                 currency_rate_difference = 0.0 #amount - (line.amount * voucher_brw.payment_rate)
