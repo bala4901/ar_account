@@ -530,7 +530,8 @@ class account_voucher(osv.osv):
             if line.amount == line.amount_unreconciled:
                 currency_rate_difference = line.move_line_id.amount_residual - (line.amount * voucher_brw.payment_rate)
             else:
-                currency_rate_difference = amount - (line.amount * voucher_brw.payment_rate)
+                #TODO:
+                currency_rate_difference = 0.0 #amount - (line.amount * voucher_brw.payment_rate)
 
             
 
