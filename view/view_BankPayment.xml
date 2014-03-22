@@ -6,7 +6,6 @@
         <record id="select_account_bankPayment" model="ir.ui.view">
             <field name="name">Search Bank Payment</field>
             <field name="model">account.bank_payment</field>
-            <field name="type">search</field>
             <field name="arch" type="xml">
                 <search string="Search Bank Payment">
                     <group>
@@ -41,7 +40,6 @@
         <record model="ir.ui.view" id="form_account_bankPayment">
             <field name="name">Form Bank Payment</field>
             <field name="model">account.bank_payment</field>
-            <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Bank Payment" version="7.0">
                     <header>
@@ -167,7 +165,6 @@
         <record model="ir.ui.view" id="tree_account_bankPayment">
             <field name="name">Tree Bank Payment</field>
             <field name="model">account.bank_payment</field>
-            <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree colors="blue:state == 'draft';gray:state == 'cancel'" string="Voucher Entries">
                     <field name="number" string="# Voucher"/>

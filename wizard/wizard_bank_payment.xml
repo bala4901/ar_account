@@ -5,7 +5,6 @@
         <record id="form_account_wizardBankPayment" model="ir.ui.view">
             <field name="name">Bank Payment</field>
             <field name="model">account.wizard_bank_payment</field>
-            <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Bank Payment" version="7.0">
                     <group col="2" colspan="4">

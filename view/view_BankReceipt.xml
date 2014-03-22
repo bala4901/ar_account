@@ -6,7 +6,6 @@
         <record id="select_account_bankReceipt" model="ir.ui.view">
             <field name="name">Search Bank Receipt</field>
             <field name="model">account.bank_receipt</field>
-            <field name="type">search</field>
             <field name="arch" type="xml">
                 <search string="Search Bank Receipt">
                 	<group>
@@ -41,7 +40,6 @@
         <record model="ir.ui.view" id="form_account_bankReceipt">
             <field name="name">Form Bank Receipt</field>
             <field name="model">account.bank_receipt</field>
-            <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Bank Receipt" version="7.0">
 					<header>
@@ -166,7 +164,6 @@
         <record model="ir.ui.view" id="tree_account_bankReceipt">
             <field name="name">Tree Bank Receipt</field>
             <field name="model">account.bank_receipt</field>
-            <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree colors="blue:state == 'draft';gray:state == 'cancel'" string="Voucher Entries">
                     <field name="number" string="# Voucher"/>

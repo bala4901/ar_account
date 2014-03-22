@@ -6,7 +6,6 @@
         <record id="select_account_memorialJournal" model="ir.ui.view">
             <field name="name">Search Memorial Journal</field>
             <field name="model">account.memorial_journal</field>
-            <field name="type">search</field>
             <field name="arch" type="xml">
                 <search string="Search Memorial Journal">
                     <group>
@@ -41,7 +40,6 @@
         <record model="ir.ui.view" id="form_account_memorialJournal">
             <field name="name">Form Memorial Journal</field>
             <field name="model">account.memorial_journal</field>
-            <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Memorial Journal" version="7.0">
 					<header>
@@ -149,7 +147,6 @@
         <record model="ir.ui.view" id="tree_account_memorialJournal">
             <field name="name">Tree Memorial Journal</field>
             <field name="model">account.memorial_journal</field>
-            <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree colors="blue:state == 'draft';gray:state == 'cancel'" string="Voucher Entries">
                     <field name="number" string="# Voucher"/>

@@ -6,7 +6,6 @@
         <record id="select_account_cashReceipt" model="ir.ui.view">
             <field name="name">Search Cash Receipt</field>
             <field name="model">account.cash_receipt</field>
-            <field name="type">search</field>
             <field name="arch" type="xml">
                 <search string="Search Cash Receipt">
                     <group>
@@ -41,7 +40,6 @@
         <record model="ir.ui.view" id="form_account_cashReceipt">
             <field name="name">Form Cash Receipt</field>
             <field name="model">account.cash_receipt</field>
-            <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Cash Receipt" version="7.0">
 					<header>
@@ -160,7 +158,6 @@
         <record model="ir.ui.view" id="tree_account_cashReceipt">
             <field name="name">Tree Cash Receipt</field>
             <field name="model">account.cash_receipt</field>
-            <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree colors="blue:state == 'draft';gray:state == 'cancel'" string="Voucher Entries">
                     <field name="number" string="# Voucher"/>

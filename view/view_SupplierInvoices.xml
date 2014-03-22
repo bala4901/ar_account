@@ -4,7 +4,6 @@
         <record id="form_account_accountSupplierInvoices" model="ir.ui.view">
             <field name="name">Form Supplier Invoices - AR Account</field>
             <field name="model">account.invoice</field>
-            <field name="type">form</field>
             <field name="inherit_id" ref="account.invoice_supplier_form"/>
             <field name="arch" type="xml">
                 <data>
@@ -20,7 +19,6 @@
         <record id="form_account_accountPaySupplierInvoices" model="ir.ui.view">
             <field name="name">Form Pay Supplier Invoices - AR Account</field>
             <field name="model">account.invoice</field>
-            <field name="type">form</field>
             <field name="inherit_id" ref="account_voucher.view_invoice_supplier"/>
             <field name="arch" type="xml">
                 <data>

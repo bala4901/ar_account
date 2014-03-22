@@ -4,7 +4,6 @@
         <record id="form_account_accountCustomerInvoices" model="ir.ui.view">
             <field name="name">Form Customer Invoices - AR Account</field>
             <field name="model">account.invoice</field>
-            <field name="type">form</field>
             <field name="inherit_id" ref="account.invoice_form"/>
             <field name="arch" type="xml">
                 <data>
@@ -19,7 +18,6 @@
         <record id="form_account_accountPayCustomerInvoices" model="ir.ui.view">
             <field name="name">Form Pay Customer Invoices - AR Account</field>
             <field name="model">account.invoice</field>
-            <field name="type">form</field>
             <field name="inherit_id" ref="account_voucher.view_invoice_customer"/>
             <field name="arch" type="xml">
                 <data>

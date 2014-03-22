@@ -6,7 +6,6 @@
 		<record id="form_account_accountJournal" model="ir.ui.view">
 			<field name="name">Journal</field>
 			<field name="model">account.journal</field>
-			<field name="type">form</field>
 			<field name="inherit_id" ref="account.view_account_journal_form"/>
 			<field name="arch" type="xml">
                 <data>

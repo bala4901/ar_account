@@ -4,7 +4,6 @@
 		<record id="tree_account_voucherType" model="ir.ui.view">
 			<field name="name">Voucher Type</field>
 			<field name="model">account.voucher_type</field>
-			<field name="type">tree</field>
 			<field name="arch" type="xml">
 				<tree string="Voucher Type">
 					<field name="kode"/>
@@ -17,7 +16,6 @@
 		<record id="form_account_voucherType" model="ir.ui.view">
 			<field name="name">Voucher Type</field>
 			<field name="model">account.voucher_type</field>
-			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form string="Voucher Type">
 					<group colspan="4" col="2">

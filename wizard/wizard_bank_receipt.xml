@@ -5,7 +5,6 @@
         <record id="form_account_wizardBankReceipt" model="ir.ui.view">
             <field name="name">Bank Receipt</field>
             <field name="model">account.wizard_bank_receipt</field>
-            <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="bank Receipt" version="7.0">
                     <group col="2" colspan="4">

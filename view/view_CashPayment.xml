@@ -6,7 +6,6 @@
         <record id="select_account_cashPayment" model="ir.ui.view">
             <field name="name">Search Cash Payment</field>
             <field name="model">account.cash_payment</field>
-            <field name="type">search</field>
             <field name="arch" type="xml">
                 <search string="Search Cash Payment">
                     <group>
@@ -41,7 +40,6 @@
         <record model="ir.ui.view" id="form_account_cashPayment">
             <field name="name">Form Cash Payment</field>
             <field name="model">account.cash_payment</field>
-            <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Cash Payment" version="7.0">
 					<header>
@@ -160,7 +158,6 @@
         <record model="ir.ui.view" id="tree_account_cashPayment">
             <field name="name">Tree Cash Payment</field>
             <field name="model">account.cash_payment</field>
-            <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree colors="blue:state == 'draft';gray:state == 'cancel'" string="Voucher Entries">
                     <field name="number" string="# Voucher"/>
