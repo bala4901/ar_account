@@ -159,6 +159,13 @@ class account_voucher(osv.osv):
                         'created_time' : default_created_time,
                         }
 
+    def name_get(self, cr, uid, ids, context={}):
+        if not ids:
+            return []
+
+        if context is None : context = {}
+
+        return [(r['id'], (r['name'] or '-')) for r in self.read(cr, uid, ids, ['name'], context)]
                                 
                         
     def fields_view_get(self, cr, uid, view_id=None, view_type=False, context=None, toolbar=False, submenu=False):
