@@ -20,6 +20,8 @@
 ##############################################################################
 
 import account_journal
+import res_currency
+import res_currency_rate
 import account_voucher
 import account_voucher_line
 import res_company
