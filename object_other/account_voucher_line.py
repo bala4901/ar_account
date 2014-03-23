@@ -74,6 +74,7 @@ class account_voucher_line(osv.osv):
                 'partner_id' : fields.many2one(string='Partner', obj='res.partner', ondelete='restrict'),
                 'amount_original': fields.function(_compute_balance, multi='dc', type='float', string='Original Amount', store=True, digits_compute=dp.get_precision('Account')),
                 'amount_unreconciled': fields.function(_compute_balance, multi='dc', type='float', string='Open Balance', store=True, digits_compute=dp.get_precision('Account')),
+                'analytic_plan_id' : fields.many2one(string='Analytic Distribution', obj='account.analytic.plan.instance'),
                 }
                 
     def onchange_product_id(self, cr, uid, ids, product_id):

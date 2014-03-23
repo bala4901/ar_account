@@ -32,6 +32,7 @@
                     'account_accountant', 
                     'account_voucher', 
                     'account_cancel',
+                    'account_analytic_plans',
                     'report_aeroo_ooo'
                 ],
     'data' : [  'security/ir.model.access.csv',
