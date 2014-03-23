@@ -11,8 +11,9 @@
 					<page string="Accounting Confirguration">
 						<group name="group_1" colspan="4" col="2">	
 							<group name="group_1_1" colspan="1" col="2">
-								<separator string="Other  Account" colspan="2"/>
 								<field name="account_writeoff_id"/>
+                                <field name="account_internal_transfer_id"/>
+                                <field name="sequence_internal_transfer_id"/>
 							</group>																			
 						</group>
 						
