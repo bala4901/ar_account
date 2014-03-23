@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="application_account_internalTransfer" model="ir.module.category">
+			<field name="name">Internal Transfer</field>
+		</record>	
+		
+		<!-- CASH RECEIPT -->
+		<record id="group_account_internalTransferUser" model="res.groups">
+			<field name="name">Create Internal Transfer</field>
+			<field name="category_id" ref="application_account_internalTransfer"/>
+		</record>
+		
+		<record id="group_account_internalTransferValidator" model="res.groups">
+			<field name="name">Validate Internal Transfer</field>
+			<field name="category_id" ref="application_account_internalTransfer"/>
+		</record>		
+		
+		<record id="group_account_internalTransferApprove" model="res.groups">
+			<field name="name">Approve Internal Transfer</field>
+			<field name="category_id" ref="application_account_internalTransfer"/>
+		</record>	
+		
+		<record id="group_account_internalTransferDone" model="res.groups">
+			<field name="name">Done Internal Transfer</field>
+			<field name="category_id" ref="application_account_internalTransfer"/>
+		</record>						
+						
+		
+		<record id="group_account_internalTransferCancel" model="res.groups">
+			<field name="name">Cancel Internal Transfer</field>
+			<field name="category_id" ref="application_account_internalTransfer"/>
+		</record>			
+	
+
+	</data>
+</openerp>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="wkf_account_internalTransfer" model="workflow">
+            <field name="name">Internal Transfer</field>
+            <field name="osv">account.internal_transfer</field>
+            <field name="on_create">True</field>
+        </record>
+
+
+        <record id="act_account_draftInternalTransfer" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_account_internalTransfer"/>
+            <field name="name">draft</field>
+			<field name="flow_start">True</field>
+            <field name="kind">dummy</field>
+        </record>   		    
+
+        <record id="act_account_confirmInternalTransfer" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_account_internalTransfer"/>
+            <field name="name">confirm</field>
+            <field name="action">workflow_action_confirm()</field>
+            <field name="kind">function</field>
+        </record>
+
+        <record id="act_account_approveInternalTransfer" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_account_internalTransfer"/>
+            <field name="name">waiting</field>
+            <field name="action">workflow_action_approve()</field>
+            <field name="kind">function</field>
+        </record>
+        
+        <record id="act_account_doneInternalTransfer" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_account_internalTransfer"/>
+            <field name="name">done</field>
+            <field name="action">workflow_action_done()</field>
+            <field name="kind">function</field>
+            <field name="flow_stop">True</field>
+        </record>       
+        
+        <record id="act_account_cancelInternalTransfer" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_account_internalTransfer"/>
+            <field name="name">cancel</field>
+            <field name="action">workflow_action_cancel()</field>
+            <field name="kind">function</field>
+            <field name="flow_stop">True</field>
+        </record>                
+        
+
+        <record id="transition_account_internalTransferDraft2Confirm" model="workflow.transition">
+            <field name="act_from" ref="act_account_draftInternalTransfer"/>
+            <field name="act_to" ref="act_account_confirmInternalTransfer"/>
+            <field name="signal">button_confirm</field>
+            <field name="condition">True</field>
+        </record>      
+        
+        <record id="transition_account_internalTransferConfirm2Approve" model="workflow.transition">
+            <field name="act_from" ref="act_account_confirmInternalTransfer"/>
+            <field name="act_to" ref="act_account_approveInternalTransfer"/>
+			<field name="signal">button_approve</field>
+            <field name="condition">True</field>            
+        </record>           
+        
+        <record id="transition_account_internalTransferApprove2Done" model="workflow.transition">
+            <field name="act_from" ref="act_account_approveInternalTransfer"/>
+            <field name="act_to" ref="act_account_doneInternalTransfer"/>
+            <field name="signal">button_process</field>
+            <field name="condition">True</field>            
+        </record>  
+
+        
+        <record id="transition_account_internalTransferDraft2Cancel" model="workflow.transition">
+            <field name="act_from" ref="act_account_draftInternalTransfer"/>
+            <field name="act_to" ref="act_account_cancelInternalTransfer"/>
+            <field name="signal">button_cancel</field>
+            <field name="condition">True</field>
+        </record>      
+        
+        <record id="transition_account_internalTransferConfirm2Cancel" model="workflow.transition">
+            <field name="act_from" ref="act_account_confirmInternalTransfer"/>
+            <field name="act_to" ref="act_account_cancelInternalTransfer"/>
+            <field name="signal">button_cancel</field>
+            <field name="condition">True</field>
+        </record>                                       
+        
+        <record id="transition_account_internalTransferApprove2Cancel" model="workflow.transition">
+            <field name="act_from" ref="act_account_approveInternalTransfer"/>
+            <field name="act_to" ref="act_account_cancelInternalTransfer"/>
+            <field name="signal">button_cancel</field>
+            <field name="condition">True</field>
+        </record>            
+        
+
+
+    </data>
+</openerp>
+

@@ -33,6 +33,13 @@
 					action="waction_account_cashReceipt"
 		/>				
 
+		<menuitem 	
+					id="menu_account_internalTransfer"
+					parent="account.menu_finance_bank_and_cash"
+					name="Internal Transfer"
+					action="waction_account_internalTransfer"
+		/>		
+
 		<menuitem 	id="menu_account_memorialJournal"
         			parent="account.menu_finance_entries"
 					name="Memorial Journal"

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<!-- SEARCH VIEW -->
+		
+        <record id="select_account_internalTransfer" model="ir.ui.view">
+            <field name="name">Search Internal Transfer</field>
+            <field name="model">account.internal_transfer</field>
+            <field name="arch" type="xml">
+                <search string="Search Internal Transfer">
+                	<group>
+                        <field name="name"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+        <!-- FORM -->
+        
+        <record model="ir.ui.view" id="form_account_internalTransfer">
+            <field name="name">Form Internal Transfer</field>
+            <field name="model">account.internal_transfer</field>
+            <field name="arch" type="xml">
+                <form string="Internal Transfer" version="7.0">
+					<header>
+                        <button name="button_confirm" type="workflow" string="Confirm" colspan="2" icon="gtk-yes" states="draft" groups="ar_account.group_account_internalTransferValidator"/>
+						<button name="button_approve" type="workflow" string="Approve" colspan="2" icon="gtk-yes" states="confirm" groups="ar_account.group_account_internalTransferValidator"/>
+                        <button name="button_done" type="workflow" string="Posted" colspan="2" icon="gtk-yes" states="proforma,approve" groups="ar_account.group_account_internalTransferDone"/>
+                        <button name="button_cancel" type="workflow" string="Cancel" colspan="2" icon="gtk-cancel" states="draft,confirm,proforma,approve" groups="ar_account.group_account_internalTransferCancel"/>
+                        <button name="button_action_cancel" type="object" string="Cancel" colspan="2" icon="gtk-cancel" states="posted" groups="ar_account.group_account_internalTransferCancel"/>
+                        <button name="button_action_set_to_draft" type="object" string="Set To Draft" colspan="2" icon="terp-stock_effects-object-colorize" states="cancel" groups="ar_account.group_account_internalTransferCancel"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,approve,done" statusbar_colors='{"done":"green","cancel":"red"}'/> 
+					</header>
+					<sheet>
+                        <group name="group_1" colspan="4" col="2">
+                            <group name="group_1_1" colspan="1" col="2">
+                                <field name="name"/>
+                                <field name="transfer_date"/>
+                                <field name="company_id"/>
+                            </group>
+                            <group name="group_1_2" colspan="1" col="2">
+                                <field name="source_journal_id"/>
+                                <field name="destination_journal_id"/>
+                                <field name="internal_transfer_account_id"/>
+                                <field name="amount"/>
+                            </group>
+                        </group>
+                        <notebook colspan="4">
+                            <page string="Description">
+                                <field name="description" colspan="4" nolabel="1"/>
+                            </page>
+							<page string="Audit Trail">
+                    			<group name="group_2" colspan="4" col="3">
+                    				<field name="created_user_id"/>
+                    				<field name="created_time" nolabel="1"/>
+                    				<field name="confirmed_user_id"/>
+                    				<field name="confirmed_time" nolabel="1"/>                    				
+                    				<field name="approved_user_id"/>
+                    				<field name="approved_time" nolabel="1"/>                    				
+                    				<field name="processed_user_id"/>
+                    				<field name="processed_time" nolabel="1"/>                    				
+                    				<field name="cancelled_user_id"/>
+                    				<field name="cancelled_time" nolabel="1"/>                    				                				
+                    			</group>
+							</page>                        
+                        </notebook>
+					</sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>					
+                </form>
+            </field>
+        </record>        
+        
+        <!-- TREE -->
+        
+        <record model="ir.ui.view" id="tree_account_internalTransfer">
+            <field name="name">Tree Internal Transfer</field>
+            <field name="model">account.internal_transfer</field>
+            <field name="arch" type="xml">
+                <tree string="Internal Transfers">
+                    <field name="name"/>
+                    <field name="transfer_date"/>
+                    <field name="company_id"/>
+                    <field name="source_journal_id"/>
+                    <field name="destination_journal_id"/>
+                    <field name="internal_transfer_account_id"/>
+                    <field name="amount"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>        
+
+	</data>
+</openerp>

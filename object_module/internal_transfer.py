@@ -25,11 +25,13 @@ from osv import fields, osv
 from datetime import date, datetime, tzinfo
 from openerp.tools.translate import _
 import netsvc
+import decimal_precision as dp
 
 
 class internal_transfer(osv.osv):
     _name = 'account.internal_transfer'
     _description = 'Internal Transfer'
+    _inherit = ['mail.thread']
 
     def default_name(self, cr, uid, context={}):
         return '/'
@@ -56,6 +58,7 @@ class internal_transfer(osv.osv):
                 'source_journal_id' : fields.many2one(string='Source Journal', obj='account.journal', required=True),
                 'destination_journal_id' : fields.many2one(string='Destination Journal', obj='account.journal', required=True),
                 'internal_transfer_account_id' : fields.many2one(string='Internal Transfer Account', obj='account.account', required=True),
+                'amount' : fields.float(string='Amount', digits_compute=dp.get_precision('Account'), required=True),
                 'description' : fields.text(string='Description'),
                 'state' : fields.selection([('draft','Draft'),('confirm','Waiting For Approval'),('approve','Ready To Process'),('done','Done'),('cancel','Cancel')], 'Status', readonly=True),
                 'created_user_id' : fields.many2one(string='Created By', obj='res.users', readonly=True),

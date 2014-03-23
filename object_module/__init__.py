@@ -28,6 +28,8 @@ import cash_receipt
 import cash_payment
 import memorial_journal
 
+import internal_transfer
+
 
 
 

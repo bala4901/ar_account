@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="waction_account_internalTransfer" model="ir.actions.act_window">
+			<field name="name">Internal Transfer</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">account.internal_transfer</field>
+			<field name="search_view_id" ref="select_account_internalTransfer"/>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a internal transfer
+              </p><p>
+                Internal Transfer is a document that manage internal transfer between bank or cash account
+              </p><p>
+                The discussions regarding internal transfer are automatically displayed at
+                the bottom of each document.
+              </p>
+            </field>			
+		</record>
+		
+		<record id="wactionView_account_treeInternalTransfer" model="ir.actions.act_window.view">
+			<field eval="10" name="sequence"/>
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="tree_account_internalTransfer"/>
+			<field name="act_window_id" ref="waction_account_internalTransfer"/>
+		</record>
+
+		<record id="wactionView_account_formInternalTransfer" model="ir.actions.act_window.view">
+			<field eval="20" name="sequence"/>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="form_account_internalTransfer"/>
+			<field name="act_window_id" ref="waction_account_internalTransfer"/>
+		</record>
+	</data>
+</openerp>
